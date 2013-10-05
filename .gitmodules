@@ -22,3 +22,6 @@
 [submodule "event_calendar"]
 	path = event_calendar
 	url = https://github.com/unclecheese/silverstripe-event-calendar.git
+[submodule "podcast-simple"]
+	path = podcast-simple
+	url = https://github.com/scttw/silverstripe-simplepodcast.git

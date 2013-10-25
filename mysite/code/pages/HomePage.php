@@ -1,9 +1,9 @@
 <?php
 class HomePage extends Page {
 
-	public static $db = array(
+	private static $db = array(
 	);	
-	public static $has_many = array(
+	private static $has_many = array(
 		'HomepageFeatures' => 'HomepageFeature'
 	);
 	//static $icon = "framework/docs/en/tutorials/_images/treeicons/home-file.gif";
@@ -19,7 +19,7 @@ class HomePage extends Page {
 
 }
 class HomePage_Controller extends Page_Controller {
-	public static $allowed_actions = array (
+	private static $allowed_actions = array (
 	);
 
 	public function init() {

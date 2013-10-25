@@ -6,7 +6,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <base href="http://www.rowenatkinson.com.au/bullidev/"><!--[if lte IE 6]></base><![endif]-->
+        <base href="http://localhost/bulli/"><!--[if lte IE 6]></base><![endif]-->
         <title>Server error &raquo; Your Site Name</title>
         <meta name="generator" content="SilverStripe - http://silverstripe.org" />
 <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
@@ -18,13 +18,13 @@
         <link rel="stylesheet" type="text/css" href="css/ie8.css" />
         <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.1.0/respond.min.js"></script>
         <![endif]-->
-  <link rel="stylesheet" type="text/css" href="/bullidev/themes/Bulli/css/normalize.css?m=1375930020" />
-<link rel="stylesheet" type="text/css" href="/bullidev/themes/Bulli/css/bootstrap.css?m=1376890523" />
-<link rel="stylesheet" type="text/css" href="/bullidev/themes/Bulli/css/bootstrap-responsive.css?m=1376890532" />
-<link rel="stylesheet" type="text/css" href="/bullidev/themes/Bulli/css/main.css?m=1375930020" />
-<link rel="stylesheet" type="text/css" href="/bullidev/themes/Bulli/css/site.css?m=1376890172" />
+  <link rel="stylesheet" type="text/css" href="/bulli/themes/Bulli/css/normalize.css?m=1376964269" />
+<link rel="stylesheet" type="text/css" href="/bulli/themes/Bulli/css/bootstrap.css?m=1376964269" />
+<link rel="stylesheet" type="text/css" href="/bulli/themes/Bulli/css/bootstrap-responsive.css?m=1376964269" />
+<link rel="stylesheet" type="text/css" href="/bulli/themes/Bulli/css/main.css?m=1376964269" />
+<link rel="stylesheet" type="text/css" href="/bulli/themes/Bulli/css/site.css?m=1377938207" />
 </head>
-  <body class=" no-sidebar orange no-banner ">
+  <body class=" no-sidebar green no-banner ">
 
         <!--[if lt IE 7]>
             <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
@@ -35,7 +35,7 @@
         <div class="container" id="container">
 
             <header class="banner" role="banner">
-                <div class="logo"><h1><a href="http://www.rowenatkinson.com.au/bullidev/">Buli Anglican Church</a></h1></div>
+                <div class="logo"><h1><a href="http://localhost/bulli/">Buli Anglican Church</a></h1></div>
                 <nav id="mainnav" class="mainnav navbar">
                 	<div class="navbar-surround" data-toggle="collapse" data-target=".nav-collapse">
 				  <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
@@ -46,36 +46,19 @@
   		        <div class="nav-collapse">
 		        <ul class="nav">
 		           
-		              <li class="link first"><a class="link" href="/bullidev/">Home </a>
+		              <li class="link first"><a class="link" href="/bulli/">Home </a>
 		                
 		              </li>
 		           
-		              <li class="link  dropdown"><a class="link dropdown-toggle" data-toggle="dropdown" href="/bullidev/about-us-2/about-us/">About us <span class="caret"></span> </a>
-		                
-		                
-		                  <ul class="dropdown-menu">
-		                    
-<!-- topbar recursion-->
-
-	
-		
-		
-		<li class="link">
-			<a href="/bullidev/about-us-2/about-us/" class="link" title="Go to the About Us page">
-				<span class="text">About Us</span>
-			</a>
-		</li>
-		
-		
-	
-
-
-		                  </ul>
-		                
+		              <li class="link "><a class="link" href="/bulli/about-us/">About Us </a>
 		                
 		              </li>
 		           
-		              <li class="link "><a class="link" href="/bullidev/contact-us/">Contact Us </a>
+		              <li class="link "><a class="link" href="/bulli/contact-us/">Contact Us </a>
+		                
+		              </li>
+		           
+		              <li class="link "><a class="link" href="/bulli/blog/">Blog </a>
 		                
 		              </li>
 		           
@@ -83,20 +66,24 @@
                 </div></div></nav>
                 <div class="search">
                     
-                        <form id="SearchForm_SearchForm" action="/bullidev/server-error/SearchForm" method="get" enctype="application/x-www-form-urlencoded" class="form-search">
-        <label for="SearchForm_SearchForm_Search" accesskey="s">Site search</label>
-        <input type="text" placeholder="site search..." name="Search" value="" id="SearchForm_SearchForm_Search" class="input-small search-query" />
-        <input type="submit" name="action_results" value="Go" class="action btn" id="SearchForm_SearchForm_action_results" />
+                        <form id="SearchForm_SearchForm" action="/bulli/server-error/SearchForm" method="get" enctype="application/x-www-form-urlencoded" class="form-search">
+        <div class="input-append">
+	        <label for="SearchForm_SearchForm_Search" accesskey="s">Site search</label>
+	        <input type="text" placeholder="search..." name="Search" value="" id="SearchForm_SearchForm_Search" class="span2 search-query" />
+	        <button type="submit" id="SearchForm_SearchForm_action_results" name="action_results" class="btn"><i class="icon-search"></i><span class="hidden"> Go</span></button>
+	    </div>
     </form>
 
 
                 </div>
             </header>
-    			<div class="strap row-fluid">
+            <div class="strap row-fluid">
                 
             </div>
-            <div class="row-fluid">&nbsp;</div>
-            <div class="row-fluid">
+            <div class="row-fluid spacer"></div>
+
+
+                <div class="row-fluid">
                 <div class="span8 lefstedge">
 					<article>
 						<h1>Server error</h1>
@@ -117,22 +104,25 @@
             </div>
 
 
-            <footer class="footer row-fluid">
+            <footer class="footer">
+                <div class="row-fluid">
                 <div class="span3">
-                <p>footer1</p>
-                <p>footer</p>
+                <h3>Bulli Anglican</h3>
+                <p>66 Park Rd, Bulli NSW 2516</p>
                 </div>
                 <div class="span3">
-                <p>footer2 </p>
-                <p>footer</p>
+                <p>Ph: (02) 4284 3021</p>
+                <p>Fx: (02) 4285 0282</p>
                 </div>
                 <div class="span3">
-                <p>footer 3</p>
+                <p><a href="mailto:bullianglican@bigpond.com">bullianglican@bigpond.com</a></p>
                 </div>
                 <div class="span3">
-                <p>footer 4</p>
+                <p>Church Office hours: 9:30am – 2:30pm Mon – Fri during school terms</p>
                 </div>
                 <div class="breaker"></div>
+                </div>
+
             </footer>
 
         </div><!-- container -->
@@ -141,5 +131,5 @@
 
     
 
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script><script type="text/javascript" src="/bullidev/themes/Bulli/javascript/plugins.js?m=1375930029"></script><script type="text/javascript" src="/bullidev/themes/Bulli/javascript/main.js?m=1376888862"></script><script type="text/javascript" src="/bullidev/themes/Bulli/javascript/bootstrap.js?m=1375930028"></script><script type="text/javascript" src="/bullidev/themes/Bulli/javascript/site.js?m=1375930029"></script></body>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script><script type="text/javascript" src="/bulli/themes/Bulli/javascript/plugins.js?m=1376964270"></script><script type="text/javascript" src="/bulli/themes/Bulli/javascript/main.js?m=1376964270"></script><script type="text/javascript" src="/bulli/themes/Bulli/javascript/bootstrap.js?m=1376964270"></script><script type="text/javascript" src="/bulli/themes/Bulli/javascript/site.js?m=1376964270"></script></body>
 </html>

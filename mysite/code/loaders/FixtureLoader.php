@@ -31,10 +31,10 @@
  * @license http://silverstripe.org/bsd-license/
  */
 class FixtureLoader {
-	public static $preload_fixtures = array(
+	private static $preload_fixtures = array(
 	);
 
-	public function loadFixtures() {
+	private function loadFixtures() {
 		if (ClassInfo::exists('Subsite')) {
 			$currentSubsite = Subsite::currentSubsiteID();
 		}

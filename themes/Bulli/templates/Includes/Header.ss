@@ -9,7 +9,7 @@
 				  </a>
   		        <div class="nav-collapse">
 		        <ul class="nav">
-		           <% control Menu(1) %>
+		           <% loop Menu(1) %>
 		              <li class="$LinkingMode <% if $First %>first<% end_if %><% if $Children %> dropdown<% end_if %>"><a class="$LinkingMode<% if $Children %> dropdown-toggle" data-toggle="dropdown<% end_if %>" href="$Link">$MenuTitle<% if $Children %> <span class="caret"></span><% end_if %> </a>
 		                <% if $Children %>
 		                <% if ClassName != HomePage %>
@@ -19,7 +19,7 @@
 		                <% end_if %>
 		                <% end_if %>
 		              </li>
-		           <% end_control %>
+		           <% end_loop %>
 				</ul>
                 </div></div></nav>
                 <div class="search">

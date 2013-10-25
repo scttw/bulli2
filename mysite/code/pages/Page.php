@@ -1,11 +1,11 @@
 <?php
 class Page extends SiteTree {
-	public static $db = array(
+	private static $db = array(
 		'PageStyle' => "Enum('orange, blue, lightblue, green, red')",
 		'HasBanner' => 'boolean',
 		'BannerContent' => 'HTMLText'
 	);
-	static $defaults = array(
+	private static $defaults = array(
 		'PageStyle' => 'green',
 		'HasBanner' => 0
 	);
@@ -24,7 +24,7 @@ class Page extends SiteTree {
 	}    
 }
 class Page_Controller extends ContentController {
-	public static $allowed_actions = array (
+	private static $allowed_actions = array (
 	);
 
 	public function init() {

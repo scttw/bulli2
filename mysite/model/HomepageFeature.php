@@ -5,13 +5,15 @@
 class HomepageFeature extends DataObject {
 	
 	public static $db = array(
+		'HasTitle' => 'boolean',
 		'Title' => 'Varchar(100)',
 		'Feature'		=> 'HTMLText',
 		'Priority' => "Enum('1, 2, 3, 4, 5, 6, 7, 8, 9')",
-		'FullWidth' => 'boolean'
+		'FullWidth' => 'boolean',
 	);
 	static $default_sort = "Priority ASC"; 
 	static $defaults = array(
+		'HasTitle' => true,
 		'Priority' => 5
 	);
 

@@ -25,3 +25,7 @@
 [submodule "podcast-simple"]
 	path = podcast-simple
 	url = https://github.com/scttw/silverstripe-simplepodcast.git
+[submodule "widgets"]
+	path = widgets
+	url = https://github.com/silverstripe/silverstripe-widgets.git
+	branch = master

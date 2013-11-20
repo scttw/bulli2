@@ -29,3 +29,9 @@
 	path = widgets
 	url = https://github.com/silverstripe/silverstripe-widgets.git
 	branch = master
+[submodule "googlemaps"]
+	path = googlemaps
+	url = https://github.com/i-lateral/silverstripe-googlemaps.git
+[submodule "SortableGridField"]
+	path = SortableGridField
+	url = https://github.com/UndefinedOffset/SortableGridField.git

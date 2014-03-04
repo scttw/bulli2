@@ -37,10 +37,14 @@ class SearchForm extends Form {
 	 */
 	public function __construct($controller, $name, $fields = null, $actions = null) {
 		if(!$fields) {
+			
+			//$mySearchField->setAttribute('data', 'Search FTW')
 			$fields = new FieldList(
-				$mySearchField = new TextField('Search', _t('SearchForm.SEARCH', 'Search')
-					$mySearchField->setAttribute('placeholder', 'Search FTW');
-			));
+				
+			);
+			$mySearchField = new TextField('Search', _t('SearchForm.SEARCH', 'Search'));
+			$mySearchField->addExtraClass('searchboxFTW');
+			$fields->push($mySearchField);
 		}
 		
 		if(class_exists('Translatable') && singleton('SiteTree')->hasExtension('Translatable')) {
@@ -49,13 +53,16 @@ class SearchForm extends Form {
 		
 		if(!$actions) {
 			$actions = new FieldList(
-				new FormAction("getResults", _t('SearchForm.GO', 'Go'))
 			);
+			$myButton = new FormAction("getResults", _t('SearchForm.GO', 'Go'));
+			$myButton->addExtraClass('btn');
+			$actions->push($myButton);
+
 		}
 		
 		parent::__construct($controller, $name, $fields, $actions);
 		
-		$this->setFormMethod('get');
+		$this->setFormMethod('get')->addExtraClass('searchfield');
 		
 		$this->disableSecurityToken();
 	}

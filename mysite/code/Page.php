@@ -28,6 +28,19 @@ class Page_Controller extends ContentController {
 	private static $allowed_actions = array (
 	);
 
+   function SearchForm() {
+      $searchText = isset($_REQUEST['Search']) ? $_REQUEST['Search'] : 'Search Huh?';
+      $fields = new FieldSet(
+       new TextField("Search", "", $searchText)
+       );
+      $actions = new FieldSet(
+       new FormAction('results', 'Search')
+       );
+
+       return new SearchForm($this, "SearchForm", $fields, $actions);
+   }
+
+
 	public function init() {
 		parent::init();
 

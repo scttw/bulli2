@@ -24,3 +24,4 @@ silverstripe-cache/
 vendor/
 composer.phar
 framework/error_log
+*.project

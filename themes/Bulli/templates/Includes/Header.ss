@@ -26,7 +26,7 @@
                     
                     <form id="SearchForm_SearchForm" action="/home/SearchForm" method="get" enctype="application/x-www-form-urlencoded" class="searchfield form-search ">
 						<fieldset class="input-append">
-							<input type="text" class="text-field search-query input-mini" name="Search" id="SearchForm_SearchForm_Search" placeholder="site search..." value="" />
+							<input type="text" class="text-field search-query input-small" name="Search" id="SearchForm_SearchForm_Search" placeholder="site search..." value="" />
 							<button type="submit" name="action_results" id="SearchForm_SearchForm_action_results" class="btn button"><span class="icon-search"></span></button>
 						</fieldset>
 					</form>

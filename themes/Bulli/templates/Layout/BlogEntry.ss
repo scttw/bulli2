@@ -24,7 +24,7 @@
 	$PageComments
 	
 	</div>
-    <div class="span3 pull-right" style="margin-right: 20px;">
+    <div class="span3 pull-right rightnav">
     	<% include BlogSideBar %>
     </div>
     <div class="breaker"></div>

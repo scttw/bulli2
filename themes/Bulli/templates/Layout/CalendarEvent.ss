@@ -27,7 +27,7 @@ $Form
 $PageComments
 
   </div>
-    <div class="span3 pull-right" style="margin-right: 20px;">
+    <div class="span3 pull-right  rightnav">
       
     $CalendarWidget
     $MonthJumper

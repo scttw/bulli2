@@ -6,6 +6,7 @@
 							$Content
 							$Googlemaps
 						</div>
+						<% include Gallery %>
 					</article>
 						$Form
 						$PageComments

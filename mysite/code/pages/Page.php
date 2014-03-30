@@ -3,11 +3,18 @@ class Page extends SiteTree {
 	private static $db = array(
 		'PageStyle' => "Enum('orange, blue, lightblue, green, red')",
 		'HasBanner' => 'boolean',
-		'BannerContent' => 'HTMLText'
+		'BannerContent' => 'HTMLText',
+		'HasGallery' => 'Boolean',
+		'Carousel' => 'Boolean'
+	);
+	private static $has_many = array(
+		'GalleryImages' => 'GalleryImage'
 	);
 	private static $defaults = array(
 		'PageStyle' => 'green',
-		'HasBanner' => 0
+		'HasBanner' => 0,
+		'HasGallery' => 0,
+		'Carousel' => 0
 	);
 
 
@@ -20,6 +27,9 @@ class Page extends SiteTree {
 		$fields->addFieldToTab('Root.Banner', new CheckboxField('HasBanner'));
 		$fields->addFieldToTab('Root.Banner', new HTMLEditorField('BannerContent'));
 
+		$fields->addFieldToTab('Root.Gallery', new CheckboxField('HasGallery'));
+		$fields->addFieldToTab('Root.Gallery', new CheckboxField('Carousel', 'Carousel style image rotator'));
+		$fields->addFieldToTab('Root.Gallery', new GridField('GalleryImages', 'Gallery Images', $this->GalleryImages(), GridFieldConfig_RecordEditor::create()));
 		return $fields;
 	}    
 }
@@ -36,11 +46,25 @@ class Page_Controller extends ContentController {
 		Requirements::css('themes/Bulli/css/main.css');
 		Requirements::css('themes/Bulli/css/site.css');
 		
-        Requirements::javascript('//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js');
+        Requirements::javascript('//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js');
         Requirements::javascript('themes/Bulli/javascript/plugins.js');
         Requirements::javascript('themes/Bulli/javascript/main.js');
         Requirements::javascript('themes/Bulli/javascript/bootstrap.js');
         Requirements::javascript('themes/Bulli/javascript/site.js');
+        if ( $this->HasGallery  ) {
+	        if ( $this->Carousel ) {
+				Requirements::javascript('themes/Bulli/javascript/3rdparty/jquery.flexslider.js');
+				Requirements::css('themes/Bulli/javascript/3rdparty/flexslider.css');
+		        Requirements::javascript('themes/Bulli/javascript/carousel.js');
+	        } else {
+				Requirements::css('themes/Bulli/css/gallery.css');
+		        Requirements::javascript('themes/Bulli/javascript/gallery.js');
+		        Requirements::javascript('//cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/3.0.4/jquery.imagesloaded.min.js');
+		        Requirements::javascript('//cdnjs.cloudflare.com/ajax/libs/fluidbox/1.2.5/jquery.fluidbox.min.js');
+				Requirements::css('//cdnjs.cloudflare.com/ajax/libs/fluidbox/1.2.5/jquery.fluidbox.css');
+
+	        }
+        }	
 	}
 
 }

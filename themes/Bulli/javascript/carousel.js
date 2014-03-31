@@ -16,7 +16,8 @@ Bulli.carousel = {
 			selector: '.carouselContainer > .carousel',
 			animation: 'slide',
 			prevText: '',
-			nextText: ''
+			nextText: '',
+			smoothHeight: true
 		});
 	}
 }

@@ -1,4 +1,4 @@
 #gallery{ }
-.galleryThumbContainer { display: table-cell; vertical-align: center; width: 160px; height: 160px; float: left; background: #eee; margin: 0 20px 20px 0; padding: 5px;}
+.galleryThumbContainer { border-radius: 4px; display: table-cell; vertical-align: center; width: 160px; height: 160px; float: left; background: #eee; margin: 0 20px 20px 0; padding: 5px;}
 .galleryThumbContainer img { display: block; margin: auto auto;}
 .galleryThumbContainer img.landscape { margin-top: 20px;}

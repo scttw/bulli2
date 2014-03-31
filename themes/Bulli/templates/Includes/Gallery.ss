@@ -4,7 +4,7 @@
 					<ul style="margin: 0;padding: 0" class="slides carouselContainer">
 					<% loop GalleryImages %>
 						<li class="galleryThumbContainer carousel">
-						  <a rel="gallery" href="$Image.URL"><img <% with $Image.width(800) %>src="$URL" width="$width" height="$height" <% end_with %>alt="$Title" class="galleryThumb" /></a>
+						  <a rel="gallery" href="$Image.URL"><img <% with $Image.SetRatioSize(800,600) %>src="$URL" width="$width" height="$height" <% end_with %>alt="$Title" class="galleryThumb" /></a>
 						</li>
 					<% end_loop %>
 					</ul>

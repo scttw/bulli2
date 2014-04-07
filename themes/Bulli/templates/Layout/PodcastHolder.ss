@@ -3,7 +3,7 @@
 <div class="podcast">
 <h2>$PodcastTitle</h2>
 $Description
-<p><a href="$iTunesLink">Open in iTunes</a></p>
+<p><a href="$FeedLink">Get the podcast feed (rss)</a>.  <a href="$iTunesLink">Open in iTunes</a></p>
 
 <% loop PodcastList %>
 	<div class="episode">

@@ -27,7 +27,10 @@ class Page_Controller extends ContentController {
 	 */
 	private static $allowed_actions = array (
 	);
-
+	static function PodcastShortCodeHandler(){
+	   $current = Controller::curr();
+	   return $current->renderWith('Podcast');
+   }
    function SearchForm() {
       $searchText = isset($_REQUEST['Search']) ? $_REQUEST['Search'] : 'Search Huh?';
       $fields = new FieldSet(

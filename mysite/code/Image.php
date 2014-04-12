@@ -1,3 +1,4 @@
+<?php
 class MyImage extends Image {
     public function generateRotateClockwise(GD $gd) {
         return $gd->rotate(90);

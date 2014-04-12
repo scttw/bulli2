@@ -35,7 +35,25 @@ class Page extends SiteTree {
 }
 class Page_Controller extends ContentController {
 	private static $allowed_actions = array (
+		"TopPodcast",
+		"TopPodcastShortcodeHandler"
 	);
+	
+	public function TopPodcast($arguments=null, $content=null) {
+		function forTemplate() { return $this->renderWith('TopPodcast'); }
+		//if(!isset($_GET['start']) || !is_numeric($_GET['start']) || (int)$_GET['start'] < 1) $_GET['start'] = 0;
+		//$SQL_start = (int)$_GET['start']; 
+		$children = Podcast::get()->first();
+		$template = new SSViewer('TopPodcast');
+		if( !$children )
+			return null; 
+		return $template->process(new ArrayData(array('TopPodcast' => $children)));
+	}
+  	public static function TopPodcastShortcodeHandler($arguments, $content = null, $parser = null) {
+      $current = Controller::curr();
+      return $current->TopPodcast();
+      //return "Ahoy";
+   	}
 
 	public function init() {
 		parent::init();

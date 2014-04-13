@@ -55,10 +55,10 @@ class Page_Controller extends ContentController {
       //return "Ahoy";
    	}
 
-	public function onBeforeInit() {
-        Requirements::javascript('//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js');
+	// public function onBeforeInit() {
+ //        
 		
-	}
+	// }
 	public function init() {
 		parent::init();
 
@@ -67,7 +67,7 @@ class Page_Controller extends ContentController {
 		Requirements::css('themes/Bulli/css/bootstrap-responsive.css');
 		Requirements::css('themes/Bulli/css/main.css');
 		Requirements::css('themes/Bulli/css/site.css');
-		
+		Requirements::javascript('//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js');
         Requirements::javascript('themes/Bulli/javascript/plugins.js');
         Requirements::javascript('themes/Bulli/javascript/main.js');
         Requirements::javascript('themes/Bulli/javascript/bootstrap.js');

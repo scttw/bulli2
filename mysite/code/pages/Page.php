@@ -64,7 +64,7 @@ class Page_Controller extends ContentController {
 
 		Requirements::css('themes/Bulli/css/normalize.css');
 		Requirements::css('themes/Bulli/css/bootstrap.css');
-		Requirements::css('themes/Bulli/css/bootstrap-responsive.css');
+		Requirements::css('//fonts.googleapis.com/css?family=Oxygen:300');
 		Requirements::css('themes/Bulli/css/main.css');
 		Requirements::css('themes/Bulli/css/site.css');
 		Requirements::javascript('//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js');

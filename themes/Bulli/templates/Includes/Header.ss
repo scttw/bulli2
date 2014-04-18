@@ -26,7 +26,7 @@
 						</div>
 					</div>
 				</nav>
-				<div class="search col-lg-3">
+				<div class="search col-xs-6 col-sm-3">
 					<form id="SearchForm_SearchForm" action="{$BaseHref}home/SearchForm" method="get" enctype="application/x-www-form-urlencoded" class="searchfield form-search ">
 						<fieldset>
 							<div class="input-group">

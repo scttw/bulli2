@@ -11,7 +11,7 @@
 						$Form
 						$PageComments
                 </div>
-                <div class="col-md-3 pull-right rightnav">
+                <div class="col-md-3 col-xs-12 pull-right rightnav">
                 	<% include SideBar %>
                 </div>
                 <div class="breaker"></div>

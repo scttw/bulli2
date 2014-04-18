@@ -155,7 +155,8 @@ ul.nav {
 .rightnav {
 	margin-right: 20px;
 }
-.footer {
+footer.footer {
+  margin: 2em -20px 0 -20px;
   background: #000;
   border-top: 1px solid #444;
   clear: both;
@@ -181,21 +182,24 @@ img.right {
 
 
 /* home page */
-
+.masonry-block {
+  margin-bottom: 20px;
+}
 .feature {
-  width: 45%;
-  float: left;
-  margin: 0 1% 20px;
   background: #383838;
   border: #888;
   padding: 1%;
   -webkit-box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, .1);
-box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, .1);
+  box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, .1);
 }
 .feature.wide {
   width: auto;
   margin-right: 0;
   float: left;
+}
+.feature img {
+  max-width: 100%;
+  height: auto;
 }
 @media (min-width: 768px) and (max-width: 979px) {
   .fauxbody {
@@ -215,6 +219,8 @@ box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, .1);
   .fauxbody {
       margin: 0;
       padding: 0;
+      box-shadow:none;
+      -webkit-box-shadow:none;
     }
     .banner div.bgStretcher {
       background-color: transparent;
@@ -231,9 +237,9 @@ box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, .1);
 	}
   .feature {
     float: none;
-    width: 96%;
-    margin-right: auto;
-	box-sizing: border-box;
+    width: auto;
+    margin: 5px;
+	 box-sizing: content-box;
   }
 	.rightnav {
 		margin-right: 0;
@@ -263,6 +269,7 @@ box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, .1);
   }
   img {
     max-width: 100%;
+    height: auto;
   }
   .strap, footer, header.banner {
     margin: 0;
@@ -270,6 +277,10 @@ box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, .1);
   }
   input.span2.search-query {
     width: 80px;
+  }
+  .row {
+    margin-left:0;
+    margin-right:0;
   }
 }
 .spacer { height: 20px;}

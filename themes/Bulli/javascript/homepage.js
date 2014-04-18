@@ -298,7 +298,7 @@ Bulli.homepage = function () {
 	$(featurecontainer).imagesLoaded( function(){
 		var featurecontainer = $('.masonry')[0];
 		$(featurecontainer).masonry({
-	  		itemSelector: '.feature'
+	  		itemSelector: '.masonry-block'
 		});
 	});
 }

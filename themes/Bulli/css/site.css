@@ -164,6 +164,7 @@ footer.footer {
 footer div {
   text-align: center;
   color: #888;
+  padding: 5px;
 }
 .breaker {
   clear: both;
@@ -221,6 +222,7 @@ img.right {
       padding: 0;
       box-shadow:none;
       -webkit-box-shadow:none;
+      overflow: hidden;
     }
     .banner div.bgStretcher {
       background-color: transparent;
@@ -230,7 +232,6 @@ img.right {
 		margin-top: 10px;
 	}
 	#SearchForm_SearchForm_Search {
-		width: 75px
 	}
 	.search {
 		right: 5px;
@@ -257,20 +258,21 @@ img.right {
   .row-fluid {
 	box-sizing: border-box;
  }
-  .strapfiller, .strapfiller p, .strapfiller img {
+  img {
+    max-width: 100%;
+    height: auto;
+  }  .strapfiller, .strapfiller p, .strapfiller img {
     margin: 0;
     padding: 0;
   }
   .strap img, .strap img.left {
     display: block;
-    width: 100%;
+    max-width: 200%;
+    width: 200%;
     height: auto;
     margin: 0;
   }
-  img {
-    max-width: 100%;
-    height: auto;
-  }
+
   .strap, footer, header.banner {
     margin: 0;
     padding: 0;
@@ -281,6 +283,16 @@ img.right {
   .row {
     margin-left:0;
     margin-right:0;
+  }
+  .navbar-header {
+    background: transparent;
+  }
+  .navbar-default {
+    background: transparent;
+  }
+  .navbar-collapse {
+    background: #fff;
+    border-left: 2px solid #efefef;
   }
 }
 .spacer { height: 20px;}

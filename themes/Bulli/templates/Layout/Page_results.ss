@@ -1,7 +1,7 @@
 
 
-<div class="row-fluid">
-    <div class="span12 lefstedge">
+<div class="row">
+    <div class="col-md-12 lefstedge">
         <article>
     <h1>$Title</h1>
 

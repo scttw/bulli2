@@ -1,5 +1,5 @@
-    <div class="row-fluid">
-        <div class="span8 lefstedge">
+    <div class="row">
+        <div class="col-md-8 lefstedge">
 <div class="podcast">
 <h2>$PodcastTitle</h2>
 $Description
@@ -48,7 +48,7 @@ $Description
 
 </div>
 	</div>
-    <div class="span3 pull-right  rightnav">
+    <div class="col-md-3 pull-right  rightnav">
     	<% include SideBar %>
     </div>
     <div class="breaker"></div>

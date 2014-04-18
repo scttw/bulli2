@@ -1,5 +1,5 @@
-    <div class="row-fluid">
-        <div class="span8 lefstedge">
+    <div class="row">
+        <div class="col-md-8 lefstedge">
 <div class="podcast">
 	<div class="episode">
 		<h3><a href="<% if Audio %>$Audio.AbsoluteURL<% else %>$ExternalLink<% end_if %>">$EpisodeTitle - $Artist</a></h3>
@@ -14,7 +14,7 @@
 	</div>
 </div>
 	</div>
-    <div class="span3 pull-right rightnav">
+    <div class="col-md-3 pull-right rightnav">
     	<% include SideBar %>
     </div>
     <div class="breaker"></div>

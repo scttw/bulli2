@@ -1,10 +1,18 @@
+/* bootstrap reset */
+
+
+
 /* local customisations */
 
 html, body {
     background: #333;
     color: #eee;
+    font-size: 16px;
 }
-
+.container {
+  padding: 0;
+  width: 100%;
+}
 .fauxbody {
    -webkit-box-shadow: 20px 0 20px -20px rgba(0, 0, 0, .7), 20px 0 20px -20px rgba(0, 0, 0, .7);
    box-shadow: 20px 0 20px -20px rgba(0, 0, 0, .7), -20px 0 20px -20px rgba(0, 0, 0, .7);
@@ -128,7 +136,7 @@ ul.nav {
 .mainnav {
   position: absolute;
   right: 0;
-  top: 80px;
+  top: 77px;
 }
 
 .search {

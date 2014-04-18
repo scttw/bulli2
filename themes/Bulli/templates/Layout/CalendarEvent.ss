@@ -1,5 +1,5 @@
-    <div class="row-fluid">
-        <div class="span8 lefstedge">
+    <div class="row">
+        <div class="col-md-8 lefstedge">
 
 <p><a href="$Parent.Link">&laquo; Back to $Parent.Title</a></p>
 <div class="vevent">
@@ -27,7 +27,7 @@ $Form
 $PageComments
 
   </div>
-    <div class="span3 pull-right  rightnav">
+    <div class="col-md-3 pull-right  rightnav">
       
     $CalendarWidget
     $MonthJumper

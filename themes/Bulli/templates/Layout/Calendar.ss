@@ -1,5 +1,5 @@
-    <div class="row-fluid">
-        <div class="span8 lefstedge">
+    <div class="row">
+        <div class="col-md-8 lefstedge">
 
 <h2>$Title</h2>
 <p class="feed"><a href="$Link(rss)"><% _t('SUBSCRIBE','Calendar RSS Feed') %></a></p>
@@ -14,7 +14,7 @@ $Content
 <% end_if %>
 
 	</div>
-    <div class="span3 pull-right rightnav" >
+    <div class="col-md-3 pull-right rightnav" >
     	
 		$CalendarWidget
 		$MonthJumper

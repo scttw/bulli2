@@ -1,6 +1,6 @@
 
-    <div class="row-fluid">
-        <div id="BlogContent" class="blogcontent typography span8 lefstedge">
+    <div class="row">
+        <div id="BlogContent" class="blogcontent typography col-md-8 lefstedge">
 	
 	<div class="blogEntry">
 		<h2 class="postTitle">$Title</h2>
@@ -24,7 +24,7 @@
 	$PageComments
 	
 	</div>
-    <div class="span3 pull-right rightnav">
+    <div class="col-md-3 pull-right rightnav">
     	<% include BlogSideBar %>
     </div>
     <div class="breaker"></div>

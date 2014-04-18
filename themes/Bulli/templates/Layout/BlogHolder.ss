@@ -1,6 +1,6 @@
 
-    <div class="row-fluid">
-        <div id="BlogContent" class="blogcontent typography span8 lefstedge">
+    <div class="row">
+        <div id="BlogContent" class="blogcontent typography col-md-8 lefstedge">
 	<% if SelectedTag %>
 		<h3><% _t('VIEWINGTAGGED', 'Viewing entries tagged with') %> '$SelectedTag'</h3>
 	<% else_if SelectedDate %>
@@ -20,7 +20,7 @@
 	<% include BlogPagination %>
 	
 	</div>
-    <div class="span3 pull-right rightnav" >
+    <div class="col-md-3 pull-right rightnav" >
     	<% include BlogSideBar %>
     </div>
     <div class="breaker"></div>

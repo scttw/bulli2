@@ -69,9 +69,10 @@ class Page_Controller extends ContentController {
 		Requirements::css('themes/Bulli/css/site.css');
 		Requirements::javascript('//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js');
         Requirements::javascript('themes/Bulli/javascript/plugins.js');
-        Requirements::javascript('themes/Bulli/javascript/main.js');
         Requirements::javascript('themes/Bulli/javascript/bootstrap.js');
         Requirements::javascript('themes/Bulli/javascript/site.js');
+        Requirements::javascript('themes/Bulli/javascript/main.js');
+		Requirements::block(FRAMEWORK_DIR .'/thirdparty/jquery/jquery.js');
         if ( $this->HasGallery  ) {
 	        if ( $this->Carousel ) {
 				Requirements::javascript('themes/Bulli/javascript/3rdparty/jquery.flexslider.js');

@@ -316,3 +316,9 @@ img.right {
 	#container .calendar-widget-table tbody .hasEvent {
 		background-position: 5px center;
 	}
+
+	/* user forms */
+
+	form fieldset div.field {
+		margin: 0 0 1em 0;
+	}

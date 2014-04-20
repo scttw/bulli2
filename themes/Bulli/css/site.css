@@ -322,3 +322,10 @@ img.right {
 	form fieldset div.field {
 		margin: 0 0 1em 0;
 	}
+	form label.required {
+		font-weight: normal;
+		color: #f00;
+		padding-left: 16px;
+		background: transparent url(../imgs/error_up.png) 0px 50% no-repeat;
+		background-size: 12px 6px;
+	}

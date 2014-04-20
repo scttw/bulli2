@@ -1,0 +1,1 @@
+<label id="$ID" class="{$extraClass} control-label">$Title</label>

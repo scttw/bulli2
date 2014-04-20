@@ -69,7 +69,7 @@ class HtmlEditorConfig {
 	protected $settings = array(
 		'friendly_name' => '(Please set a friendly name for this config)',
 		'priority' => 0,
-		'mode' => "specific_textareas",
+		'mode' => "none", // initialized through HtmlEditorField.js redraw() logic
 		'editor_selector' => "htmleditor",
 		'width' => "100%",
 		'auto_resize' => false,
@@ -86,6 +86,7 @@ class HtmlEditorConfig {
 		'safari_warning' => false,
 		'relative_urls' => true,
 		'verify_html' => true,
+		'browser_spellcheck' => true,
 	);
 	
 	/**
@@ -96,7 +97,6 @@ class HtmlEditorConfig {
 		'table' => null, 
 		'emotions' => null, 
 		'paste' => null, 
-		'spellchecker' => null
 	);
 
 	/**
@@ -106,7 +106,7 @@ class HtmlEditorConfig {
 		1 => array('bold','italic','underline','strikethrough','separator',
 			'justifyleft','justifycenter','justifyright','justifyfull','formatselect','separator',
 			'bullist','numlist','outdent','indent','blockquote','hr','charmap'),
-		2 => array('undo','redo','separator','cut','copy','paste','pastetext','pasteword','spellchecker','separator',
+		2 => array('undo','redo','separator','cut','copy','paste','pastetext','pasteword','separator',
 			'advcode','search','replace','selectall','visualaid','separator','tablecontrols'),
 		3 => array()
 	);

@@ -15,7 +15,7 @@
  * 
  * @see SS_List
  * 
- * @package framework
+ * @package forms
  * @subpackage fields-gridfield
  */
 class GridField extends FormField {
@@ -615,7 +615,8 @@ class GridField extends FormField {
 	public function gridFieldAlterAction($data, $form, SS_HTTPRequest $request) {
 		$html = '';
 		$data = $request->requestVars();
-		$fieldData = @$data[$this->getName()];
+		$name = $this->getName();
+		$fieldData = isset($data[$name]) ? $data[$name] : null;
 
 		// Update state from client
 		$state = $this->getState(false);
@@ -764,7 +765,7 @@ class GridField extends FormField {
  * This class is the base class when you want to have an action that alters 
  * the state of the {@link GridField}, rendered as a button element. 
  * 
- * @package framework
+ * @package forms
  * @subpackage fields-gridfield
  */
 class GridField_FormAction extends FormAction {

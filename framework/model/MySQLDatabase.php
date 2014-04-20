@@ -67,7 +67,7 @@ class MySQLDatabase extends SS_Database {
 		} else {
 			$this->dbConn = new MySQLi($parameters['server'], $parameters['username'], $parameters['password']);
 		}
-		
+
 		if($this->dbConn->connect_error) {
 			$this->databaseError("Couldn't connect to MySQL database | " . $this->dbConn->connect_error);
 		}
@@ -83,6 +83,12 @@ class MySQLDatabase extends SS_Database {
 
 		if(isset($parameters['timezone'])) {
 			$this->query(sprintf("SET SESSION time_zone = '%s'", $parameters['timezone']));
+		}
+	}
+
+	public function __destruct() {
+		if($this->dbConn) {
+			mysqli_close($this->dbConn);
 		}
 	}
 
@@ -155,7 +161,7 @@ class MySQLDatabase extends SS_Database {
 	}
 
 	public function createDatabase() {
-		$this->query("CREATE DATABASE \"$this->database\"");
+		$this->query("CREATE DATABASE \"$this->database\" DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci");
 		$this->query("USE \"$this->database\"");
 
 		$this->tableList = $this->fieldList = $this->indexList = null;
@@ -1208,54 +1214,5 @@ class MySQLDatabase extends SS_Database {
 	protected function getLockIdentifier($name) {
 		// Prefix with database name
 		return Convert::raw2sql($this->database . '_' . Convert::raw2sql($name));
-	}
-}
-
-/**
- * A result-set from a MySQL database.
- * @package framework
- * @subpackage model
- */
-class MySQLQuery extends SS_Query {
-	/**
-	 * The MySQLDatabase object that created this result set.
-	 * @var MySQLDatabase
-	 */
-	protected $database;
-
-	/**
-	 * The internal MySQL handle that points to the result set.
-	 * @var resource
-	 */
-	protected $handle;
-
-	/**
-	 * Hook the result-set given into a Query class, suitable for use by SilverStripe.
-	 * @param database The database object that created this query.
-	 * @param handle the internal mysql handle that is points to the resultset.
-	 */
-	public function __construct(MySQLDatabase $database, $handle) {
-		$this->database = $database;
-		$this->handle = $handle;
-	}
-
-	public function __destruct() {
-		if(is_object($this->handle)) $this->handle->free();
-	}
-	
-	public function seek($row) {
-		if(is_object($this->handle)) return $this->handle->data_seek($row);
-	}
-	
-	public function numRecords() {
-		if(is_object($this->handle)) return $this->handle->num_rows;
-	}
-
-	public function nextRecord() {
-		if(is_object($this->handle) && ($data = $this->handle->fetch_assoc())) {
-			return $data;
-		} else {
-			return false;
-		}
 	}
 }

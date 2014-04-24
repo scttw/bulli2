@@ -18,6 +18,7 @@ i18n::set_locale('en_US');
 
 // Enable nested URLs for this site (e.g. page/sub-page/)
 if (class_exists('SiteTree')) SiteTree::enable_nested_urls(); 
+Member::add_extension("CustomMember"); 
 
 ShortcodeParser::get('default')->register(
     'TopPodcast', array('Page_Controller', 'TopPodcastShortcodeHandler')

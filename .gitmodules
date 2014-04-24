@@ -35,3 +35,7 @@ url=https://github.com/scttw/silverstripe-googlemaps.git
 [submodule "SortableGridField"]
 	path = SortableGridField
 	url = https://github.com/UndefinedOffset/SortableGridField.git
+[submodule "memberprofiles"]
+	path = memberprofiles
+	url = https://github.com/ajshort/silverstripe-memberprofiles.git
+	branch = master

@@ -144,10 +144,14 @@ ul.nav {
 
 .search {
 	position: absolute;
-	top: 20px;
+	top: 15px;
+	right: 80px;
+}
+.security {
+	position: absolute;
+	top: 15px;
 	right: 20px;
 }
-
 
 .container .row-fluid .leftedge {
 	margin-left: 20px;
@@ -329,3 +333,8 @@ img.right {
 		background: transparent url(../imgs/error_up.png) 0px 50% no-repeat;
 		background-size: 12px 6px;
 	}
+	.ss-uploadfield-item-info label, .ss-uploadfield-item, .ss-uploadfield .ss-uploadfield-item .ss-uploadfield-item-preview {
+		color: black;
+		font-weight: normal;
+	}
+	.ss-uploadfield-item-name small {display: none;}

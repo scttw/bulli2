@@ -340,4 +340,7 @@ img.right {
 		color: black;
 		font-weight: normal;
 	}
+	.table-striped > tbody > tr:nth-child(2n+1) > td, .table-striped > tbody > tr:nth-child(2n+1) > th {
+		background-color: #444444;
+	}
 	.ss-uploadfield-item-name small {display: none;}

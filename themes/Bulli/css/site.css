@@ -225,6 +225,9 @@ img.right {
 	.strap {
 		height: auto;
 	}
+	.strap img {
+		margin-left: -25%;
+	}
 }
 @media (max-width: 480px) {
 	.fauxbody {
@@ -271,29 +274,30 @@ img.right {
 	img {
 		max-width: 100%;
 		height: auto;
-		}  .strapfiller, .strapfiller p, .strapfiller img {
-			margin: 0;
-			padding: 0;
-		}
-		.strap img, .strap img.left {
-			display: block;
-			max-width: 200%;
-			width: 200%;
-			height: auto;
-			margin: 0;
-		}
+	}
+	.strapfiller, .strapfiller p, .strapfiller img {
+		margin: 0;
+		padding: 0;
+	}
+	.strap img, .strap img.left {
+		display: block;
+		max-width: 200%;
+		width: 200%;
+		height: auto;
+		margin-left: -25%;
+	}
 
-		.strap, footer, header.banner {
-			margin: 0;
-			padding: 0;
-		}
-		input.span2.search-query {
-			width: 80px;
-		}
-		.row {
-			margin-left:0;
-			margin-right:0;
-		}
+	.strap, footer, header.banner {
+		margin: 0;
+		padding: 0;
+	}
+	input.span2.search-query {
+		width: 80px;
+	}
+	.row {
+		margin-left:0;
+		margin-right:0;
+	}
 
 	}
 	.spacer { height: 20px;}

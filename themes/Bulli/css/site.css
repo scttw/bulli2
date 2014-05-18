@@ -152,7 +152,6 @@ ul.nav {
 	top: 15px;
 	right: 20px;
 }
-
 .container .row-fluid .leftedge {
 	margin-left: 20px;
 }
@@ -216,8 +215,6 @@ img.right {
 	.strap img {
 		width: auto;
 		max-width: 10000px; 
-		margin-left: -50%;
-		left: 50%;
 	}
 	.navbar-default .navbar-nav > li > a {
 		font-size: 0.9em;
@@ -226,10 +223,6 @@ img.right {
 @media (max-width: 767px) {
 	.strap {
 		height: auto;
-	}
-	.strap img {
-		margin-left: -50%;
-		left: 50%;
 	}
 }
 @media (max-width: 480px) {
@@ -277,31 +270,29 @@ img.right {
 	img {
 		max-width: 100%;
 		height: auto;
-	}
-	.strapfiller, .strapfiller p, .strapfiller img {
-		margin: 0;
-		padding: 0;
-	}
-	.strap img, .strap img.left {
-		display: block;
-		max-width: 200%;
-		width: 200%;
-		height: auto;
-		margin-left: -50%;
-		left: 50%;
-	}
+		}  .strapfiller, .strapfiller p, .strapfiller img {
+			margin: 0;
+			padding: 0;
+		}
+		.strap img, .strap img.left {
+			display: block;
+			max-width: 200%;
+			width: 200%;
+			height: auto;
+			margin: 0;
+		}
 
-	.strap, footer, header.banner {
-		margin: 0;
-		padding: 0;
-	}
-	input.span2.search-query {
-		width: 80px;
-	}
-	.row {
-		margin-left:0;
-		margin-right:0;
-	}
+		.strap, footer, header.banner {
+			margin: 0;
+			padding: 0;
+		}
+		input.span2.search-query {
+			width: 80px;
+		}
+		.row {
+			margin-left:0;
+			margin-right:0;
+		}
 
 	}
 	.spacer { height: 20px;}

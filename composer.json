@@ -1,0 +1,13 @@
+{
+    "name": "Rowen Atkinson/bulli_web",
+    "authors": [
+        {
+            "name": "Administrator",
+            "email": "rowen@solutionsoutsourced.com.au"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+
+    }
+}

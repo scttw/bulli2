@@ -1,6 +1,11 @@
 /* bootstrap reset */
 
-
+@media(max-width:767px)
+{    
+	.navbar-collapse {
+	     max-height: none;
+	}
+}
 
 /* local customisations */
 

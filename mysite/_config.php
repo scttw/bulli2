@@ -23,7 +23,7 @@ Member::add_extension("CustomMember");
 ShortcodeParser::get('default')->register(
     'TopPodcast', array('Page_Controller', 'TopPodcastShortcodeHandler')
 );
-HtmlEditorConfig::get('cms')->setOption('valid_elements', 
+HtmlEditorConfig::get('cms')->setOption('extended_valid_elements', 
     'div[class|id|style|title],' .
     'span[class|id|style|title]'
 );

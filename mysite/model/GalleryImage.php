@@ -5,13 +5,19 @@
 class GalleryImage extends DataObject {
 
 	public static $db = array(
-		'Title' => 'Varchar(100)'
+		'Title' => 'Varchar(100)',
+		'Priority' => 'Enum("1,2,3,4,5,6,7,8,9")'
 	);
 
 	public static $has_one = array(
 		'Image'			=> 'Image',
 		'ParentPage'	=> 'Page'
 	);
+	static $default_sort = "Priority ASC, Title ASC"; 
+	static $defaults = array(
+		'Priority' => 5
+	);
+
     public function canView($member = null) {
         return $this->ParentPage()->canEdit($member);
     }

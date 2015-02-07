@@ -1,0 +1,11 @@
+<?php
+class myUserDefinedForm extends UserDefinedForm {
+	private static $db = array(
+		"FormClass" => "Varchar",
+	)
+
+}
+
+class myUserDefinedForm_Controller extends UserDefinedForm_Controller {
+
+}

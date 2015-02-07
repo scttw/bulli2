@@ -1,0 +1,41 @@
+{
+    "name": "bulli/website",
+    "repositories": [
+        {
+            "type": "git",
+            "url": "https://github.com/scttw/silverstripe-simplepodcast"
+        },
+        {
+            "type": "git",
+            "url": "https://github.com/scttw/silverstripe-googlemaps"
+        }
+    ],
+    "require": {
+        "silverstripe/cms": "3.1.9",
+        "silverstripe/framework": "3.1.9",
+        "silverstripe/advancedworkflow": "dev-master",
+        "silverstripe/blog": "dev-master",
+        "silverstripe/event-calendar": "dev-master",
+        "scttw/silverstripe-googlemaps": "dev-master",
+        "silverstripe/memberprofiles": "dev-master",
+        "silverstripe/queuedjobs": "dev-master",
+        "silverstripe/timepickerfield": "~1.0@dev",
+        "silverstripe/userforms": "~2.0@dev",
+        "silverstripe/dashboard": "dev-master",
+        "silverstripe/widgets": "dev-master",
+        "scttw/silverstripe-simple-podcast": "dev-master"
+    },
+
+    "authors": [
+        {
+            "name": "Rowen Atkinson",
+            "email": "rowen.atkinson@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+      "require-dev": {
+          "phing/phing": "2.*",
+          "phpunit/phpunit": "3.7.*",
+          "silverstripe/sqlite3": "1.3.x-dev"
+      }
+}

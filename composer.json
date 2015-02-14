@@ -23,7 +23,8 @@
         "silverstripe/userforms": "~2.0@dev",
         "silverstripe/dashboard": "dev-master",
         "silverstripe/widgets": "dev-master",
-        "scttw/silverstripe-simple-podcast": "dev-master"
+        "scttw/silverstripe-simple-podcast": "dev-master",
+        "micschk/silverstripe-gridfieldsitetreebuttons": "dev-master"
     },
 
     "authors": [

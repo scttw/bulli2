@@ -13,6 +13,7 @@ mysite/BUILD_NUMBER
 mysite/*.log
 mysite/VERSION
 mysite/configs
+build/
 build/*.tar.gz
 build/archive
 build/build.properties

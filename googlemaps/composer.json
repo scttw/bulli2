@@ -1,0 +1,25 @@
+{
+  "name": "scttw/silverstripe-googlemaps",
+  "description": "A module to allow embeding of google maps inside page objects",
+	"type": "silverstripe-module",
+	"homepage": "http://github.com/scttw/silverstripe-googlemaps",
+	"keywords": ["silverstripe", "googlemaps"],
+	"license": "BSD-3-Clause",
+	"authors": [
+		{
+			"name": "Morven Lewis-Everley",
+			"email": "morven@i-lateral.com"
+		}
+	],
+	"support": {
+		"issues": "http://github.com/scttw/silverstripe-googlemaps/issues"
+	},
+	"require": {
+		"silverstripe/framework": ">=3.0",
+		"silverstripe/cms": ">=3.0",
+		"undefinedoffset/sortablegridfield": "dev-master"
+	},
+	"extra": {
+		"installer-name": "googlemaps"
+	}
+}

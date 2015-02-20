@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!-- Rename this project to something relevant! -->
-<project name="bulli" default="build">
+<project name="bulli_rebuild" default="build">
 
 	<tstamp>
 		<format property="FULLDTIME" pattern="%Y%m%d%H%M%S" />

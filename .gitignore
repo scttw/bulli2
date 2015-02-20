@@ -1,7 +1,5 @@
 /.htaccess
 .htaccess
-cms/
-framework/
 assets/
 jsparty/
 nbproject/

@@ -1,0 +1,17 @@
+{
+    "name": "micschk/silverstripe-excludechildren",
+    "description": "Extension to hide pages from the SiteTree",
+    "type": "silverstripe-module",
+    "keywords": ["silverstripe", "excludechildren", "sitetree"],
+    "authors": [
+    {
+        "name": "micschk"
+    }],
+    "require": {
+        "silverstripe/framework": "~3.0"
+    },
+	"extra": {
+		"installer-name": "excludechildren"
+	}
+    
+}

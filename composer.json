@@ -11,8 +11,8 @@
         }
     ],
     "require": {
-        "silverstripe/cms": "3.1.9",
-        "silverstripe/framework": "3.1.9",
+        "silverstripe/cms": "3.1.10",
+        "silverstripe/framework": "3.1.10",
         "silverstripe/advancedworkflow": "dev-master",
         "silverstripe/blog": "dev-master",
         "silverstripe/event-calendar": "dev-master",

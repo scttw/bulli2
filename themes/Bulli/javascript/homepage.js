@@ -303,16 +303,24 @@ Bulli.homepage = function () {
 	});
 
   Bulli.setWeeks();
-  window.on('resize', function () {
+  $(window).resize(function () {
     Bulli.setWeeks();
   });
 
 }
 
 Bulli.setWeeks = function () {
+  var windowwidth = $('.weeks').css('background');
   var width = $('.weeks').width(); 
-  $('.weeks').css('height', width*0.50);
-  $('.weeks').css('padding-top', width*0.15);
+  if (windowwidth.indexOf('url(') > 0 ) {
+    $('.weeks').css('height', width*0.50);
+    $('.weeks').css('padding-top', width*0.15);
+  } else {
+    $('.weeks').css('height', 'auto');
+    $('.weeks').css('padding-top', '.2em');
+
+  }
+
 }
 
 $(window).ready(Bulli.homepage());

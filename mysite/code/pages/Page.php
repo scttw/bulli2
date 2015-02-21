@@ -18,7 +18,8 @@ class Page extends SiteTree {
 	);
 
 	private static $casting = array(
-        'WeeksShortCodeHandler' => 'HTMLText'
+        'WeeksShortCodeHandler' => 'HTMLText',
+        'IframeShortCodeHandler' => 'HTMLText'
     );
 
 	function getCMSFields() {
@@ -43,6 +44,15 @@ class Page_Controller extends ContentController {
 		"SearchForm"
 	);
 	
+	public static function IframeShortCodeHandler ($arguments, $content = null, $parser = null, $tagName) {
+		if (isset($arguments['height'])) {
+			$height=$arguments['height'];
+		} else {
+			$height=400;
+		}
+		return "<iframe src=\"$content\" width=\"100%\" height=\"" . $height . "\" frameborder=\"0\" vspace=\"0\" hspace=\"0\" marginheight=\"5\" marginwidth=\"5\" scrolling=\"auto\" allowtransparency=\"true\" />";
+	}
+
    	/**
    	 * 77 Days of Prayer promo.
    	 */

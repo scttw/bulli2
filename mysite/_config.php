@@ -26,6 +26,9 @@ ShortcodeParser::get('default')->register(
 ShortcodeParser::get('default')->register(
     'TopPodcast', array('Page_Controller', 'TopPodcastShortcodeHandler')
 );
+ShortcodeParser::get('default')->register(
+    'Iframe', array('Page_Controller', 'IframeShortCodeHandler')
+);
 
 HtmlEditorConfig::get('cms')->setOption('extended_valid_elements', 
     'div[class|id|style|title],' .

@@ -370,6 +370,9 @@ img.right {
 			font-size: 100%;
 			color: #efefef;
 		}
+		.weeks:before {
+			content: "77 Days of Prayer: "
+		}
 	}
 	@media (max-width: 767px) {
 		.weeks {

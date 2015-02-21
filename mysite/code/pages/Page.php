@@ -17,6 +17,9 @@ class Page extends SiteTree {
 		'Carousel' => 0
 	);
 
+	private static $casting = array(
+        'WeeksShortCodeHandler' => 'HTMLText'
+    );
 
 	function getCMSFields() {
 		$fields = parent::getCMSFields();
@@ -40,6 +43,37 @@ class Page_Controller extends ContentController {
 		"SearchForm"
 	);
 	
+   	/**
+   	 * 77 Days of Prayer promo.
+   	 */
+   	public function DaysOfPrayer () {
+   		$weeks = array(
+			"Week 1" => "For our church as we work at making disciples of Jesus; to meet and exceed the budget and for giving to be generous & joyful.",
+			"Week 2" => "For property meetings & building plans that allow for Gospel growth. For Jesus to shape our families, parents discipling their kids, for marriages & grandparents.",
+			"Week 3" => "Youth ministry - youth leaders, families & other adults to get alongside youth. Evangelism in high schools. Our annual general meeting.",
+			"Week 4" => "Children’s Ministry - leaders, families & all to love, teach & nurture children; EE Seven Nations Conference - for attendees, their Gospel ministry & ours.",
+			"Week 5" => "Overseas Gospel ministry; church leaders, those on mission - the Scarratt’s serving South America, the Harvey’s in the Pacific, the Hatton’s in Africa.",
+			"Week 6" => "Serving ministries - as we make disciples in the local context; for people to step up and serve Jesus with humility & love - for ‘people’ opportunities and ‘practical’ opportunities to serve. ",
+			"Week 7" => "Women’s ministry - that our church would faithfully disciple and encourage women to follow Jesus and continue to become like him.",
+			"Week 8" => "Easter - inviting people to hear about Jesus; for renewed love & gratitude to God for our salvation. Easter Youth Camp - leaders, campers & new believers in Christ.",
+			"Week 9" => "Pray for men’s ministry. For our men to befriend other blokes, speak to them about Jesus, read God’s word together and disciple them.",
+			"Week 10" => "For our church vision to be faithful, clear and captivating - so that it leads to great zeal, love, generosity and each of us serving together for the sake of Jesus. ",
+			"Week 11" => "Towards Belief Series - for our church to invite people; for open, gracious conversations, for us to listen, for people to begin their journey towards faith in Jesus."
+   		);
+		$startweek = new DateTime('2015-02-15');
+
+//		return $this->datediffInWeeks(date('Y-m-d'), $startweek), date('Y-m-d'));
+	    $weekssince = floor($startweek->diff(new DateTime('NOW'))->days/7)+1;
+		if ($weekssince<12) {
+		    return "<strong>Week $weekssince</strong>: " . $weeks['Week '.$weekssince];
+		}
+		return false;
+   	}
+
+	public static function WeeksShortCodeHandler($arguments, $content = null, $parser = null, $tagName) {
+        $current = Controller::curr();
+        return '<div class="weeks">'.$current->DaysOfPrayer().'</div>';
+    }
 	public function TopPodcast($arguments=null, $content=null) {
 		function forTemplate() { return $this->renderWith('TopPodcast'); }
 		//if(!isset($_GET['start']) || !is_numeric($_GET['start']) || (int)$_GET['start'] < 1) $_GET['start'] = 0;

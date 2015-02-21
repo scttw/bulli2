@@ -301,6 +301,18 @@ Bulli.homepage = function () {
 	  		itemSelector: '.masonry-block'
 		});
 	});
+
+  Bulli.setWeeks();
+  window.on('resize', function () {
+    Bulli.setWeeks();
+  });
+
+}
+
+Bulli.setWeeks = function () {
+  var width = $('.weeks').width(); 
+  $('.weeks').css('height', width*0.50);
+  $('.weeks').css('padding-top', width*0.15);
 }
 
 $(window).ready(Bulli.homepage());

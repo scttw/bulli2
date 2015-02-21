@@ -349,3 +349,36 @@ img.right {
 		background-color: #444444;
 	}
 	.ss-uploadfield-item-name small {display: none;}
+
+
+	/* 77 days of prayer */
+	.weeks {
+		background: url(../imgs/77-Days-of-Prayer.jpg) top left no-repeat;
+		background-size: 100% auto;
+		padding-top: 130px;
+		padding-left: 5%;
+		padding-right: 10%;
+		color: #333;
+		font-size: 220%;
+		border-radius: 15px;
+	}
+
+	@media (max-width: 480px) {
+		.weeks {
+			background: transparent;
+			padding: .2em;
+			font-size: 100%;
+			color: #efefef;
+		}
+	}
+	@media (max-width: 767px) {
+		.weeks {
+			font-size: 150%;
+			padding-top: 80px;			
+		}
+	}
+	@media (min-width: 768px) and (max-width: 979px) {
+		.weeks {
+			font-size: 150%;
+		}
+	}

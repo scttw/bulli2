@@ -35,15 +35,16 @@ class Page extends SiteTree {
 		$fields->addFieldToTab('Root.Gallery', new CheckboxField('Carousel', 'Carousel style image rotator'));
 		$fields->addFieldToTab('Root.Gallery', new GridField('GalleryImages', 'Gallery Images', $this->GalleryImages(), GridFieldConfig_RecordEditor::create()));
 		return $fields;
-	}    
+	}
 }
+
 class Page_Controller extends ContentController {
 	private static $allowed_actions = array (
 		"TopPodcast",
 		"TopPodcastShortcodeHandler",
 		"SearchForm"
 	);
-	
+
 	public static function IframeShortCodeHandler ($arguments, $content = null, $parser = null, $tagName) {
 		if (isset($arguments['height'])) {
 			$height=$arguments['height'];
@@ -85,28 +86,27 @@ class Page_Controller extends ContentController {
         return '<div class="weeks">'.$current->DaysOfPrayer().'</div>';
     }
 	public function TopPodcast($arguments=null, $content=null) {
-		function forTemplate() { return $this->renderWith('TopPodcast'); }
+		// function forTemplate() { return $this->renderWith('TopPodcast'); }
 		//if(!isset($_GET['start']) || !is_numeric($_GET['start']) || (int)$_GET['start'] < 1) $_GET['start'] = 0;
-		//$SQL_start = (int)$_GET['start']; 
-		$children = Podcast::get()->first();
-		$template = new SSViewer('TopPodcast');
+		//$SQL_start = (int)$_GET['start'];
+		$children = Podcast::get()->sort('Date DESC')->first();
 		if( !$children )
-			return null; 
-		return $template->process(new ArrayData(array('TopPodcast' => $children)));
+			return null;
+		return $children;
 	}
 
-  	public static function TopPodcastShortcodeHandler($arguments, $content = null, $parser = null) {
-      $current = Controller::curr();
-      return $current->TopPodcast();
-      //return "Ahoy";
-   	}
+ //  	public static function TopPodcastShortcodeHandler($arguments, $content = null, $parser = null) {
+ //      $current = Controller::curr();
+ //      return $current->TopPodcast();
+ //      //return "Ahoy";
+ //   	}
 
 	// public function onBeforeInit() {
- //        
-	static function PodcastShortCodeHandler(){
-	   $current = Controller::curr();
-	   return $current->renderWith('Podcast');
-   }
+ //
+	// static function PodcastShortCodeHandler(){
+	//    $current = Controller::curr();
+	//    return $current->renderWith('Podcast');
+ //   }
    function SearchForm() {
       $searchText = isset($_REQUEST['Search']) ? $_REQUEST['Search'] : 'Search Huh?';
       $fields = new FieldList(
@@ -123,9 +123,9 @@ class Page_Controller extends ContentController {
 	public function init() {
 		parent::init();
 		Requirements::themedCSS('reset');
-		Requirements::themedCSS('layout'); 
-		Requirements::themedCSS('typography'); 
-		Requirements::themedCSS('form'); 
+		Requirements::themedCSS('layout');
+		Requirements::themedCSS('typography');
+		Requirements::themedCSS('form');
 
 		Requirements::css('themes/Bulli/css/normalize.css');
 		Requirements::css('themes/Bulli/css/bootstrap.css');
@@ -151,7 +151,7 @@ class Page_Controller extends ContentController {
 				Requirements::css('//cdnjs.cloudflare.com/ajax/libs/fluidbox/1.2.5/jquery.fluidbox.css');
 
 	        }
-        }	
+        }
 	}
 
 }

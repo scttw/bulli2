@@ -8,19 +8,22 @@
 // GearmanHandler is an extension that could be not available.
 if (interface_exists('GearmanHandler')) {
 	class JobWorker implements GearmanHandler {
-		
-		public static $dependencies = array(
-			'queuedJobService' => '%$QueuedJobService',
-		);
 		/**
 		 * @var QueuedJobService
 		 */
 		public $queuedJobService;
-		
+
+		/**
+		 * @return string
+		 */
 		public function getName() {
 			return 'jobqueueExecute';
 		}
 
+		/**
+		 * @param int $jobId
+		 * @return void
+		 */
 		public function jobqueueExecute($jobId) {
 			$this->queuedJobService->checkJobHealth();
 			$job = DataList::create('QueuedJobDescriptor')->byID($jobId);

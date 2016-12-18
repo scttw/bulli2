@@ -2,7 +2,7 @@
 
 /**
  * A DB field that serialises an array before writing it to the db, and returning the array
- * back to the end user. 
+ * back to the end user.
  *
  * @author Marcus Nyeholt <marcus@silverstripe.com.au>
  */
@@ -20,7 +20,7 @@ class MultiValueField extends DBField implements CompositeDBField {
 	 * Returns the value of this field.
 	 * @return mixed
 	 */
-	function getValue() {
+	public function getValue() {
 		// if we're not deserialised yet, do so
 		if ($this->exists() && is_string($this->value)) {
 			$this->value = unserialize($this->value);
@@ -31,12 +31,12 @@ class MultiValueField extends DBField implements CompositeDBField {
 	public function getValues() {
 		return $this->getValue();
 	}
-	
+
 	/**
 	 * Overridden to make sure that the user_error that gets triggered if this is already is set
 	 * ... doesn't. DataObject tries setting this at times that it shouldn't :/
-	 * 
-	 * @param string $name 
+	 *
+	 * @param string $name
 	 */
 	public function setName($name) {
 		if (!$this->name) {
@@ -51,7 +51,7 @@ class MultiValueField extends DBField implements CompositeDBField {
 	 * @param mixed $value
 	 * @param array $record
 	 */
-	function setValue($value, $record = null, $markChanged = true) {
+	public function setValue($value, $record = null, $markChanged = true) {
 		if ($markChanged) {
 			if (is_array($value)) {
 				$this->value = $value;
@@ -83,7 +83,7 @@ class MultiValueField extends DBField implements CompositeDBField {
 	 * (non-PHPdoc)
 	 * @see core/model/fieldtypes/DBField#prepValueForDB($value)
 	 */
-	function prepValueForDB($value) {
+	public function prepValueForDB($value) {
 		if (!$this->nullifyEmpty && $value === '') {
 			return "'" . Convert::raw2sql($value) . "'";
 		} else {
@@ -96,18 +96,18 @@ class MultiValueField extends DBField implements CompositeDBField {
 			return parent::prepValueForDB($value);
 		}
 	}
-	
-	function requireField() {
+
+	public function requireField() {
 		$parts=Array('datatype'=>'mediumtext', 'character set'=>'utf8', 'collate'=>'utf8_general_ci', 'arrayValue'=>$this->arrayValue);
 		$values=Array('type'=>'text', 'parts'=>$parts);
 		DB::requireField($this->tableName, $this->name . 'Value', $values);
 	}
 
-	function compositeDatabaseFields() {
+	public function compositeDatabaseFields() {
 		return self::$composite_db;
 	}
 
-	function writeToManipulation(&$manipulation) {
+	public function writeToManipulation(&$manipulation) {
 		if($this->getValue()) {
 			$manipulation['fields'][$this->name.'Value'] = $this->prepValueForDB($this->getValue());
 		} else {
@@ -115,17 +115,17 @@ class MultiValueField extends DBField implements CompositeDBField {
 		}
 	}
 
-	function addToQuery(&$query) {
+	public function addToQuery(&$query) {
 		parent::addToQuery($query);
 		$name = sprintf('%sValue', $this->name);
 		$val = sprintf('"%sValue"', $this->name);
 		$select = $query->getSelect();
 		if (!isset($select[$name])) {
-			$query->addSelect(array($name => $val)); 
+			$query->addSelect(array($name => $val));
 		}
 	}
 
-	function isChanged() {
+	public function isChanged() {
 		return $this->changed;
 	}
 
@@ -144,13 +144,20 @@ class MultiValueField extends DBField implements CompositeDBField {
 	 * Return all items separated by a separator, defaulting to a comma and
 	 * space.
 	 *
-	 * @param  string $separator
+	 * @param string $separator
 	 * @return string
 	 */
 	public function Implode($separator = ', ') {
 		return implode($separator, $this->getValue());
 	}
-	
+    
+    public function __toString() {
+        if ($this->getValue()) {
+            return $this->csv();
+        }
+        return '';
+    }
+
 	public function Items() {
 		return $this->forTemplate();
 	}
@@ -161,7 +168,7 @@ class MultiValueField extends DBField implements CompositeDBField {
 			foreach ($this->value as $key => $item) {
 				$v = new Varchar('Value');
 				$v->setValue($item);
-				
+
 				$obj = new ArrayData(array(
 					'Value' => $v,
 					'Key'	=> $key,

@@ -1,22 +1,20 @@
 <?php
+
 /**
- * This validation class handles all form and custom form validation through
- * the use of Required fields.
- * 
- * Relies on javascript for client-side validation, and marking fields after serverside validation.
- * 
- * Acts as a visitor to individual form fields.
- * 
+ * This validation class handles all form and custom form validation through the use of Required
+ * fields. It relies on javascript for client-side validation, and marking fields after server-side
+ * validation. It acts as a visitor to individual form fields.
+ *
  * @package forms
  * @subpackage validators
- */ 
+ */
 abstract class Validator extends Object {
-	
+
 	/**
 	 * @var Form $form
 	 */
 	protected $form;
-	
+
 	/**
 	 * @var array $errors
 	 */
@@ -24,74 +22,105 @@ abstract class Validator extends Object {
 
 	/**
 	 * @param Form $form
+	 *
+	 * @return $this
 	 */
 	public function setForm($form) {
 		$this->form = $form;
+
 		return $this;
 	}
-	
+
 	/**
-	 * @return array Errors (if any)
+	 * Returns any errors there may be.
+	 *
+	 * @return null|array
 	 */
-	public function validate(){
+	public function validate() {
 		$this->errors = null;
+
 		$this->php($this->form->getData());
+
 		return $this->errors;
 	}
-	
+
 	/**
-	 * Callback to register an error on a field (Called from implementations of {@link FormField::validate})
-	 * 
-	 * @param $fieldName name of the field
-	 * @param $message error message to display
-	 * @param $messageType optional parameter, gets loaded into the HTML class attribute in the rendered output.
-	 *                              See {@link getErrors()} for details.
+	 * Callback to register an error on a field (Called from implementations of
+	 * {@link FormField::validate}). The optional error message type parameter is loaded into the
+	 * HTML class attribute.
+	 *
+	 * See {@link getErrors()} for details.
+	 *
+	 * @param string $fieldName
+	 * @param string $errorMessage
+	 * @param string $errorMessageType
 	 */
-	public function validationError($fieldName, $message, $messageType='') {
+	public function validationError($fieldName, $errorMessage, $errorMessageType = '') {
 		$this->errors[] = array(
 			'fieldName' => $fieldName,
-			'message' => $message,
-			'messageType' => $messageType,
+			'message' => $errorMessage,
+			'messageType' => $errorMessageType,
 		);
 	}
-	
+
 	/**
-	 * Returns all errors found by a previous call to {@link validate()}.
-	 * The array contains the following keys for each error:
-	 * - 'fieldName': the name of the FormField instance
-	 * - 'message': Validation message (optionally localized)
-	 * - 'messageType': Arbitrary type of the message which is rendered as a CSS class in the FormField template,
-	 *   e.g. <span class="message (type)">. Usually "bad|message|validation|required", which renders differently
-	 *   if framework/css/Form.css is included.
-	 * 
-	 * @return array
+	 * Returns all errors found by a previous call to {@link validate()}. The returned array has a
+	 * structure resembling:
+	 *
+	 * <code>
+	 *     array(
+	 *         'fieldName' => '[form field name]',
+	 *         'message' => '[validation error message]',
+	 *         'messageType' => '[bad|message|validation|required]',
+	 *     )
+	 * </code>
+	 *
+	 * @return null|array
 	 */
 	public function getErrors() {
 		return $this->errors;
 	}
-	
+
+	/**
+	 * @param string $fieldName
+	 * @param array $data
+	 */
 	public function requireField($fieldName, $data) {
 		if(is_array($data[$fieldName]) && count($data[$fieldName])) {
-			foreach($data[$fieldName] as $componentkey => $componentVal){
-				if(!strlen($componentVal)) {
-					$this->validationError($fieldName, "$fieldName $componentkey is required", "required");
+			foreach($data[$fieldName] as $componentKey => $componentValue) {
+				if(!strlen($componentValue)) {
+					$this->validationError(
+						$fieldName,
+						sprintf('%s %s is required', $fieldName, $componentKey),
+						'required'
+					);
 				}
 			}
-			
 		} else if(!strlen($data[$fieldName])) {
-			$this->validationError($fieldName, "$fieldName is required", "required");
+			$this->validationError(
+				$fieldName,
+				sprintf('%s is required', $fieldName),
+				'required'
+			);
 		}
 	}
-	
+
 	/**
-	 * Returns true if the named field is "required".
-	 * Used by FormField to return a value for FormField::Required(), to do things like show *s on the form template.
-	 * By default, it always returns false.
+	 * Returns whether the field in question is required. This will usually display '*' next to the
+	 * field. The base implementation always returns false.
+	 *
+	 * @param string $fieldName
+	 *
+	 * @return bool
 	 */
 	public function fieldIsRequired($fieldName) {
 		return false;
 	}
-	
+
+	/**
+	 * @param array $data
+	 *
+	 * @return mixed
+	 */
 	abstract public function php($data);
 }
-

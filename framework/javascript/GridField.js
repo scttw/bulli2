@@ -55,7 +55,7 @@
 								content = '<span class="non-sortable"></span>';
 								self.addClass('show-filter').find('.filter-header').show();
 							} else {
-								content = '<button name="showFilter" class="ss-gridfield-button-filter trigger"></button>';
+								content = '<button type="button" name="showFilter" class="ss-gridfield-button-filter trigger"></button>';
 								self.removeClass('show-filter').find('.filter-header').hide();
 							}
 
@@ -136,6 +136,12 @@
 		$('.ss-gridfield .action').entwine({
 			onclick: function(e){
 				var filterState='show'; //filterstate should equal current state.
+
+				// If the button is disabled, do nothing.
+				if (this.button('option', 'disabled')) {
+					e.preventDefault();
+					return;
+				}
 				
 				if(this.hasClass('ss-gridfield-button-close') || !(this.closest('.ss-gridfield').hasClass('show-filter'))){
 					filterState='hidden';
@@ -143,6 +149,66 @@
 
 				this.getGridField().reload({data: [{name: this.attr('name'), value: this.val(), filter: filterState}]});
 				e.preventDefault();
+			},
+			/**
+			 * Get the url this action should submit to
+			 */
+			actionurl: function() {
+				var btn = this.closest(':button'), grid = this.getGridField(),
+					form = this.closest('form'), data = form.find(':input.gridstate').serialize(),
+					csrf = form.find('input[name="SecurityID"]').val();
+
+				// Add current button
+				data += "&" + encodeURIComponent(btn.attr('name')) + '=' + encodeURIComponent(btn.val());
+
+				// Add csrf
+				if(csrf) {
+					data += "&SecurityID=" + encodeURIComponent(csrf);
+			}
+
+				// Include any GET parameters from the current URL, as the view
+				// state might depend on it. For example, a list pre-filtered
+				// through external search criteria might be passed to GridField.
+				if(window.location.search) {
+					data = window.location.search.replace(/^\?/, '') + '&' + data;
+				}
+
+				// decide whether we should use ? or & to connect the URL
+				var connector = grid.data('url').indexOf('?') == -1 ? '?' : '&';
+
+				return $.path.makeUrlAbsolute(
+					grid.data('url') + connector + data,
+					$('base').attr('href')
+				);
+			}
+
+		});
+
+		/**
+		 * Don't allow users to submit empty values in grid field auto complete inputs.
+		 */
+		$('.ss-gridfield .add-existing-autocompleter').entwine({
+			onbuttoncreate: function () {
+				var self = this;
+
+				this.toggleDisabled();
+
+				this.find('input[type="text"]').on('keyup', function () {
+					self.toggleDisabled();
+				});
+			},
+			onunmatch: function () {
+				this.find('input[type="text"]').off('keyup');
+			},
+			toggleDisabled: function () {
+				var $button = this.find('.ss-ui-button'),
+					$input = this.find('input[type="text"]'),
+					inputHasValue = $input.val() !== '',
+					buttonDisabled = $button.is(':disabled');
+
+				if ((inputHasValue && buttonDisabled) || (!inputHasValue && !buttonDisabled)) {
+					$button.button("option", "disabled", !buttonDisabled);
+				}
 			}
 		});
 
@@ -168,30 +234,9 @@
 				this._super();
 			},
 			onclick: function(e){
-				var btn = this.closest(':button'), grid = this.getGridField(),
-					form = this.closest('form'), data = form.find(':input.gridstate').serialize();;
-
-				// Add current button
-				data += "&" + encodeURIComponent(btn.attr('name')) + '=' + encodeURIComponent(btn.val());
-
-				// Include any GET parameters from the current URL, as the view
-				// state might depend on it.
-				// For example, a list prefiltered through external search criteria
-				// might be passed to GridField.
-				if(window.location.search) {
-					data = window.location.search.replace(/^\?/, '') + '&' + data;
-				}
-
-				// decide whether we should use ? or & to connect the URL
-				var connector = grid.data('url').indexOf('?') == -1 ? '?' : '&';
-
-				var url = $.path.makeUrlAbsolute(
-					grid.data('url') + connector + data,
-					$('base').attr('href')
-				);
-
-				var newWindow = window.open(url);
-
+				var url = this.actionurl();
+				window.open(url);
+				e.preventDefault();
 				return false;
 			}
 		});
@@ -219,27 +264,8 @@
 		 */
 		$('.ss-gridfield .action.no-ajax').entwine({
 			onclick: function(e){
-				var self = this, btn = this.closest(':button'), grid = this.getGridField(), 
-					form = this.closest('form'), data = form.find(':input.gridstate').serialize();
-
-				// Add current button
-				data += "&" + encodeURIComponent(btn.attr('name')) + '=' + encodeURIComponent(btn.val());
-
-				// Include any GET parameters from the current URL, as the view
-				// state might depend on it. For example, a list pre-filtered
-				// through external search criteria might be passed to GridField.
-				if(window.location.search) {
-					data = window.location.search.replace(/^\?/, '') + '&' + data;
-				}
-
-				// decide whether we should use ? or & to connect the URL
-				var connector = grid.data('url').indexOf('?') == -1 ? '?' : '&';
-
-				window.location.href = $.path.makeUrlAbsolute(
-					grid.data('url') + connector + data,
-					$('base').attr('href')
-				);
-
+				window.location.href = this.actionurl();
+				e.preventDefault();
 				return false;
 			}
 		});
@@ -347,10 +373,13 @@
 						});
 					},
 					select: function(event, ui) {
-						$(this).closest(".ss-gridfield").find("#action_gridfield_relationfind").replaceWith(
-							'<input type="hidden" name="relationID" value="'+ui.item.id+'" id="relationID"/>'
-						);
-						var addbutton = $(this).closest(".ss-gridfield").find("#action_gridfield_relationadd");
+						var hiddenField = $('<input type="hidden" name="relationID" class="action_gridfield_relationfind" />');
+						hiddenField.val(ui.item.id);
+						$(this)
+							.closest(".ss-gridfield")
+							.find(".action_gridfield_relationfind")
+							.replaceWith(hiddenField);
+						var addbutton = $(this).closest(".ss-gridfield").find(".action_gridfield_relationadd");
 						if(addbutton.data('button')){
 							addbutton.button('enable');
 						}else{

@@ -5,121 +5,150 @@
  * @package userforms
  */
 
-class SubmittedForm extends DataObject {
-	
-	private static $has_one = array(
-		"SubmittedBy" => "Member",
-		"Parent" => "UserDefinedForm",
-	);
-	
-	private static $has_many = array( 
-		"Values" => "SubmittedFormField"
-	);
+class SubmittedForm extends DataObject
+{
 
-	private static $summary_fields = array(
-		'ID',
-		'Created'
-	);
-	
-	/**
-	 * Returns the value of a relation or, in the case of this form, the value
-	 * of a given child {@link SubmittedFormField}
-	 * 
-	 * @param string
-	 * 
-	 * @return mixed
-	 */
-	public function relField($fieldName) {
-		// default case
-		if($value = parent::relField($fieldName)) {
-			return $value;
-		}
+    private static $has_one = array(
+        "SubmittedBy" => "Member",
+        "Parent" => "UserDefinedForm",
+    );
 
-		// check values for a form field with the matching name.
-		$formField = SubmittedFormField::get()->filter(array(
-			'ParentID' => $this->ID,
-			'Name' => $fieldName
-		))->first();
+    private static $has_many = array(
+        "Values" => "SubmittedFormField"
+    );
 
-		if($formField) {
-			return $formField->getFormattedValue();
-		}
-	}
+    private static $summary_fields = array(
+        'ID',
+        'Created'
+    );
 
-	/**
-	 * @return FieldList
-	 */
-	public function getCMSFields() {
-		$fields = parent::getCMSFields();
-		$fields->removeByName('Values');
-		$fields->dataFieldByName('SubmittedByID')->setDisabled(true);
+    /**
+     * Returns the value of a relation or, in the case of this form, the value
+     * of a given child {@link SubmittedFormField}
+     *
+     * @param string
+     *
+     * @return mixed
+     */
+    public function relField($fieldName)
+    {
+        // default case
+        if ($value = parent::relField($fieldName)) {
+            return $value;
+        }
 
-		$values = new GridField(
-			"Values", 
-			"SubmittedFormField",
-			 $this->Values()->sort('Created', 'ASC')
-		);
+        // check values for a form field with the matching name.
+        $formField = SubmittedFormField::get()->filter(array(
+            'ParentID' => $this->ID,
+            'Name' => $fieldName
+        ))->first();
 
-		$config = new GridFieldConfig();
-		$config->addComponent(new GridFieldDataColumns());
-		$config->addComponent(new GridFieldExportButton());
-		$config->addComponent(new GridFieldPrintButton());
-		$values->setConfig($config);
+        if ($formField) {
+            return $formField->getFormattedValue();
+        }
+    }
 
-		$fields->addFieldToTab('Root.Main', $values);
-		
-		return $fields;
-	}
+    /**
+     * @return FieldList
+     */
+    public function getCMSFields()
+    {
+        $self = $this;
 
-	/**
-	 * @param Member
-	 *
-	 * @return boolean
-	 */
-	public function canCreate($member = null) {
-		return $this->Parent()->canCreate();
-	}
+        $this->beforeUpdateCMSFields(function ($fields) use ($self) {
+            $fields->removeByName('Values');
+            $fields->dataFieldByName('SubmittedByID')->setDisabled(true);
 
-	/**
-	 * @param Member
-	 *
-	 * @return boolean
-	 */
-	public function canView($member = null) {
-		return $this->Parent()->canView();
-	}
+            $values = new GridField(
+                'Values',
+                'SubmittedFormField',
+                $self->Values()->sort('Created', 'ASC')
+            );
 
-	/**
-	 * @param Member
-	 *
-	 * @return boolean
-	 */
-	public function canEdit($member = null) {
-		return $this->Parent()->canEdit();
-	}
+            $config = new GridFieldConfig();
+            $config->addComponent(new GridFieldDataColumns());
+            $config->addComponent(new GridFieldExportButton());
+            $config->addComponent(new GridFieldPrintButton());
+            $values->setConfig($config);
 
-	/**
-	 * @param Member
-	 *
-	 * @return boolean
-	 */
-	public function canDelete($member = null) {
-		return $this->Parent()->canDelete();
-	}
+            $fields->addFieldToTab('Root.Main', $values);
+        });
 
-	/**
-	 * Before we delete this form make sure we delete all the
-	 * field values so that we don't leave old data round
-	 *
-	 * @return void
-	 */
-	protected function onBeforeDelete() {
-		if($this->Values()) {
-			foreach($this->Values() as $value) {
-				$value->delete();
-			}
-		}
-		
-		parent::onBeforeDelete();
-	}
+        $fields = parent::getCMSFields();
+
+        return $fields;
+    }
+
+    /**
+     * @param Member
+     *
+     * @return boolean
+     */
+    public function canCreate($member = null)
+    {
+        $extended = $this->extendedCan(__FUNCTION__, $member);
+        if ($extended !== null) {
+            return $extended;
+        }
+        return $this->Parent()->canCreate();
+    }
+
+    /**
+     * @param Member
+     *
+     * @return boolean
+     */
+    public function canView($member = null)
+    {
+        $extended = $this->extendedCan(__FUNCTION__, $member);
+        if ($extended !== null) {
+            return $extended;
+        }
+        return $this->Parent()->canView();
+    }
+
+    /**
+     * @param Member
+     *
+     * @return boolean
+     */
+    public function canEdit($member = null)
+    {
+        $extended = $this->extendedCan(__FUNCTION__, $member);
+        if ($extended !== null) {
+            return $extended;
+        }
+        return $this->Parent()->canEdit();
+    }
+
+    /**
+     * @param Member
+     *
+     * @return boolean
+     */
+    public function canDelete($member = null)
+    {
+        $extended = $this->extendedCan(__FUNCTION__, $member);
+        if ($extended !== null) {
+            return $extended;
+        }
+        return $this->Parent()->canDelete();
+    }
+
+    /**
+     * Before we delete this form make sure we delete all the
+     * field values so that we don't leave old data round
+     *
+     * @return void
+     */
+    protected function onBeforeDelete()
+    {
+        if ($this->Values()) {
+            foreach ($this->Values() as $value) {
+                $value->delete();
+            }
+        }
+
+        parent::onBeforeDelete();
+    }
 }

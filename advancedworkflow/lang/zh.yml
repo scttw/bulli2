@@ -18,11 +18,11 @@ zh:
     INVALIDIDLIST: '提供了一个无效的 ID 列表。'
     INVALIDPARENTID: '指定了一个无效的父 ID。'
     LastEdited: 已更改
+    MENUTITLE: 工作流
     SORTORDERSAVED: '排序顺序已保存。'
     Title: 题目
     WorkflowStatus: '当前动作'
     WorkflowTitle: '有效工作流程'
-    MENUTITLE: 工作流
   AdvancedWorkflowFrontendForm:
     ACTIONCONTROLLERCHECK: '操作 "%s" 不允许针对控制器进行（类： %s）'
     ACTIONFORMCHECK: '操作 "%s" 不允许针对表单进行（名称："%s"）'
@@ -53,7 +53,6 @@ zh:
     FORMATTINGHELP: '格式化帮助'
     FORMATTINGNOTE: "通知邮件可以含 HTML 格式。以下特殊变量分别以邮件标题、发件人和模板/主体各自的值替换。"
     INITIATORNOTE: "这些字段将填充发起工作流程请求的成员信息。例如，\n{$Initiator.Email}。"
-    LISTING_TEMPLATE: "列表模板 - 列出工作流中的所有操作项（操作的同义词）。\n\n同时当前工作流实例的所有属性都将可用"
     MEMBERNOTE: "这些字段将填充发起通知操作的成员信息。例如，\n\n{$Member.FirstName}。"
     NOTIFICATIONEMAIL: '通知邮件'
     NOTIFICATIONNOTE: '该动作开始时所有该工作流程相关用户均会受到一封邮件'
@@ -87,15 +86,12 @@ zh:
     Transitions: 转换
     TypeLabel: 类型
   WorkflowActionInstance:
-    PLURALNAME: '工作流操作实例'
     SINGULARNAME: '工作流动作实例'
     Title: 题目
   WorkflowApplicable:
     DEFINITION: '应用的工作流'
     EFFECTIVE_WORKFLOW: '有效的工作流'
     INHERIT: '从父项继承'
-    NONE: （无）
-    UPDATE_WORKFLOW: '更新工作流'
     WORKFLOWLOG: '工作流日志'
   WorkflowDefinition:
     ADDAFTERSAVING: '第一次保存后，您可以添加工作流步骤。'
@@ -139,8 +135,6 @@ zh:
   WorkflowInstance:
     ActionLogTitle: 日志
     EXECUTE_EXCEPTION: '试图启动一个无效的工作流实例 #%s！'
-    NEXT_ACTION: '下一个动作'
-    PLURALNAME: '工作流实例'
     REASSIGN_HEADER: '重新分配工作流'
     SINGULARNAME: '工作流实例'
     TITLE_FOR_DO: '%s - %s'

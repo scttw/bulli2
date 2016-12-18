@@ -82,23 +82,36 @@ class ConfigTest_TestNest extends Object implements TestOnly {
 }
 
 class ConfigTest extends SapphireTest {
-	
+
+	protected $depSettings = null;
+
+	public function setUp() {
+		parent::setUp();
+		$this->depSettings = Deprecation::dump_settings();
+		Deprecation::set_enabled(false);
+	}
+
+	public function tearDown() {
+		Deprecation::restore_settings($this->depSettings);
+		parent::tearDown();
+	}
+
 	public function testNest() {
-		
+
 		// Check basic config
 		$this->assertEquals(3, Config::inst()->get('ConfigTest_TestNest', 'foo'));
 		$this->assertEquals(5, Config::inst()->get('ConfigTest_TestNest', 'bar'));
-		
+
 		// Test nest copies data
 		Config::nest();
 		$this->assertEquals(3, Config::inst()->get('ConfigTest_TestNest', 'foo'));
 		$this->assertEquals(5, Config::inst()->get('ConfigTest_TestNest', 'bar'));
-		
+
 		// Test nested data can be updated
 		Config::inst()->update('ConfigTest_TestNest', 'foo', 4);
 		$this->assertEquals(4, Config::inst()->get('ConfigTest_TestNest', 'foo'));
 		$this->assertEquals(5, Config::inst()->get('ConfigTest_TestNest', 'bar'));
-		
+
 		// Test unnest restores data
 		Config::unnest();
 		$this->assertEquals(3, Config::inst()->get('ConfigTest_TestNest', 'foo'));
@@ -189,12 +202,11 @@ class ConfigTest extends SapphireTest {
 		// But it won't affect subclasses - this is *uninherited* static
 		$this->assertNotContains('test_2b',
 			Config::inst()->get('ConfigStaticTest_Third', 'first', Config::UNINHERITED));
-		$this->assertNotContains('test_2b',
-			Config::inst()->get('ConfigStaticTest_Fourth', 'first', Config::UNINHERITED));
+		$this->assertNull(Config::inst()->get('ConfigStaticTest_Fourth', 'first', Config::UNINHERITED));
 
 		// Subclasses that don't have the static explicitly defined should allow definition, also
-		// This also checks that set can be called after the first uninherited get() 
-		// call (which can be buggy due to caching) 
+		// This also checks that set can be called after the first uninherited get()
+		// call (which can be buggy due to caching)
 		Config::inst()->update('ConfigStaticTest_Fourth', 'first', array('test_4b'));
 		$this->assertContains('test_4b', Config::inst()->get('ConfigStaticTest_Fourth', 'first', Config::UNINHERITED));
 	}
@@ -227,7 +239,7 @@ class ConfigTest extends SapphireTest {
 
 		$result = array('A' => 1, 'B' => 2, 'C' => array('Foo' => 1, 'Bar' => 2), 'D' => 3);
 		Config::merge_array_low_into_high($result, array('C' => array('Bar' => 3, 'Baz' => 4)));
-		$this->assertEquals($result, 
+		$this->assertEquals($result,
 			array('A' => 1, 'B' => 2, 'C' => array('Foo' => 1, 'Bar' => 2, 'Baz' => 4), 'D' => 3));
 
 		$result = array('A' => 1, 'B' => 2, 'C' => array('Foo' => 1, 'Bar' => 2), 'D' => 3);
@@ -250,21 +262,59 @@ class ConfigTest extends SapphireTest {
 		$this->assertEquals(Object::static_lookup('ConfigTest_DefinesFooDoesntExtendObject', 'bar'), null);
 	}
 
+	public function testForClass() {
+		$config = ConfigTest_DefinesFoo::config();
+		// Set values
+		$this->assertTrue(isset($config->foo));
+		$this->assertFalse(empty($config->foo));
+		$this->assertEquals(1, $config->foo);
+		
+		// Unset values
+		$this->assertFalse(isset($config->bar));
+		$this->assertTrue(empty($config->bar));
+		$this->assertNull($config->bar);
+	}
+
 	public function testFragmentOrder() {
 		$this->markTestIncomplete();
 	}
 
+	public function testCacheCleaning() {
+		$cache = new ConfigTest_Config_MemCache();
+
+		for ($i = 0; $i < 1000; $i++) $cache->set($i, $i);
+		$this->assertEquals(1000, count($cache->cache));
+
+		$cache->clean();
+		$this->assertEquals(0, count($cache->cache), 'Clean clears all items');
+		$this->assertFalse($cache->get(1), 'Clean clears all items');
+
+		$cache->set(1, 1, array('Foo'));
+		$this->assertEquals(1, count($cache->cache));
+		$this->assertEquals(1, count($cache->tags));
+
+		$cache->clean('Foo');
+		$this->assertEquals(0, count($cache->tags), 'Clean items with matching tag');
+		$this->assertFalse($cache->get(1), 'Clean items with matching tag');
+
+		$cache->set(1, 1, array('Foo', 'Bar'));
+		$this->assertEquals(2, count($cache->tags));
+		$this->assertEquals(1, count($cache->cache));
+
+		$cache->clean('Bar');
+		$this->assertEquals(1, count($cache->tags));
+		$this->assertEquals(0, count($cache->cache), 'Clean items with any single matching tag');
+		$this->assertFalse($cache->get(1), 'Clean items with any single matching tag');
+	}
+
 	public function testLRUDiscarding() {
 		$cache = new ConfigTest_Config_LRU();
-
 		for ($i = 0; $i < Config_LRU::SIZE*2; $i++) $cache->set($i, $i);
 		$this->assertEquals(
 			Config_LRU::SIZE, count($cache->indexing),
 			'Homogenous usage gives exact discarding'
 		);
-
 		$cache = new ConfigTest_Config_LRU();
-
 		for ($i = 0; $i < Config_LRU::SIZE; $i++) $cache->set($i, $i);
 		for ($i = 0; $i < Config_LRU::SIZE; $i++) $cache->set(-1, -1);
 		$this->assertLessThan(
@@ -275,24 +325,18 @@ class ConfigTest extends SapphireTest {
 
 	public function testLRUCleaning() {
 		$cache = new ConfigTest_Config_LRU();
-
 		for ($i = 0; $i < Config_LRU::SIZE; $i++) $cache->set($i, $i);
 		$this->assertEquals(Config_LRU::SIZE, count($cache->indexing));
-
 		$cache->clean();
 		$this->assertEquals(0, count($cache->indexing), 'Clean clears all items');
 		$this->assertFalse($cache->get(1), 'Clean clears all items');
-
 		$cache->set(1, 1, array('Foo'));
 		$this->assertEquals(1, count($cache->indexing));
-
 		$cache->clean('Foo');
 		$this->assertEquals(0, count($cache->indexing), 'Clean items with matching tag');
 		$this->assertFalse($cache->get(1), 'Clean items with matching tag');
-
 		$cache->set(1, 1, array('Foo', 'Bar'));
 		$this->assertEquals(1, count($cache->indexing));
-
 		$cache->clean('Bar');
 		$this->assertEquals(0, count($cache->indexing), 'Clean items with any single matching tag');
 		$this->assertFalse($cache->get(1), 'Clean items with any single matching tag');
@@ -300,8 +344,13 @@ class ConfigTest extends SapphireTest {
 }
 
 class ConfigTest_Config_LRU extends Config_LRU implements TestOnly {
-
 	public $cache;
 	public $indexing;
+}
+
+class ConfigTest_Config_MemCache extends Config_MemCache implements TestOnly {
+
+	public $cache;
+	public $tags;
 
 }

@@ -63,26 +63,32 @@ class MemberProfilePage extends Page implements PermissionProvider {
 
 	/**
 	 * An array of default settings for some standard member fields.
+	 *
+	 * @var array
 	 */
 	public static $profile_field_defaults = array(
 		'Email' => array(
 			'RegistrationVisibility' => 'Edit',
 			'ProfileVisibility'      => 'Edit',
-			'PublicVisibility'       => 'MemberChoice'),
+			'PublicVisibility'       => 'MemberChoice'
+		),
 		'FirstName' => array(
 			'RegistrationVisibility' => 'Edit',
 			'ProfileVisibility'      => 'Edit',
 			'MemberListVisible'      => true,
-			'PublicVisibility'       => 'Display'),
+			'PublicVisibility'       => 'Display'
+		),
 		'Surname' => array(
 			'RegistrationVisibility'  => 'Edit',
 			'ProfileVisibility'       => 'Edit',
 			'MemberListVisible'       => true,
 			'PublicVisibility'        => 'MemberChoice',
-			'PublicVisibilityDefault' => true),
+			'PublicVisibilityDefault' => true
+		),
 		'Password' => array(
 			'RegistrationVisibility' => 'Edit',
-			'ProfileVisibility'      => 'Edit')
+			'ProfileVisibility'      => 'Edit'
+		)
 	);
 
 	private static $description = '';
@@ -97,7 +103,7 @@ class MemberProfilePage extends Page implements PermissionProvider {
 	 */
 	public function Link($action = null) {
 		if(
-			   !$action
+			!$action
 			&& Member::currentUserID()
 			&& !$this->AllowProfileEditing
 			&& $this->CanAddMembers()
@@ -118,7 +124,7 @@ class MemberProfilePage extends Page implements PermissionProvider {
 
 		$fields->addFieldsToTab('Root.Profile', array(
 			new Tab(
-                		'Fields',
+				'Fields',
 				_t('MemberProfiles.FIELDS', 'Fields'),
 				new GridField(
 					'Fields',
@@ -131,7 +137,7 @@ class MemberProfilePage extends Page implements PermissionProvider {
 			),
 			new Tab(
 				'Groups',
-                		_t('MemberProfiles.GROUPS', 'Groups'),
+				_t('MemberProfiles.GROUPS', 'Groups'),
 				$groups = new TreeMultiselectField(
 					'Groups',
 					_t('MemberProfiles.GROUPS', 'Groups'),
@@ -145,7 +151,7 @@ class MemberProfilePage extends Page implements PermissionProvider {
 			),
 			new Tab(
 				'PublicProfile',
-                		_t('MemberProfiles.PUBLICPROFILE', 'Public Profile'),
+				_t('MemberProfiles.PUBLICPROFILE', 'Public Profile'),
 				new GridField(
 					'Sections',
 					_t('MemberProfiles.PROFILESECTIONS', 'Profile Sections'),
@@ -196,12 +202,12 @@ class MemberProfilePage extends Page implements PermissionProvider {
 		$fields->removeByName('Content', true);
 
 		$contentFields = array();
-		if($this->AllowRegistration){
+		if($this->AllowRegistration) {
 			$contentFields[] = 'Registration';
 			$contentFields[] = 'AfterRegistration';
 		}
 
-		if($this->AllowProfileEditing){
+		if($this->AllowProfileEditing) {
 			$contentFields[] = 'Profile';
 		}
 
@@ -216,7 +222,7 @@ class MemberProfilePage extends Page implements PermissionProvider {
 			));
 			$content->setRows(15);
 		}
-		
+
 
 		$fields->addFieldsToTab('Root.Email', array(
 			new OptionsetField(
@@ -349,7 +355,7 @@ class MemberProfilePage extends Page implements PermissionProvider {
 	}
 
 	public function onAfterWrite() {
-		if ($this->isChanged('ID')) {
+		if ($this->isChanged('ID', 2)) {
 			$section = new MemberProfileFieldsSection();
 			$section->ParentID = $this->ID;
 			$section->write();
@@ -364,7 +370,6 @@ class MemberProfilePage extends Page implements PermissionProvider {
 	public function CanAddMembers() {
 		return $this->AllowAdding && singleton('Member')->canCreate();
 	}
-
 }
 
 /**
@@ -451,9 +456,14 @@ class MemberProfilePage_Controller extends Page_Controller {
 		$form->loadDataFrom($member);
 
 		if($password = $form->Fields()->fieldByName('Password')) {
-			$password->setCanBeEmpty(false);
-			$password->setValue(null);
-			$password->setCanBeEmpty(true);
+			if ($password->hasMethod('setCanBeEmpty')) {
+				$password->setCanBeEmpty(false);
+				$password->setValue(null);
+				$password->setCanBeEmpty(true);
+			} else {
+				// If Password field is ReadonlyField or similar
+				$password->setValue(null);
+			}
 		}
 
 		return array (
@@ -471,7 +481,7 @@ class MemberProfilePage_Controller extends Page_Controller {
 			$this->httpError(404);
 		}
 
-		return new MemberProfileViewer($this, 'show');
+		return MemberProfileViewer::create($this, 'show');
 	}
 
 	/**
@@ -489,8 +499,9 @@ class MemberProfilePage_Controller extends Page_Controller {
 			new MemberProfileValidator($this->Fields())
 		);
 
-		if(class_exists('SpamProtectorManager')) {
-			SpamProtectorManager::update_form($form);
+
+		if($form->hasExtension('FormSpamProtectionExtension')) {
+			$form->enableSpamProtection( );
 		}
 		$this->extend('updateRegisterForm', $form);
 		return $form;
@@ -606,7 +617,7 @@ class MemberProfilePage_Controller extends Page_Controller {
 	 * @return Form
 	 */
 	public function AddForm() {
-		return new Form (
+		$form = new Form (
 			$this,
 			'AddForm',
 			$this->getProfileFields('Add'),
@@ -615,6 +626,9 @@ class MemberProfilePage_Controller extends Page_Controller {
 			),
 			new MemberProfileValidator($this->Fields())
 		);
+		
+		$this->extend('updateAddForm', $form);
+		return $form;
 	}
 
 	/**
@@ -703,7 +717,7 @@ class MemberProfilePage_Controller extends Page_Controller {
 	 * Allows the user to confirm their account by clicking on the validation link in
 	 * the confirmation email.
 	 *
-	 * @param  HTTPRequest $request
+	 * @param HTTPRequest $request
 	 * @return array
 	 */
 	public function confirm($request) {
@@ -729,6 +743,8 @@ class MemberProfilePage_Controller extends Page_Controller {
 		$member->NeedsValidation = false;
 		$member->ValidationKey   = null;
 		$member->write();
+
+		$this->extend('onConfirm', $member);
 
 		$member->logIn();
 
@@ -795,7 +811,7 @@ class MemberProfilePage_Controller extends Page_Controller {
 				$email->send();
 			}
 		} elseif($this->EmailType != 'None') {
-			$email = new MemberConfirmationEmail($this, $member);
+			$email = MemberConfirmationEmail::create($this, $member);
 			$email->send();
 		}
 
@@ -804,7 +820,7 @@ class MemberProfilePage_Controller extends Page_Controller {
 	}
 
 	/**
-	 * @param  string $context
+	 * @param string $context
 	 * @return FieldSet
 	 */
 	protected function getProfileFields($context) {
@@ -824,12 +840,15 @@ class MemberProfilePage_Controller extends Page_Controller {
 		}
 
 		if ($this->AllowProfileViewing
-		    && $profileFields->find('PublicVisibility', 'MemberChoice')
+			&& $profileFields->find('PublicVisibility', 'MemberChoice')
 		) {
-			$fields->push(new LiteralField('VisibilityNote', '<p>' . _t(
-				'MemberProfiles.CHECKVISNOTE',
-				'Check fields below to make them visible on your public ' .
-				'profile.') . '</p>'));
+			$fields->push(new LiteralField(
+				'VisibilityNote',
+				'<p>' . _t(
+					'MemberProfiles.CHECKVISNOTE',
+					'Check fields below to make them visible on your public profile.'
+				) . '</p>'
+			));
 		}
 
 		foreach($profileFields as $profileField) {
@@ -839,7 +858,7 @@ class MemberProfilePage_Controller extends Page_Controller {
 
 			// handle the special case of the Groups control so that only allowed groups can be selected
 			if ($name == 'Groups') {
-				$availableGroups = $this->data()->SelectableGroups();
+				$availableGroups = $this->data()->SelectableGroups()->map('ID', 'Title');
 				$memberField->setSource($availableGroups);
 			}
 
@@ -882,5 +901,4 @@ class MemberProfilePage_Controller extends Page_Controller {
 		$this->extend('updateProfileFields', $fields);
 		return $fields;
 	}
-
 }

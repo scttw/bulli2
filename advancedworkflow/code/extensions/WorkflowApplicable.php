@@ -99,6 +99,7 @@ class WorkflowApplicable extends DataExtension {
 			// Allow an optional selection of additional workflow definitions.
 
 			if($this->owner->WorkflowDefinitionID) {
+				$fields->removeByName('AdditionalWorkflowDefinitions');
 				unset($definitions[$this->owner->WorkflowDefinitionID]);
 				$tab->push($additional = ListboxField::create(
 					'AdditionalWorkflowDefinitions',
@@ -157,7 +158,7 @@ class WorkflowApplicable extends DataExtension {
 					foreach ($transitions as $transition) {
 						if ($transition->canExecute($active)) {
 							$action = FormAction::create('updateworkflow-' . $transition->ID, $transition->Title)
-								->setAttribute('data-transitionid', $transition->ID);
+								->setAttribute('data-transitionid', $transition->ID)->setUseButtonTag(true);
 							$workflowOptions->push($action);
 						}
 					}
@@ -175,7 +176,7 @@ class WorkflowApplicable extends DataExtension {
 
 						// Instantiate a new action menu for any data objects.
 
-						$menu = $this->createActionMenus();
+						$menu = $this->createActionMenu();
 						$actions->push($menu);
 					}
 					$tab = Tab::create(
@@ -188,7 +189,7 @@ class WorkflowApplicable extends DataExtension {
 							$action = FormAction::create(
 								"startworkflow-{$definition->ID}",
 								$definition->InitialActionButtonText ? $definition->InitialActionButtonText : $definition->getInitialAction()->Title
-							)->addExtraClass('start-workflow')->setAttribute('data-workflow', $definition->ID);
+							)->addExtraClass('start-workflow')->setAttribute('data-workflow', $definition->ID)->setUseButtonTag(true);
 
 							// The first element is the main workflow definition, and will be displayed as a major action.
 

@@ -41,7 +41,7 @@ class RedirectorPage extends Page {
 	 * Return the the link that should be used for this redirector page, in navigation, etc.
 	 * If the redirectorpage has been appropriately configured, then it will return the redirection
 	 * destination, to prevent unnecessary 30x redirections.  However, if it's misconfigured, then
-	 * it will return a link to itself, which will then display an error message. 
+	 * it will return a link to itself, which will then display an error message.
 	 */
 	public function Link() {
 		if($link = $this->redirectionLink()) return $link;
@@ -107,7 +107,11 @@ class RedirectorPage extends Page {
 		parent::onBeforeWrite();
 
 		// Prefix the URL with "http://" if no prefix is found
-		if($this->ExternalURL && (strpos($this->ExternalURL, '://') === false)) {
+		if(
+			$this->ExternalURL
+			&& !parse_url($this->ExternalURL, PHP_URL_SCHEME)
+			&& !preg_match('#^//#', $this->ExternalURL)
+		) {
 			$this->ExternalURL = 'http://' . $this->ExternalURL;
 		}
 	}
@@ -125,17 +129,17 @@ class RedirectorPage extends Page {
 			array(
 				new HeaderField('RedirectorDescHeader',_t('RedirectorPage.HEADER', "This page will redirect users to another page")),
 				new OptionsetField(
-					"RedirectionType", 
-					_t('RedirectorPage.REDIRECTTO', "Redirect to"), 
+					"RedirectionType",
+					_t('RedirectorPage.REDIRECTTO', "Redirect to"),
 					array(
 						"Internal" => _t('RedirectorPage.REDIRECTTOPAGE', "A page on your website"),
 						"External" => _t('RedirectorPage.REDIRECTTOEXTERNAL', "Another website"),
-					), 
+					),
 					"Internal"
 				),
 				new TreeDropdownField(	
-					"LinkToID", 
-					_t('RedirectorPage.YOURPAGE', "Page on your website"), 
+					"LinkToID",
+					_t('RedirectorPage.YOURPAGE', "Page on your website"),
 					"SiteTree"
 				),
 				new TextField("ExternalURL", _t('RedirectorPage.OTHERURL', "Other website URL"))
@@ -161,7 +165,8 @@ class RedirectorPage_Controller extends Page_Controller {
 	public function init() {
 		parent::init();
 
-		if($link = $this->redirectionLink()) {
+		// Check we don't already have a redirect code set
+		if(!$this->getResponse()->isFinished() && $link = $this->redirectionLink()) {
 			$this->redirect($link, 301);
 			return;
 		}

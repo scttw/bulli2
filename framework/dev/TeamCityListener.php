@@ -6,7 +6,7 @@
  * @subpackage testing
  */
 class TeamCityListener implements PHPUnit_Framework_TestListener {
-	
+
 	private function escape($str) {
 		return strtr($str, array(
 			"\n" => '|n',
@@ -17,7 +17,7 @@ class TeamCityListener implements PHPUnit_Framework_TestListener {
 			"|" => '||'
 		));
 	}
-	
+
 	public function startTestSuite(PHPUnit_Framework_TestSuite $suite) {
 		echo "##teamcity[testSuiteStarted name='{$suite->getName()}']\n";
 	}
@@ -25,7 +25,7 @@ class TeamCityListener implements PHPUnit_Framework_TestListener {
 	public function endTestSuite(PHPUnit_Framework_TestSuite $suite) {
 		echo "##teamcity[testSuiteFinished name='{$suite->getName()}']\n";
 	}
-	
+
 	public function startTest(PHPUnit_Framework_Test $test) {
 		$class = get_class($test);
 		echo "##teamcity[testStarted name='{$class}.{$test->getName()}']\n";
@@ -46,7 +46,7 @@ class TeamCityListener implements PHPUnit_Framework_TestListener {
 
 	public function addFailure(PHPUnit_Framework_Test $test, PHPUnit_Framework_AssertionFailedError $e, $time) {
 		$class = get_class($test);
-		$message = $this->escape($e->getMessage());
+		$message = $this->escape(PHPUnit_Framework_TestFailure::exceptionToString($e));
 		$trace = $this->escape($e->getTraceAsString());
 		echo "##teamcity[testFailed type='failure' name='{$class}.{$test->getName()}' message='$message'"
 			. " details='$trace']\n";

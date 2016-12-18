@@ -1,95 +1,125 @@
 en:
   ArchiveWidget:
-    DispBY: 'Display by'
-    MONTH: month
     PLURALNAME: 'Archive Widgets'
     SINGULARNAME: 'Archive Widget'
-    YEAR: year
+  Blog:
+    AND: and
+    Archive: Archive
+    By: by
+    CONTRIBUTOR: Contributor
+    Categories: Categories
+    Category: Category
+    Comments: Comments
+    DESCRIPTION: 'Adds a blog to your website.'
+    EDITOR: Editor
+    FILTERDESCRIPTION_AUTHOR: 'By {author}'
+    FILTERDESCRIPTION_CATEGORY: 'In category {category}'
+    FILTERDESCRIPTION_DATE: 'In {date}'
+    FILTERDESCRIPTION_PAGE: 'Page {page}'
+    FILTERDESCRIPTION_TAG: 'Tagged with {tag}'
+    LumberjackTitle: 'Blog Posts'
+    NoPosts: 'There are no posts'
+    NoUnfeaturedPosts: 'There are no non-featured posts'
+    PERMISSIONS_CATEGORY: 'Blog permissions'
+    PERMISSION_MANAGE_USERS_DESCRIPTION: 'Manage users for individual blogs'
+    PERMISSION_MANAGE_USERS_HELP: 'Allow assignment of Editors, Writers, or Contributors to blogs'
+    PLURALNAME: 'Base Pages'
+    Posted: Posted
+    PostedIn: 'Posted in'
+    PostsPerPage: 'Posts Per Page'
+    ReadMoreAbout: 'Read more about ''{title}''...'
+    SINGULARNAME: Blog
+    Tag: Tag
+    Tagged: Tagged
+    Tags: Tags
+    WRITER: Writer
+  BlogArchiveWidget:
+    ArchiveType: ArchiveType
+    Blog: Blog
+    NumberToDisplay: 'No. to Display'
+    PLURALNAME: 'Blog Archive Widgets'
+    SINGULARNAME: 'Blog Archive Widget'
+  BlogCategoriesWidget:
+    Blog: Blog
+    Direction:
+      Description: 'Change the direction of ordering of categories shown by this widget.'
+      Label: Direction
+    Limit:
+      Description: 'Limit the number of categories shown by this widget (set to 0 to show all categories).'
+      Label: Limit
+    PLURALNAME: 'Blog Categories Widgets'
+    SINGULARNAME: 'Blog Categories Widget'
+    Sort:
+      Description: 'Change the order of categories shown by this widget.'
+      Label: Sort
+  BlogCategory:
+    Duplicate: 'A blog category already exists with that name'
+    PLURALNAME: 'Blog Categories'
+    SINGULARNAME: 'Blog Category'
+    Title: Title
   BlogEntry:
-    AU: Author
-    BBH: 'BBCode help'
-    CN: Content
-    DT: Date
-    PLURALNAME: 'Blog Entry Pages'
-    SINGULARNAME: 'Blog Entry Page'
-    TS: 'Tags (comma sep.)'
-    DESCRIPTION: 'An individual blog entry'
-  BlogEntry_ss:
-    COMMENTS: Comments
-    EDITTHIS: 'Edit this post'
-    POSTEDBY: 'Posted by'
-    POSTEDON: on
-    TAGS: 'Tags:'
-    UNPUBLISHTHIS: 'Unpublish this post'
-    VIEWALLPOSTTAGGED: 'View all posts tagged'
+    DESCRIPTION: 'Generic content page'
+    PLURALNAME: 'Base Pages'
+    SINGULARNAME: 'Blog Entry'
   BlogHolder:
-    PLURALNAME: 'Blog Holder Pages'
-    POST: 'Post blog entry'
-    RSSFEED: 'RSS feed of these blogs'
-    SINGULARNAME: 'Blog Holder Page'
-    SJ: Subject
-    SPUC: 'Please separate tags using commas.'
-    SUCCONTENT: '<p>Congratulations, the SilverStripe blog module has been successfully installed. This blog entry can be safely deleted. You can configure aspects of your blog in <a href="admin">the CMS</a>.</p>'
-    SUCTAGS: 'silverstripe, blog'
-    SUCTITLE: 'SilverStripe blog module successfully installed'
-    TE: 'For example: sport, personal, science fiction'
-    DESCRIPTION: 'Displays listings of blog entries'
-  BlogHolder_ss:
-    NOENTRIES: 'There are no blog entries'
-    VIEWINGTAGGED: 'Viewing entries tagged with'
-    VIEWINGPOSTEDBY: 'Viewing entries posted by'
-    VIEWINGPOSTEDIN: 'Viewing entries posted in'
-  BlogManagementWidget:
-    COMADM: 'Comment administration'
-    PLURALNAME: 'Blog Management Widgets'
-    SINGULARNAME: 'Blog Management Widget'
-    UNM1: 'You have 1 unmoderated comment'
-    UNMM: 'You have %i unmoderated comments'
-  BlogManagementWidget_ss:
-    LOGOUT: Logout
-    POSTNEW: 'Post a new blog entry'
-  BlogSummary_ss:
-    COMMENTS: Comments
-    POSTEDBY: 'Posted by'
-    POSTEDON: on
-    VIEWFULL: 'View full post titled -'
-    READFULLPOST: 'Read the full post'
-    SUMMARYCOMMENTS: comment(s)
-    TAGS: Tags
+    DESCRIPTION: 'Generic content page'
+    PLURALNAME: 'Base Pages'
+    SINGULARNAME: 'Blog Holder'
+  BlogPost:
+    AUTHOR: Author
+    AdditionalCredits: 'Additional Credits'
+    AdditionalCredits_Description: 'If some authors of this post don''t have CMS access, enter their name(s) here. You can separate multiple names with a comma.'
+    Authors: Authors
+    CUSTOMSUMMARY: 'Add A Custom Summary'
+    Categories: Categories
+    DESCRIPTION: 'Generic content page'
+    FeaturedImage: 'Featured Image'
+    PLURALNAME: 'Base Pages'
+    PageTitleLabel: 'Post Title'
+    PublishDate: 'Publish Date'
+    PublishDate_Description: 'Will be set to "now" if published without a value.'
+    SINGULARNAME: 'Blog Post'
+    SUMMARY_DESCRIPTION: 'If no summary is specified the first 30 words will be used.'
+    Tags: Tags
+  BlogRecentPostsWidget:
+    Blog: Blog
+    NumberOfPosts: 'Number of Posts'
+    PLURALNAME: 'Blog Recent Posts Widgets'
+    SINGULARNAME: 'Blog Recent Posts Widget'
+  BlogTag:
+    Duplicate: 'A blog tags already exists with that name'
+    PLURALNAME: 'Blog Tags'
+    SINGULARNAME: 'Blog Tag'
+    Title: Title
+  BlogTagsCloudWidget:
+    Blog: Blog
+    PLURALNAME: 'Blog Tags Cloud Widgets'
+    SINGULARNAME: 'Blog Tags Cloud Widget'
+  BlogTagsWidget:
+    Blog: Blog
+    Direction:
+      Description: 'Change the direction of ordering of tags shown by this widget.'
+      Label: Direction
+    Limit:
+      Description: 'Limit the number of tags shown by this widget (set to 0 to show all tags).'
+      Label: Limit
+    PLURALNAME: 'Blog Tags Widgets'
+    SINGULARNAME: 'Blog Tags Widget'
+    Sort:
+      Description: 'Change the order of tags shown by this widget.'
+      Label: Sort
   BlogTree:
-    PLURALNAME: 'Blog Tree Pages'
-    SINGULARNAME: 'Blog Tree Page'
-    DESCRIPTION: 'A grouping of blogs'
-  RSSWidget:
-    CT: 'Custom title for the feed'
-    NTS: 'Number of Items to show'
-    PLURALNAME: 'R S S Widgets'
-    SINGULARNAME: 'R S S Widget'
-    URL: 'URL of the other page''s RSS feed.  Please make sure this URL points to an RSS feed.'
-    DEFAULTTITLE: 'RSS Feed'
-  SubscribeRSSWidget:
-    PLURALNAME: 'Subscribe R S S Widgets'
-    SINGULARNAME: 'Subscribe R S S Widget'
-  SubscribeRSSWidget_ss:
-    SUBSCRIBETEXT: Subscribe
-    SUBSCRIBETITLE: 'Subscribe to this blog via RSS'
+    DESCRIPTION: 'Generic content page'
+    PLURALNAME: 'Base Pages'
+    SINGULARNAME: 'Blog Tree'
+  GridFieldAddByDBField:
+    Add: 'Add {name}'
+    AddFail: 'Unable to save {class} to the database.'
+    PermissionFail: 'You don''t have permission to create a {class}.'
+  GridFieldBlogPostState:
+    Draft: '<i class="btn-icon gridfield-icon btn-icon-pencil"></i> Saved as Draft on {date}'
+    Published: '<i class="btn-icon gridfield-icon btn-icon-accept"></i> Published on {date}'
+    Timer: '<i class="gridfield-icon blog-icon-timer"></i> Publish at {date}'
   TagCloudWidget:
-    LIMIT: 'Limit number of tags'
     PLURALNAME: 'Tag Cloud Widgets'
-    SBAL: alphabet
-    SBFREQ: frequency
     SINGULARNAME: 'Tag Cloud Widget'
-    SORTBY: 'Sort by'
-    TILE: Title
-    DEFAULTTITLE: 'Tag Cloud'
-  TrackBackPing:
-    PLURALNAME: 'Track Back Pings'
-    SINGULARNAME: 'Track Back Ping'
-  BlogTree_ss:
-    NOENTRIES: 'There are no blog entries'
-    VIEWINGPOSTEDBY: 'Viewing entries posted by'
-    VIEWINGPOSTEDIN: 'Viewing entries posted in'
-    VIEWINGTAGGED: 'Viewing entries tagged with'
-  SiteTree:
-    PLURALNAME: Pages
-    SINGULARNAME: Page

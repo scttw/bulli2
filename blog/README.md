@@ -1,112 +1,42 @@
-# Blog Module
+# SilverStripe Blog Module
+[![Build Status](https://travis-ci.org/silverstripe/silverstripe-blog.svg?branch=master)](https://travis-ci.org/silverstripe/silverstripe-blog)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/silverstripe/silverstripe-blog/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/silverstripe/silverstripe-blog/?branch=master)
+[![codecov.io](https://codecov.io/github/silverstripe/silverstripe-blog/coverage.svg?branch=master)](https://codecov.io/github/silverstripe/silverstripe-blog?branch=master)
+![helpfulrobot](https://helpfulrobot.io/silverstripe/blog/badge)
 
-[![Build Status](https://secure.travis-ci.org/silverstripe/silverstripe-blog.png?branch=master)](http://travis-ci.org/silverstripe/silverstripe-blog)
+[![Latest Stable Version](https://poser.pugx.org/silverstripe/blog/version)](https://packagist.org/packages/silverstripe/blog)
+[![License](https://poser.pugx.org/silverstripe/blog/license)](https://packagist.org/packages/silverstripe/blog)
+[![Monthly Downloads](https://poser.pugx.org/silverstripe/blog/d/monthly)](https://packagist.org/packages/silverstripe/blog)
 
-## Introduction
 
-The blog module allows you to post blogs on your SilverStripe. It includes the ability to post blogs using a site front-end form. Blogs are summarised on the blog holder page type, with more detail viewable when a specific blog is clicked.
+## Documentation
+[User guide](docs/en/userguide/index.md)
 
-## Maintainer Contact ##
-
- * Saophalkun Ponlu (phalkunz at silverstripe dot com)
- * Carlos Barberis (carlos at silverstripe dot com)
+[Developer documentation](docs/en/index.md)
 
 ## Requirements
 
- * Silverstripe 3.1
- * silverstripe-widgets module
+```
+silverstripe/cms: ^3.1
+silverstripe/lumberjack: ^1.1
+silverstripe/tagfield: ^1.0
+```
 
-## Feature Overview
+### Suggested Modules
 
-*  Front-end blog post form
-*  Posts allow bbcode
-*  RSS feed for blog and also feeds for comments on posts
-*  Easily customizable
-*  Tag cloud widget
-*  Archive widget
-*  Blog management widget
-*  RSS widget (will likely move in future)
+```
+silverstripe/widgets: *
+silverstripe/comments: *
+```
 
-## Configuration Options
+## Installation
 
-### Use WYSIWYG editing instead of bbcode
+```
+composer require silverstripe/blog
+```
 
-Out of the box the blog module uses bbcode, just like the forum module. If you want to go back to using the standard page editing toolbar you need to add the following code to your mysite/_config.php file
+## Upgrading legacy blog to 2.x
 
-	:::php
-	BlogEntry::allow_wysiwyg_editing();
-
-
-## Page types
-
-We have chosen to go with the following page types to include with the blog module:
-
-*  BlogHolder: The BlogHolder shows BlogEntrys, and provides a way to search etc.It would also contain methods to post new blogs.
-
-*  BlogEntry: This is simply an entry/post for the blog.
+If you're upgrading from blog version 1.0 to 2.x you will need to run the `BlogMigrationTask`. Run the task using `dev/tasks/BlogMigrationTask` either via the browser or sake CLI to migrate your legacy blog to the new version data structure.
 
 
-## Simple form for adding a post
-
-There is a blog management widget, that includes a link "Post new blog entry", which takes the user to [site/CurrentBlogHolder]/post (this is a good url to bookmark if you will be using it to blog regularly). This shows a blog entry form, which requires a subject and some content at the least. Clicking "Post blog entry" takes the user back to the blog. A login form will show if the user is not logged in. The entered author name is stored in a cookie. Initially the shown name will be the user's name.
-
-#### BBcode support
-
-*  BBCode can be entered into the form.
-
-*  A bbcode tags help box shows when the "BBCode help" link is clicked. Javascript is required for this to work.
-
-See [:PEAR:BBCodeParser](/PEAR/BBCodeParser) for more details.
-
-#### Modifying the blog entry form
-
-You may want to add or remove certain fields from the blog entry form. This can be done in **BlogHolder.php**. You will need to modify the $fields FieldSet object in the BlogEntryForm function. [tutorial 3](tutorial/3-forms#creating_the_form) shows you how to do this.
-
-You will likely need to play around with the form and associated css to get the form looking how you  want it.
-
-## View Archived Blogs
-
-Blog archives can be viewed by year/month by appending the year, followed by a forward slash, then the numerical month, to the end of the blogholder URL. Alternately, just the year can be appended to view entries for that year.
-
-for example: mysite/blog/2007/6 would show blog entries for June 2007
-
-or: mysite/blog/2007 would show blog entries for 2007
-
-## Comments and Spam Protection
-
-See [:pagecomment](/pagecomment) for creating Askimet-protected comments for every page.
-
-## Widgets
-
-The module comes with a couple of default widgets, which rely on the "silverstripe/widgets"
-module being installed. Since widgets are based on database records and relations
-to pages, they need to be enabled through an `Extension` class in your `config.yml`:
-
-	:::yml
-	BlogTree:
-	  extensions:
-	    - WidgetPageExtension
-	BlogEntry:
-	  extensions:
-	    - WidgetPageExtension
-
-Alternatively, you can simply enable the extension on your `Page` records
-to have it available globally.
-
-## Working with the theme
-
-The blog comes set up to use the `\themes\blackcandy_blog\` directory by default. 
-
-   * See [:themes](/themes)
-
-## Contributing
-
-### Translations
-
-Translations of the natural language strings are managed through a
-third party translation interface, transifex.com.
-Newly added strings will be periodically uploaded there for translation,
-and any new translations will be merged back to the project source code.
-
-Please use https://www.transifex.com/projects/p/silverstripe-blog/ to contribute translations,
-rather than sending pull requests with YAML files.

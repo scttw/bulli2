@@ -67,21 +67,21 @@ class MemberLoginForm extends LoginForm {
 		}
 
 		if($checkCurrentUser && Member::currentUser() && Member::logged_in_session_exists()) {
-			$fields = new FieldList(
-				new HiddenField("AuthenticationMethod", null, $this->authenticator_class, $this)
+			$fields = FieldList::create(
+				HiddenField::create("AuthenticationMethod", null, $this->authenticator_class, $this)
 			);
-			$actions = new FieldList(
-				new FormAction("logout", _t('Member.BUTTONLOGINOTHER', "Log in as someone else"))
+			$actions = FieldList::create(
+				FormAction::create("logout", _t('Member.BUTTONLOGINOTHER', "Log in as someone else"))
 			);
 		} else {
 			if(!$fields) {
 				$label=singleton('Member')->fieldLabel(Member::config()->unique_identifier_field);
-				$fields = new FieldList(
-					new HiddenField("AuthenticationMethod", null, $this->authenticator_class, $this),
+				$fields = FieldList::create(
+					HiddenField::create("AuthenticationMethod", null, $this->authenticator_class, $this),
 					// Regardless of what the unique identifer field is (usually 'Email'), it will be held in the
 					// 'Email' value, below:
-					$emailField = new TextField("Email", $label, null, null, $this),
-					new PasswordField("Password", _t('Member.PASSWORD', 'Password'))
+					$emailField = TextField::create("Email", $label, null, null, $this),
+					PasswordField::create("Password", _t('Member.PASSWORD', 'Password'))
 				);
 				if(Security::config()->remember_username) {
 					$emailField->setValue(Session::get('SessionForms.MemberLoginForm.Email'));
@@ -91,18 +91,18 @@ class MemberLoginForm extends LoginForm {
 					$emailField->setAttribute('autocomplete', 'off');
 				}
 				if(Security::config()->autologin_enabled) {
-					$fields->push(new CheckboxField(
+					$fields->push(CheckboxField::create(
 						"Remember",
 						_t('Member.REMEMBERME', "Remember me next time?")
 					));
 				}
 			}
 			if(!$actions) {
-				$actions = new FieldList(
-					new FormAction('dologin', _t('Member.BUTTONLOGIN', "Log in")),
-					new LiteralField(
+				$actions = FieldList::create(
+					FormAction::create('dologin', _t('Member.BUTTONLOGIN', "Log in")),
+					LiteralField::create(
 						'forgotPassword',
-						'<p id="ForgotPassword"><a href="Security/lostpassword">'
+						'<p id="ForgotPassword"><a href="' . Security::lost_password_url() . '">'
 						. _t('Member.BUTTONLOSTPASSWORD', "I've lost my password") . '</a></p>'
 					)
 				);
@@ -110,7 +110,7 @@ class MemberLoginForm extends LoginForm {
 		}
 
 		if(isset($backURL)) {
-			$fields->push(new HiddenField('BackURL', 'BackURL', $backURL));
+			$fields->push(HiddenField::create('BackURL', 'BackURL', $backURL));
 		}
 
 		// Reduce attack surface by enforcing POST requests
@@ -118,7 +118,7 @@ class MemberLoginForm extends LoginForm {
 
 		parent::__construct($controller, $name, $fields, $actions);
 
-		$this->setValidator(new RequiredFields('Email', 'Password'));
+		$this->setValidator(RequiredFields::create('Email', 'Password'));
 
 		// Focus on the email input when the page is loaded
 		$js = <<<JS
@@ -134,18 +134,22 @@ JS;
 	 * Get message from session
 	 */
 	protected function getMessageFromSession() {
-		if(($member = Member::currentUser()) && !Session::get('MemberLoginForm.force_message')) {
+
+		$forceMessage = Session::get('MemberLoginForm.force_message');
+		if(($member = Member::currentUser()) && !$forceMessage) {
 			$this->message = _t(
 				'Member.LOGGEDINAS',
 				"You're logged in as {name}.",
 				array('name' => $member->{$this->loggedInAsField})
 			);
 		}
-		Session::set('MemberLoginForm.force_message', false);
 
-		parent::getMessageFromSession();
+		// Reset forced message
+		if($forceMessage) {
+			Session::set('MemberLoginForm.force_message', false);
+		}
 
-		return $this->message;
+		return parent::getMessageFromSession();
 	}
 
 
@@ -190,7 +194,7 @@ JS;
 	 * )
 	 *
 	 * @param array $data
-	 * @return void
+	 * @return SS_HTTPResponse
 	 */
 	protected function logInUserAndRedirect($data) {
 		Session::clear('SessionForms.MemberLoginForm.Email');
@@ -200,7 +204,7 @@ JS;
 			if(isset($_REQUEST['BackURL']) && $backURL = $_REQUEST['BackURL']) {
 				Session::set('BackURL', $backURL);
 			}
-			$cp = new ChangePasswordForm($this->controller, 'ChangePasswordForm');
+			$cp = ChangePasswordForm::create($this->controller, 'ChangePasswordForm');
 			$cp->sessionMessage(
 				_t('Member.PASSWORDEXPIRED', 'Your password has expired. Please choose a new one.'),
 				'good'
@@ -209,21 +213,24 @@ JS;
 		}
 
 		// Absolute redirection URLs may cause spoofing
-		if(isset($_REQUEST['BackURL']) && $_REQUEST['BackURL'] && Director::is_site_url($_REQUEST['BackURL']) ) {
-			return $this->controller->redirect($_REQUEST['BackURL']);
-		}
-
-		// Spoofing attack, redirect to homepage instead of spoofing url
-		if(isset($_REQUEST['BackURL']) && $_REQUEST['BackURL'] && !Director::is_site_url($_REQUEST['BackURL'])) {
-			return $this->controller->redirect(Director::absoluteBaseURL());
+		if(!empty($_REQUEST['BackURL'])) {
+			$url = $_REQUEST['BackURL'];
+			if(Director::is_site_url($url) ) {
+				$url = Director::absoluteURL($url);
+			} else {
+				// Spoofing attack, redirect to homepage instead of spoofing url
+				$url = Director::absoluteBaseURL();
+			}
+			return $this->controller->redirect($url);
 		}
 
 		// If a default login dest has been set, redirect to that.
-		if (Security::config()->default_login_dest) {
-			return $this->controller->redirect(Director::absoluteBaseURL() . Security::config()->default_login_dest);
+		if ($url = Security::config()->default_login_dest) {
+			$url = Controller::join_links(Director::absoluteBaseURL(), $url);
+			return $this->controller->redirect($url);
 		}
 
-		// Redirect the user to the page where he came from
+		// Redirect the user to the page where they came from
 		$member = Member::currentUser();
 		if($member) {
 			$firstname = Convert::raw2xml($member->FirstName);
@@ -287,9 +294,19 @@ JS;
 	 * @param array $data Submitted data
 	 */
 	public function forgotPassword($data) {
-		$SQL_data = Convert::raw2sql($data);
-		$SQL_email = $SQL_data['Email'];
-		$member = DataObject::get_one('Member', "\"Email\" = '{$SQL_email}'");
+		// Ensure password is given
+		if(empty($data['Email'])) {
+			$this->sessionMessage(
+				_t('Member.ENTEREMAIL', 'Please enter an email address to get a password reset link.'),
+				'bad'
+			);
+
+			$this->controller->redirect('Security/lostpassword');
+			return;
+		}
+
+		// Find existing member
+		$member = Member::get()->filter("Email", $data['Email'])->first();
 
 		// Allow vetoing forgot password requests
 		$results = $this->extend('forgotPassword', $member);
@@ -312,7 +329,7 @@ JS;
 		} elseif($data['Email']) {
 			// Avoid information disclosure by displaying the same status,
 			// regardless wether the email address actually exists
-			$this->controller->redirect('Security/passwordsent/' . urlencode($data['Email']));
+			$this->controller->redirect('Security/passwordsent/' . rawurlencode($data['Email']));
 		} else {
 			$this->sessionMessage(
 				_t('Member.ENTEREMAIL', 'Please enter an email address to get a password reset link.'),
@@ -324,3 +341,4 @@ JS;
 	}
 
 }
+

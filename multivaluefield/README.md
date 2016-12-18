@@ -1,6 +1,6 @@
 # SilverStripe MultiValueField module
 
-[![Build Status](https://secure.travis-ci.org/silverstripe-australia/silverstripe-multivaluefield.png)](http://travis-ci.org/silverstripe-australia/silverstripe-multivaluefield)
+[![Build Status](https://travis-ci.org/silverstripe-australia/silverstripe-multivaluefield.svg?branch=master)](https://travis-ci.org/silverstripe-australia/silverstripe-multivaluefield)
 
 Note: The SilverStripe 2.4 compatible version of the module is still available
 in the ss24 branch
@@ -35,8 +35,8 @@ Version marked as 2.0.x are compatible with SilverStripe 3.1, with 2.0.1 compati
 
 As with all DB fields
 
-	public static $db = array(
-		'Keywords' => 'MultiValueField',
+	private static $db = array(
+		'Keywords' 	=> 'MultiValueField',
 	);
 
 To make use of the field on the frontend, you can loop over the Items property

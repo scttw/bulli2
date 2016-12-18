@@ -36,10 +36,16 @@ class PublishItemWorkflowAction extends WorkflowAction {
 				$target->DesiredPublishDate = '';
 				$target->write();
 			} else {
-				$target->doPublish();
+				if ($target->hasMethod('doPublish')) {
+					$target->doPublish();
+				}
 			}
 		} else {
-			$target->doPublish();
+			if ($target->hasMethod('doPublish')) {
+				$target->doPublish();
+			} else if ($target->hasMethod('publish')) {
+                $target->publish('Stage', 'Live');
+            }
 		}
 
 		return true;

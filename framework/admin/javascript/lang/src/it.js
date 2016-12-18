@@ -1,10 +1,22 @@
 {
+    "CMSMAIN.BATCH_ARCHIVE_PROMPT": "Hai selezionato {num} pagina(e).\n\nSei sicuro di volerle archiviare?\n\nQueste pagine insieme a tutte le pagine figlio saranno spubblicate ed archiviate.",
+    "CMSMAIN.BATCH_DELETELIVE_PROMPT": "Hai {num} pagine selezionate.\n\nVuoi veramente eliminare queste pagine dal sito live?",
+    "CMSMAIN.BATCH_DELETE_PROMPT": "Hai {num} pagina(e) selezionate.\n\nVuoi veramente eliminarle?",
+    "CMSMAIN.BATCH_PUBLISH_PROMPT": "Hai {num} pagine selezionate.\n\nVuoi veramente pubblicarle?",
+    "CMSMAIN.BATCH_RESTORE_PROMPT": "Hai selezionato {num} pagina(e).\n\nSei sicuri di volerle ripristinare?\n\nI figli delle pagine archiviate saranno ripristinati nel primo livello, a meno anche i genitori non vengano ripristinati.",
+    "CMSMAIN.BATCH_UNPUBLISH_PROMPT": "Hai {num} pagine selezionate.\n\nVuoi veramente nasconderle?",
+    "CMSMAIN.SELECTONEPAGE": "Per favore selezionare almeno una pagina",
+    "Campaigns.ADDCAMPAIGN": "Aggiungi campagna",
+    "Campaigns.ITEM_SUMMARY_PLURAL": "%s elementi",
+    "Campaigns.ITEM_SUMMARY_SINGULAR": "%s elemento",
+    "Campaigns.PUBLISHCAMPAIGN": "Pubblica campagna",
+    "Campaigns.REVERTCAMPAIGN": "Ripristina",
     "LeftAndMain.CONFIRMUNSAVED": "Siete sicuri di voler uscire da questa pagina?\n\nATTENZIONE: I vostri cambiamenti non sono stati salvati.\n\nCliccare OK per continuare, o su Annulla per rimanere sulla pagina corrente.",
-    "LeftAndMain.CONFIRMUNSAVEDSHORT": "WARNING: Your changes have not been saved.",
-    "SecurityAdmin.BATCHACTIONSDELETECONFIRM": "Do you really want to delete %s groups?",
-    "ModelAdmin.SAVED": "Salvato",
-    "ModelAdmin.REALLYDELETE": "Si è sicuri di voler eliminare?",
+    "LeftAndMain.CONFIRMUNSAVEDSHORT": "ATTENZIONE: le tue modifiche non sono state salvate.",
+    "LeftAndMain.PAGEWASDELETED": "Questa pagina è stata eliminata. Per modificare questa pagine, selezionarla a sinistra.",
     "ModelAdmin.DELETED": "Eliminato",
-    "ModelAdmin.VALIDATIONERROR": "Validation Error",
-    "LeftAndMain.PAGEWASDELETED": "Questa pagina è stata eliminata. Per modificare questa pagine, selezionarla a sinistra."
+    "ModelAdmin.REALLYDELETE": "Si è sicuri di voler eliminare?",
+    "ModelAdmin.SAVED": "Salvato",
+    "ModelAdmin.VALIDATIONERROR": "Errore di validazione",
+    "SecurityAdmin.BATCHACTIONSDELETECONFIRM": "Vuoi veramente eliminare %s gruppi?"
 }

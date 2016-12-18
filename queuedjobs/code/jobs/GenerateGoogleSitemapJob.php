@@ -9,7 +9,9 @@
  * @license http://silverstripe.org/bsd-license/
  */
 class GenerateGoogleSitemapJob extends AbstractQueuedJob {
-
+	/**
+	 * @var int
+	 */
 	private static $regenerate_time = 43200;
 
 	public function __construct() {
@@ -20,6 +22,8 @@ class GenerateGoogleSitemapJob extends AbstractQueuedJob {
 
 	/**
 	 * Sitemap job is going to run for a while...
+	 *
+	 * @return int
 	 */
 	public function getJobType() {
 		return QueuedJob::QUEUED;
@@ -34,10 +38,10 @@ class GenerateGoogleSitemapJob extends AbstractQueuedJob {
 
 	/**
 	 * Return a signature for this queued job
-	 * 
+	 *
 	 * For the generate sitemap job, we only ever want one instance running, so just use the class name
-	 * 
-	 * @return String
+	 *
+	 * @return string
 	 */
 	public function getSignature() {
 		return md5(get_class($this));
@@ -65,7 +69,7 @@ class GenerateGoogleSitemapJob extends AbstractQueuedJob {
 	}
 
 	/**
-	 * On any restart, make sure to check that our temporary file is being created still. 
+	 * On any restart, make sure to check that our temporary file is being created still.
 	 */
 	public function prepareForRestart() {
 		parent::prepareForRestart();
@@ -84,7 +88,7 @@ class GenerateGoogleSitemapJob extends AbstractQueuedJob {
 		if (!$this->tempFile) {
 			throw new Exception("Temporary sitemap file has not been set");
 		}
-		
+
 		if (!file_exists($this->tempFile)) {
 			throw new Exception("Temporary file $this->tempFile has been deleted!");
 		}
@@ -98,7 +102,6 @@ class GenerateGoogleSitemapJob extends AbstractQueuedJob {
 			return;
 		}
 
-		
 		// lets process our first item - note that we take it off the list of things left to do
 		$ID = array_shift($remainingChildren);
 
@@ -124,17 +127,17 @@ class GenerateGoogleSitemapJob extends AbstractQueuedJob {
 				$period = $timediff / ($versions + 1);
 
 				if($period > 60*60*24*365) { // > 1 year
-					$page->ChangeFreq='yearly';
+					$page->ChangeFreq = 'yearly';
 				} elseif($period > 60*60*24*30) { // > ~1 month
-					$page->ChangeFreq='monthly';
+					$page->ChangeFreq = 'monthly';
 				} elseif($period > 60*60*24*7) { // > 1 week
-					$page->ChangeFreq='weekly';
+					$page->ChangeFreq = 'weekly';
 				} elseif($period > 60*60*24) { // > 1 day
-					$page->ChangeFreq='daily';
+					$page->ChangeFreq = 'daily';
 				} elseif($period > 60*60) { // > 1 hour
-					$page->ChangeFreq='hourly';
+					$page->ChangeFreq = 'hourly';
 				} else { // < 1 hour
-					$page->ChangeFreq='always';
+					$page->ChangeFreq = 'always';
 				}
 
 				// do the generation of the file in a temporary location
@@ -164,14 +167,13 @@ class GenerateGoogleSitemapJob extends AbstractQueuedJob {
 	 * Outputs the completed file to the site's webroot
 	 */
 	protected function completeJob() {
-
-		$content = '<?xml version="1.0" encoding="UTF-8"?>'.
+		$content = '<?xml version="1.0" encoding="UTF-8"?>' .
 					'<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
 		$content .= file_get_contents($this->tempFile);
 		$content .= '</urlset>';
 
 		$sitemap = Director::baseFolder() .'/sitemap.xml';
-		
+
 		file_put_contents($sitemap, $content);
 
 		if (file_exists($this->tempFile)) {

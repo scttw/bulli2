@@ -27,9 +27,8 @@ class AdvancedWorkflowExtension extends LeftAndMainExtension {
 
 		$svc = singleton('WorkflowService');
 		$svc->startWorkflow($item, $workflowID);
-
-		$negotiator = method_exists($this->owner, 'getResponseNegotiator') ? $this->owner->getResponseNegotiator() : Controller::curr()->getResponseNegotiator();
-		return $negotiator->respond($this->owner->getRequest());
+		
+		return $this->returnResponse($form);
 	}
 
 	/**
@@ -67,11 +66,18 @@ class AdvancedWorkflowExtension extends LeftAndMainExtension {
 			if (!$p->canEditWorkflow()) {
 				$form->makeReadonly();
 			}
+
+			$this->owner->extend('updateWorkflowEditForm', $form);
 		}
 	}
 	
 	public function updateItemEditForm($form) {
-		$this->updateEditForm($form);
+		$record = $form->getRecord();
+		if ($record && $record->hasExtension('WorkflowApplicable')) {
+			$actions = $form->Actions();
+			$record->extend('updateCMSActions', $actions);
+			$this->updateEditForm($form);
+		}
 	}
 
 	/**
@@ -88,31 +94,47 @@ class AdvancedWorkflowExtension extends LeftAndMainExtension {
 		$svc = singleton('WorkflowService');
 		$p = $form->getRecord();
 		$workflow = $svc->getWorkflowFor($p);
-		$action = $workflow->CurrentAction();
+        
+        
+        if (!$workflow) {
+            return;
+        }
+        
+        $action = $workflow->CurrentAction();
 
-		if (!$p || !$p->canEditWorkflow()) {
-			return;
-		}
+        if (!$p || !$p->canEditWorkflow()) {
+            return;
+        }
 
-		$allowedFields = $workflow->getWorkflowFields()->saveableFields();
-		unset($allowedFields['TransitionID']);
+        $allowedFields = $workflow->getWorkflowFields()->saveableFields();
+        unset($allowedFields['TransitionID']);
 
-		$allowed = array_keys($allowedFields);
-		if (count($allowed)) {
-			$form->saveInto($action, $allowed);
-			$action->write();
-		}
+        $allowed = array_keys($allowedFields);
+        if (count($allowed)) {
+            $form->saveInto($action, $allowed);
+            $action->write();
+        }
 
-		if (isset($data['TransitionID']) && $data['TransitionID']) {
-			$svc->executeTransition($p, $data['TransitionID']);
-		} else {
-			// otherwise, just try to execute the current workflow to see if it
-			// can now proceed based on user input
-			$workflow->execute();
-		}
-
+        if (isset($data['TransitionID']) && $data['TransitionID']) {
+            $svc->executeTransition($p, $data['TransitionID']);
+        } else {
+            // otherwise, just try to execute the current workflow to see if it
+            // can now proceed based on user input
+            $workflow->execute();
+        }
+		
+		return $this->returnResponse($form);
+	}
+	
+	protected function returnResponse($form) {
+		if ($this->owner instanceof GridFieldDetailForm_ItemRequest) {
+			$record = $form->getRecord();
+			if ($record && $record->exists()) {
+				return $this->owner->edit($this->owner->getRequest());
+			}
+		} 
+		
 		$negotiator = method_exists($this->owner, 'getResponseNegotiator') ? $this->owner->getResponseNegotiator() : Controller::curr()->getResponseNegotiator();
-
 		return $negotiator->respond($this->owner->getRequest());
 	}
 	

@@ -2,7 +2,6 @@ az:
   CMSMain:
     DELETE: 'Qaralama saytdan sil'
     DELETEFP: Dərc olunmuş saytdan sil
-    RESTORE: Bərpa et
     SAVE: Yadda saxla
   ContentControl:
     NOTEWONTBESHOWN: 'Qeyd: Bu mesaj ziyarətçilər üçün görünməyəcək'
@@ -68,9 +67,7 @@ az:
     BUTTONUNPUBLISHDESC: 'Bu səhifəni dərc olunmuş saytdan sil'
     Comments: Şərhlər
     Content: Məzmun
-    DEFAULTABOUTCONTENT: '<p>Siz bu səhifəni öz məzmununzla doldura bilər, ya da səhifəni silib və pz səhifələrinizi yarada bilərsiniz.<br /></p>'
     DEFAULTABOUTTITLE: 'Haqqımızda'
-    DEFAULTCONTACTCONTENT: '<p>Siz bu səhifəni öz məzmununzla doldura bilər, ya da səhifəni silib və pz səhifələrinizi yarada bilərsiniz.<br /></p>'
     DEFAULTCONTACTTITLE: 'Bizimlə əlaqə'
     DEFAULTHOMETITLE: Baş səhifə
     DependtPageColumnLinkType: 'Keçid növü'
@@ -107,5 +104,4 @@ az:
     many_many_LinkTracking: 'Keçidin izlənməsi'
   VirtualPage:
     HEADER: 'Bu virtual səhifədir'
-    PLURALNAME: 'Virtual səhifələr'
     SINGULARNAME: 'Virtual səhifə'

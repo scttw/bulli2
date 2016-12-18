@@ -1,98 +1,124 @@
 fi:
   ArchiveWidget:
-    DispBY: "Näytä »"
-    MONTH: "kuukausi"
-    # 50
-    PLURALNAME: "Arkistovimpaimet"
-    # 50
-    SINGULARNAME: "Arkistovimpain"
-    YEAR: "vuosi"
+    PLURALNAME: 'Arkistovimpaimet'
+    SINGULARNAME: 'Arkistovimpain'
+  Blog:
+    Archive: Arkisto
+    By: kirjoittanut
+    CONTRIBUTOR: Avustaja
+    Categories: Kategoriat
+    Category: Kategoria
+    Comments: Kommentit
+    DESCRIPTION: 'Lisää blogin nettisivuillesi.'
+    EDITOR: Toimittaja
+    FILTERDESCRIPTION_AUTHOR: 'Kirjoittanut {author}'
+    FILTERDESCRIPTION_CATEGORY: 'Kategoriassa: {category}'
+    FILTERDESCRIPTION_DATE: 'Pvm: {date}'
+    FILTERDESCRIPTION_PAGE: 'Sivu {page}'
+    FILTERDESCRIPTION_TAG: 'Avainsanat: {tag}'
+    LumberjackTitle: 'Blogikirjoitukset'
+    NoPosts: 'Ei kirjoituksia'
+    NoUnfeaturedPosts: 'Ei artikkeleita, jotka eivät ole nostoja'
+    PERMISSIONS_CATEGORY: 'Blogin oikeudet'
+    PERMISSION_MANAGE_USERS_DESCRIPTION: 'Hallinnoi käyttäjiä yksittäisissä blogeissa'
+    PERMISSION_MANAGE_USERS_HELP: 'Salli toimittajien, kirjoittajien tai avustajien kiinnittäminen blogeihin'
+    PLURALNAME: 'Pohjasivut'
+    Posted: Kirjoitettu
+    PostedIn: 'Kirjoitettu:'
+    PostsPerPage: 'Kirjoitusta per sivu'
+    ReadMoreAbout: 'Lue lisää kirjoituksesta ''{title}''...'
+    SINGULARNAME: Blogi
+    Tag: Avainsana
+    Tagged: Merkitty
+    Tags: Avainsanat
+    WRITER: Kirjoittaja
+  BlogArchiveWidget:
+    ArchiveType: Arkistotyyppi
+    Blog: Blogi
+    NumberToDisplay: 'Näytetään'
+    PLURALNAME: 'Blogiarkisto-vimpaimet'
+    SINGULARNAME: 'Blogiarkisto-vimpain'
+  BlogCategoriesWidget:
+    Blog: Blogi
+    Direction:
+      Description: 'Vaihda vimpaimen näytettävien kategorioiden järjestyksen suunta.'
+      Label: Suunta
+    Limit:
+      Description: 'Rajoita näytettävien kategorioiden määrää tässä vimpaimessa (aseta arvoksi 0, jos haluat näyttää kaikki kategoriat).'
+      Label: Rajoita
+    PLURALNAME: 'Blogikategoriat-vimpaimet'
+    SINGULARNAME: 'Blogikategoriat-vimpain'
+    Sort:
+      Description: 'Vaihda vimpaimen näytettävien kategorioiden järjestys.'
+      Label: Järjestä
+  BlogCategory:
+    Duplicate: 'Tämä blogikategoria on jo olemassa'
+    PLURALNAME: 'Blogikategoriat'
+    SINGULARNAME: 'Blogikategoria'
+    Title: Otsikko
   BlogEntry:
-    AU: "Kirjoittaja"
-    BBH: "BBCode apu"
-    CN: "Sisältö"
-    DT: "Pvm"
-    # 50
-    PLURALNAME: "Blogikirjoitukset"
-    # 50
-    SINGULARNAME: "Blogikirjoitus"
-    TS: "Avainsanat (erottimena pilkku)"
-  BlogEntry_ss:
-    COMMENTS: "Kommentit"
-    EDITTHIS: "Muokkaa tätä kirjoitusta"
-    POSTEDBY: "Lähettäjä"
-    POSTEDON: "»"
-    TAGS: "Avainsanat:"
-    UNPUBLISHTHIS: "Poista julkaisusta"
-    VIEWALLPOSTTAGGED: "Näytä kaikki tägätyt kirjoitukset"
+    DESCRIPTION: 'Yleinen sisältösivu'
+    PLURALNAME: 'Pohjasivut'
+    SINGULARNAME: 'Blogikirjoitus'
   BlogHolder:
-    # 50
-    PLURALNAME: "Blogin koontisivut"
-    POST: "Kirjoita blogi"
-    RSSFEED: "RSS-syöte näistä blogeista"
-    # 50
-    SINGULARNAME: "Blogin koontisivu"
-    SJ: "Aihe"
-    SPUC: "Erota avainsanat pilkulla."
-    SUCCONTENT: "Onnittelut, SilverStripe blogimoduuli on asennettu onnistuneesti. Voit poistaa tämän blogikirjoituksen turvallisesti. Voit säätää blogin toiminnaliisuuksia (kuten sivupalkin toiminnallisuuksia) ylläpidosta [url=admin]the CMS[/url]."
-    SUCTAGS: "silverstripe, blog"
-    SUCTITLE: "SilverStripe blogimoduuli asennettu onnistuneesti"
-    TE: "Esim. urheilu, henkilökohtainen, sci-fi"
-  BlogHolder_ss:
-    NOENTRIES: "Ei blogikirjoituksia"
-    VIEWINGTAGGED: "Näytä kirjoitukset tällä avainsanalla"
-  BlogManagementWidget:
-    COMADM: "Kommenttien moderointi"
-    # 50
-    PLURALNAME: "Blogin hallinnointivimpaimet"
-    # 50
-    SINGULARNAME: "Blogin hallinnointivimpain"
-    UNM1: "Sinulla on yksi moderoimaton kommentti"
-    UNMM: "Sinulla on %i moderoimatonta kommenttia"
-  BlogManagementWidget_ss:
-    LOGOUT: "Kirjaudu ulos"
-    POSTNEW: "Kirjoita uusi blogiteksti"
-  BlogSummary_ss:
-    COMMENTS: "Kommentit"
-    POSTEDBY: "Lähettänyt »"
-    POSTEDON: "pvm"
-    READFULLPOST: 'Lue koko kirjoitus'
-    SUMMARYCOMMENTS: 'kommentti(a)'
-    TAGS: 'Avainsanat:'
-    VIEWFULL: "Näytä koko kirjoitus otsikolla -"
+    DESCRIPTION: 'Yleinen sisältösivu'
+    PLURALNAME: 'Pohjasivut'
+    SINGULARNAME: 'Blogin koontisivu'
+  BlogPost:
+    AUTHOR: Kirjoittaja
+    AdditionalCredits: 'Lisäkiitokset'
+    AdditionalCredits_Description: 'Mikäli kaikilla artikkelin kirjoittajilla ei ole pääsyä sisällönhallintajärjestelmään, syötä heidän nimensä (nimi) tähän. Erota useampi pilkulla.'
+    Authors: Kirjoittajat
+    CUSTOMSUMMARY: 'Lisää tiivistelmä'
+    Categories: Kategoriat
+    DESCRIPTION: 'Yleinen sisältösivu'
+    FeaturedImage: 'Kuvanosto'
+    PLURALNAME: 'Pohjasivut'
+    PageTitleLabel: 'Otsikko'
+    PublishDate: 'Julkaisupäivä'
+    PublishDate_Description: 'Asetetaan "nyt", mikäli arvo jätetään asettamatta.'
+    SINGULARNAME: 'Blogikirjoitus'
+    SUMMARY_DESCRIPTION: 'Mikäli tiivistelmää ei ole kirjoitettu, käytetään 30 ensimmäistä sanaa kirjoituksesta.'
+    Tags: Avainsanat
+  BlogRecentPostsWidget:
+    Blog: Blogi
+    NumberOfPosts: 'Kirjoituksien määrä'
+    PLURALNAME: 'Viimeisimmät blogikirjoitukset -vimpaimet'
+    SINGULARNAME: 'Viimeisimmät blogikirjoitukset -vimpain'
+  BlogTag:
+    Duplicate: 'Tämä blogin avainsana on jo olemassa'
+    PLURALNAME: 'Blogin avainsanat'
+    SINGULARNAME: 'Blogin avainsana'
+    Title: Otsikko
+  BlogTagsCloudWidget:
+    Blog: Blogi
+    PLURALNAME: 'Avainsanapilvi vimpaimet'
+    SINGULARNAME: 'Avainsanapilvi vimpaimet'
+  BlogTagsWidget:
+    Blog: Blogi
+    Direction:
+      Description: 'Vaihda vimpaimen näytettävien avainsanojen järjestyksen suunta'
+      Label: Suunta
+    Limit:
+      Description: 'Rajoita vimpaimella näytettävien avainsanojen määrää (aseta arvoksi 0, jos haluat näyttää kaikki avainsanat).'
+      Label: Rajoita
+    PLURALNAME: 'Avainsanat-vimpaimet'
+    SINGULARNAME: 'Avainsanat-vimpain'
+    Sort:
+      Description: 'Vaihda vimpaimella näytettävien avainsanojen järjestystä.'
+      Label: Järjestä
   BlogTree:
-    # 50
-    PLURALNAME: "Blogi hakemistopuut"
-    # 50
-    SINGULARNAME: "Blogihakemistopuu"
-  RSSWidget:
-    CT: "Oma otsikko syötteelle"
-    NTS: "Montako kohdetta näytetään"
-    # 50
-    PLURALNAME: "R S S vimpain"
-    # 50
-    SINGULARNAME: "R S S vimpain"
-    URL: "Toisen sivuston URL-osoite RSS syötteeseen.  Varmistathan, että osoite on RSS-syötteeseen."
-  SubscribeRSSWidget:
-    # 50
-    PLURALNAME: "Tilaa R S S vimpaimet"
-    # 50
-    SINGULARNAME: "Tilaa R S S vimpain"
-  SubscribeRSSWidget_ss:
-    SUBSCRIBETEXT: "Tilaa"
-    SUBSCRIBETITLE: "Tilaa tämän blogin RSS"
+    DESCRIPTION: 'Yleinen sisältösivu'
+    PLURALNAME: 'Pohjasivut'
+    SINGULARNAME: 'Blogihakemistopuu'
+  GridFieldAddByDBField:
+    Add: 'Lisää {name}'
+    AddFail: '{class} ei voida tallentaa tietokantaan.'
+    PermissionFail: 'Sinulla ei ole oikeuksia luoda {class}.'
+  GridFieldBlogPostState:
+    Draft: '<i class="btn-icon blog-icon btn-icon-pencil"></i> Versio tallennettu {date}'
+    Published: '<i class="btn-icon blog-icon btn-icon-accept"></i> Julkaistu {date}'
+    Timer: '<i class="blog-icon blog-icon-timer"></i> Julkaistaan {date}'
   TagCloudWidget:
-    LIMIT: "Rajoita avainsanojen määrää"
-    # 50
-    PLURALNAME: "Avainsanapilvi vimpaimet"
-    SBAL: "aakkoset"
-    SBFREQ: "toistuvuus"
-    # 50
-    SINGULARNAME: "Avainsanapilvi vimpain"
-    SORTBY: "Järjestä"
-    TILE: "Otsikko"
-  TrackBackPing:
-    # 50
-    PLURALNAME: "Track Back Pings"
-    # 50
-    SINGULARNAME: "Track Back Ping"
+    PLURALNAME: 'Avainsanapilvi vimpaimet'
+    SINGULARNAME: 'Avainsanapilvi vimpain'

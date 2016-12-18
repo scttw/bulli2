@@ -1,28 +1,39 @@
 {
 	"name": "silverstripe/blog",
-	"description": "The blog module allows you to post blogs on your SilverStripe. It includes the ability to post blogs using a site front-end form. Blogs are summarised on the blog holder page type, with more detail viewable when a specific blog is clicked.",
-	"type": "silverstripe-module",
-	"keywords": ["silverstripe", "blog"],
-	"authors": [
-	{
-		"name": "Saophalkun Ponlu",
-		"email": "phalkunz@silverstripe.com"
-	},
-	{
-		"name": "Carlos Barberis",
-		"email": "carlos@silverstripe.com"
-	}
+	"description": "A fresh take on blogging in Silverstripe set out to tackle the issue of a cluttered Site Tree.",
+	"keywords": [
+		"silverstripe",
+		"blog",
+		"news"
 	],
-
-	"require":
-	{
-		"silverstripe/cms": "~3.1"
+	"type": "silverstripe-module",
+	"require": {
+		"silverstripe/cms": "^3.1.0",
+		"silverstripe/lumberjack": "~1.1",
+		"silverstripe/tagfield": "^1.0"
 	},
-	"suggest":
-	{
-		"silverstripe/widgets": "Additional 'sidebar features', e.g. a list of recent posts and a tagcloud",
-		"silverstripe/comments": "Enable user comments on any page type, including blog posts",
-		"simplepie/simplepie": "Parse RSS feeds, required for the RSS widget"
+	"require-dev": {
+		"phpunit/PHPUnit": "~3.7@stable"
 	},
-	"minimum-stability": "dev"
+	"extra": {
+		"branch-alias": {
+			"dev-master": "2.4.x-dev"
+		}
+	},
+	"license": "BSD-2-Clause",
+	"authors": [
+		{
+			"name": "Michael Strong",
+			"email": "github@michaelstrong.co.uk"
+		}
+	],
+	"suggest": {
+		"silverstripe/widgets": "Some widgets come with the blog which are compatible with the widgets module.",
+		"silverstripe/comments": "This module adds comments to your blog."
+	},
+	"replace": {
+		"micmania1/silverstripe-blog": "*"
+	},
+	"minimum-stability": "dev",
+	"prefer-stable": true
 }

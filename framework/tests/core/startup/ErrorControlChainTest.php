@@ -8,6 +8,30 @@
  */
 class ErrorControlChainTest_Chain extends ErrorControlChain {
 
+	protected $displayErrors = 'STDERR';
+
+	/**
+	 * Modify method visibility to public for testing
+	 *
+	 * @return string
+	 */
+	public function getDisplayErrors()
+	{
+		// Protect manipulation of underlying php_ini values
+		return $this->displayErrors;
+	}
+
+	/**
+	 * Modify method visibility to public for testing
+	 *
+	 * @param mixed $errors
+	 */
+	public function setDisplayErrors($errors)
+	{
+		// Protect manipulation of underlying php_ini values
+		$this->displayErrors = $errors;
+	}
+
 	// Change function visibility to be testable directly
 	public function translateMemstring($memstring) {
 		return parent::translateMemstring($memstring);
@@ -64,6 +88,7 @@ require_once '$classpath';
 class ErrorControlChainTest extends SapphireTest {
 
 	function setUp() {
+
 		// Check we can run PHP at all
 		$null = is_writeable('/dev/null') ? '/dev/null' : 'NUL';
 		exec("php -v 2> $null", $out, $rv);
@@ -78,8 +103,53 @@ class ErrorControlChainTest extends SapphireTest {
 
 	function testErrorSuppression() {
 
-		// Fatal error
+		// Errors disabled by default
+		$chain = new ErrorControlChainTest_Chain();
+		$chain->setDisplayErrors('Off'); // mocks display_errors: Off
+		$initialValue = null;
+		$whenNotSuppressed = null;
+		$whenSuppressed = null;
+		$chain->then(
+			function(ErrorControlChainTest_Chain $chain)
+				use(&$initialValue, &$whenNotSuppressed, &$whenSuppressed) {
+					$initialValue = $chain->getDisplayErrors();
+					$chain->setSuppression(false);
+					$whenNotSuppressed = $chain->getDisplayErrors();
+					$chain->setSuppression(true);
+					$whenSuppressed = $chain->getDisplayErrors();
+				}
+		)->execute();
 
+		// Disabled errors never un-disable
+		$this->assertEquals(0, $initialValue); // Chain starts suppressed
+		$this->assertEquals(0, $whenSuppressed); // false value used internally when suppressed
+		$this->assertEquals('Off', $whenNotSuppressed); // false value set by php ini when suppression lifted
+		$this->assertEquals('Off', $chain->getDisplayErrors()); // Correctly restored after run
+
+		// Errors enabled by default
+		$chain = new ErrorControlChainTest_Chain();
+		$chain->setDisplayErrors('Yes'); // non-falsey ini value
+		$initialValue = null;
+		$whenNotSuppressed = null;
+		$whenSuppressed = null;
+		$chain->then(
+			function(ErrorControlChainTest_Chain $chain)
+				use(&$initialValue, &$whenNotSuppressed, &$whenSuppressed) {
+					$initialValue = $chain->getDisplayErrors();
+					$chain->setSuppression(true);
+					$whenSuppressed = $chain->getDisplayErrors();
+					$chain->setSuppression(false);
+					$whenNotSuppressed = $chain->getDisplayErrors();
+				}
+		)->execute();
+
+		// Errors can be suppressed an un-suppressed when initially enabled
+		$this->assertEquals(0, $initialValue); // Chain starts suppressed
+		$this->assertEquals(0, $whenSuppressed); // false value used internally when suppressed
+		$this->assertEquals('Yes', $whenNotSuppressed); // false value set by php ini when suppression lifted
+		$this->assertEquals('Yes', $chain->getDisplayErrors()); // Correctly restored after run
+
+		// Fatal error
 		$chain = new ErrorControlChainTest_Chain();
 
 		list($out, $code) = $chain
@@ -133,6 +203,21 @@ class ErrorControlChainTest extends SapphireTest {
 				ini_set('memory_limit', '10M');
 				$a = array();
 				while(1) $a[] = 1;
+			})
+			->thenIfErrored(function(){
+				echo "Done";
+			})
+			->executeInSubprocess();
+
+		$this->assertEquals('Done', $out);
+
+		// Exceptions
+
+		$chain = new ErrorControlChainTest_Chain();
+
+		list($out, $code) = $chain
+			->then(function(){
+				throw new Exception("bob");
 			})
 			->thenIfErrored(function(){
 				echo "Done";

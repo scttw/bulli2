@@ -9,22 +9,23 @@ ru:
     AppCategoryImage: Изображение
     AppCategoryVideo: Видео
     BackToFolder: 'Вернуться к папке'
+    CMSMENU_OLD: 'Файлы (прошлые)'
     CREATED: Дата
     CurrentFolderOnly: 'Только в этой папке?'
-    DetailsView: Детали
+    DetailsView: Подробности
     FILES: Файлы
     FILESYSTEMSYNC: 'Синхронизировать'
-    FILESYSTEMSYNCTITLE: 'Обновление базы данных файлов в файловой системе. Стоит использовать, если новые файлы были загружены без использования CMS, например, через FTP.'
+    FILESYSTEMSYNCTITLE: 'Обновление базы данных файловой системы. Стоит использовать, если новые файлы были загружены без использования CMS, например, через FTP.'
     FROMTHEINTERNET: 'Из интернета'
-    FROMYOURCOMPUTER: 'С диска'
+    FROMYOURCOMPUTER: 'С вашего компьютера'
     Filetype: 'Тип файла'
     ListView: 'В виде списка'
+    MENUTITLE: Файлы
     NEWFOLDER: Новая папка
     SIZE: Размер
     THUMBSDELETED: '{count} неиспользуемых миниатюр удалено'
     TreeView: 'В виде дерева'
     Upload: Загрузить
-    MENUTITLE: Файлы
   AssetAdmin_DeleteBatchAction:
     TITLE: 'Удалить папки'
   AssetAdmin_Tools:
@@ -33,7 +34,7 @@ ru:
     GO: Выбрать
   AssetTableField:
     BACKLINKCOUNT: 'Используется на:'
-    PAGES: страниц
+    PAGES: страниц(а)
   BackLink_Button_ss:
     Back: Назад
   BrokenLinksReport:
@@ -61,22 +62,30 @@ ru:
   CMSAddPageController:
     Title: 'Добавить страницу'
   CMSBatchActions:
+    ARCHIVE: Архив
+    ARCHIVED_PAGES: 'Зархивировано %d страниц '
     DELETED_DRAFT_PAGES: '%d страниц удалено с чернового сайта, %d ошибок'
     DELETED_PAGES: '%d страниц удалено с опубликованного сайта, %d ошибок'
     DELETE_DRAFT_PAGES: 'Удалить из чернового сайта'
     DELETE_PAGES: 'Удалить из опубликованной версии сайта'
     PUBLISHED_PAGES: 'Опубликовано %d страниц, %d ошибок'
     PUBLISH_PAGES: Опубликовать
-    UNPUBLISHED_PAGES: 'Публикация %d страниц отменена'
+    RESTORE: Восстановить
+    RESTORED_PAGES: 'Восстановлено %d страниц'
+    UNPUBLISHED_PAGES: 'Отменена публикация %d страниц'
     UNPUBLISH_PAGES: Отмена публикации
+  CMSFileAddController:
+    MENUTITLE: Файлы
   CMSMain:
     ACCESS: 'Доступ к разделу ''{title}'''
     ACCESS_HELP: 'Возможность просматривать раздел, содержащий дерево страниц и контент. Настройка прав просмотра и редактирования производится через выпадающие меню на отдельных страницах, а также через "Права доступа к содержимому".'
+    ARCHIVE: В архив
+    ARCHIVEDPAGE: 'Страница ''%s'' отправлена в архив'
     AddNew: 'Добавить новую страницу'
     AddNewButton: 'Добавить'
     AddPageRestriction: 'Внимание: некоторые типы страниц в этом случае недоступны для выбора'
     Cancel: Отмена
-    ChoosePageParentMode: 'Выберите, где создать страницу'
+    ChoosePageParentMode: 'Выберите, расположение страницы'
     ChoosePageType: 'Выберите тип страницы'
     Create: Создать
     DELETE: 'Удалить черновик'
@@ -84,79 +93,99 @@ ru:
     DESCREMOVED: 'и {count} страниц нижнего уровня'
     DUPLICATED: 'Копия ''{title}'' создана'
     DUPLICATEDWITHCHILDREN: 'Копия ''{title}'' и дочерних элементов создана'
-    EMAIL: Email
     EditTree: 'Редактировать дерево'
-    ListFiltered: 'Отфильтрованный список.'
+    ListFiltered: 'Результаты поиска.'
+    MENUTITLE: 'Править страницу'
     NEWPAGE: 'Новая {pagetype}'
     PAGENOTEXISTS: 'Страница не существует'
-    PAGES: Страницы
+    PAGES: 'Статус страницы'
     PAGETYPEANYOPT: Любой
     PAGETYPEOPT: 'Тип страницы'
     PUBALLCONFIRM: 'Пожалуйста, опубликуйте каждую страницу сайта, перенося содержимое из чернового режима в опубликованный'
     PUBALLFUN: 'Функция "Опубликовать все"'
-    PUBALLFUN2: "Нажатие этой кнопки выполнит ту же функцию, что и нажатие кнопки \"Опубликовать\" для каждой отдельной страницы. Данная функция предназначена для использования после значительных изменений содержимого, например, в момент создания нового сайта."
+    PUBLISHED: '''{title}'' опубликован'
     PUBPAGES: 'Готово: опубликовано {count} страниц'
     PageAdded: 'Страница успешно создана'
     REMOVED: 'Страница ''{title}''{description} удалена с опубликованного сайта'
     REMOVEDPAGE: 'Страница ''{title}'' удалена с опубликованного сайта'
     REMOVEDPAGEFROMDRAFT: 'Страница ''%s'' удалена с чернового сайта'
-    RESTORE: Восстановить
+    RESTORE: 'Восстановить черновик'
     RESTORED: '''{title}'' успешно восстановлен'
-    ROLLBACK: 'Откатить до этой версии'
-    ROLLEDBACKPUBv2: 'Выполнен откат к опубликованной версии.'
-    ROLLEDBACKVERSIONv2: 'Выполнен откат к версии #%d.'
+    RESTORE_DESC: 'Восстановить архивную версию в черновик'
+    RESTORE_TO_ROOT: 'Восстановить черновик в корень сайта'
+    RESTORE_TO_ROOT_DESC: 'Восстановить архивную версию в черновик в корне сайта'
+    ROLLBACK: 'Вернуться к этой версии'
+    ROLLEDBACKPUBv2: 'Восстановлена опубликованная версия.'
+    ROLLEDBACKVERSIONv2: 'Версия #%d восстановлена.'
     SAVE: Сохранить
+    SAVED: '''{title}'' сохранен'
     SAVEDRAFT: 'Сохранить черновик'
     TabContent: Содержимое
     TabHistory: История
     TabSettings: Настройки
-    TreeFiltered: 'Отфильтрованное дерево.'
-    TreeFilteredClear: 'Сбросить фильтр'
-    MENUTITLE: 'Править страницу'
+    TreeFiltered: 'Результаты поиска.'
+    TreeFilteredClear: Сбросить
   CMSMain_left_ss:
-    APPLY_FILTER: 'Применить фильтр'
+    APPLY_FILTER: Поиск
+    CLEAR_FILTER: Сбросить
     RESET: Восстановить
   CMSPageAddController:
+    MENUTITLE: 'Добавить страницу'
     ParentMode_child: 'Под другой страницей'
     ParentMode_top: 'Корневая страница'
-    MENUTITLE: 'Добавить страницу'
+  CMSPageEditController:
+    MENUTITLE: 'Редактировать страницу'
   CMSPageHistoryController:
-    COMPAREMODE: 'Режим сравнения (выбрать две)'
+    COMPAREMODE: 'Режим сравнения двух страниц'
     COMPAREVERSIONS: 'Сравнить версии'
     COMPARINGVERSION: 'Сравнение версий {version1} и {version2}.'
+    MENUTITLE: История
     REVERTTOTHISVERSION: 'Вернуться на эту версию'
     SHOWUNPUBLISHED: 'Показать неопубликованные версии'
     SHOWVERSION: 'Показать версию'
     VIEW: обзор
     VIEWINGLATEST: 'Вы просматриваете самую новую версию.'
     VIEWINGVERSION: 'Вы просматриваете версию {version}.'
-    MENUTITLE: История
   CMSPageHistoryController_versions_ss:
     AUTHOR: Автор
     NOTPUBLISHED: 'Не издавалось'
+    PREVIEW: 'Предпросмотр сайта'
     PUBLISHER: Издатель
     UNKNOWN: Неизвестно
     WHEN: Когда
+  CMSPageSettingsController:
+    MENUTITLE: 'Править страницу'
   CMSPagesController:
     GalleryView: 'В виде галереи'
     ListView: 'Обзор списка'
     MENUTITLE: Страницы
     TreeView: 'Обзор дерева'
   CMSPagesController_ContentToolbar_ss:
-    MULTISELECT: Множественный выбор
+    MULTISELECT: 'Действия'
   CMSPagesController_Tools_ss:
     FILTER: Фильтр
+  CMSSIteTreeFilter_PublishedPages:
+    Title: 'Опубликованные страницы'
   CMSSearch:
     FILTERDATEFROM: От
     FILTERDATEHEADING: Дата
     FILTERDATETO: До
-    FILTERLABELTEXT: Содержимое
+    FILTERLABELTEXT: Поиск
+    PAGEFILTERDATEHEADING: 'Последнее изменение'
+  CMSSettingsController:
+    MENUTITLE: Настройки
   CMSSiteTreeFilter_ChangedPages:
-    Title: 'Измененные страницы'
+    Title: 'Изменённые страницы'
   CMSSiteTreeFilter_DeletedPages:
-    Title: 'Все страницы, включая удаленные'
+    Title: 'Все страницы, включая архивные'
   CMSSiteTreeFilter_Search:
     Title: 'Все страницы'
+  CMSSiteTreeFilter_StatusDeletedPages:
+    Title: 'Архивные страницы'
+  CMSSiteTreeFilter_StatusDraftPages:
+    Title: 'Черновики'
+  CMSSiteTreeFilter_StatusRemovedFromDraftPages:
+    Title: 'Опубликовано, но удалено из черновика'
   ContentControl:
     NOTEWONTBESHOWN: 'Внимание: это сообщение не будет показано посетителям'
   ContentController:
@@ -217,6 +246,8 @@ ru:
     ERRORFILEPROBLEM: 'Ошибка при открытии файла "{filename}" для записи. Пожалуйста, проверьте права доступа к файлам.'
     PLURALNAME: 'Страницы ошибок'
     SINGULARNAME: 'Страница ошибки'
+  File:
+    Title: Название
   Folder:
     AddFolderButton: 'Добавить папку'
     DELETEUNUSEDTHUMBNAILS: 'Удалить неиспользуемые миниатюры'
@@ -244,9 +275,19 @@ ru:
     REDIRECTTOPAGE: 'Страницу вашего сайта'
     SINGULARNAME: 'Страница перенаправления'
     YOURPAGE: 'Страница вашего сайта'
+  RemoveOrphanedPagesTask:
+    BUTTONRUN: Старт
+    CHOOSEOPERATION: 'Выберите операцию:'
+    DELETEWARNING: 'Внимание: Эти операции невозможно отменить. Используйте с осторожностью.'
+    HEADER: 'Удалить все несвязанные страницы'
+    NONEFOUND: 'Несвязанные страницы не найдены'
+    NONEREMOVED: 'Ничего не удалено'
+    OPERATION_REMOVE: 'Удалить все версии выбранного (ВНИМАНИЕ: Это действие удалит все выбранные страниц из черновиков и с опубликованного сайта)'
+    SELECTALL: 'выбрать все'
+    UNSELECTALL: 'снять выделение со всех'
   ReportAdmin:
-    ReportTitle: Название
     MENUTITLE: Отчеты
+    ReportTitle: Название
   ReportAdminForm:
     FILTERBY: 'Фильтровать по'
   SITETREE:
@@ -272,10 +313,36 @@ ru:
   SilverStripeNavigator:
     ARCHIVED: Архивные
   SilverStripeNavigatorLink:
-    ShareInstructions: 'Чтобы поделиться ссылкой на эту страницу, скопируйте URL ниже.'
+    ShareInstructions: 'Для того чтобы поделиться данной страницей скопируйте ссылку ниже. '
     ShareLink: 'Поделиться ссылкой'
   SilverStripeNavigatorLinkl:
     CloseLink: Закрыть
+  SilverStripe\CMS\Controllers\CMSPageAddController:
+    MENUTITLE: 'Добавить страницу'
+  SilverStripe\CMS\Controllers\CMSPageEditController:
+    MENUTITLE: 'Редактировать страницу'
+  SilverStripe\CMS\Controllers\CMSPageHistoryController:
+    MENUTITLE: История
+  SilverStripe\CMS\Controllers\CMSPageSettingsController:
+    MENUTITLE: 'Редактировать Страницу'
+  SilverStripe\CMS\Controllers\CMSPagesController:
+    MENUTITLE: Страницы
+  SilverStripe\CMS\Model\ErrorPage:
+    DESCRIPTION: 'Пользовательские страницы ошибок (например, "Страница не найдена")'
+    PLURALNAME: 'Страницы ошибок'
+    SINGULARNAME: 'Страница ошибки'
+  SilverStripe\CMS\Model\RedirectorPage:
+    DESCRIPTION: 'Перенаправление на другую внутреннюю или внешнюю страницу'
+    PLURALNAME: 'Страницы перенаправления'
+    SINGULARNAME: 'Страница перенаправления'
+  SilverStripe\CMS\Model\SiteTree:
+    DESCRIPTION: 'Обычная страница'
+    PLURALNAME: 'Древа Страниц'
+    SINGULARNAME: 'Древо Страниц'
+  SilverStripe\CMS\Model\VirtualPage:
+    DESCRIPTION: 'Отображает содержимое другой страницы'
+    PLURALNAME: 'Виртуальные Страницы'
+    SINGULARNAME: 'Виртуальная Страница'
   SiteConfig:
     DEFAULTTHEME: '(Использовать тему по умолчанию)'
     EDITHEADER: 'Кто может редактировать страницы на этом сайте?'
@@ -301,6 +368,9 @@ ru:
     ADDEDTODRAFTSHORT: Черновик
     ALLOWCOMMENTS: 'Разрешить комментарии для этой страницы?'
     APPEARSVIRTUALPAGES: 'Это содержимое также отображается на виртуальных страницах в разделе {title}.'
+    ARCHIVEDPAGEHELP: 'Страница удалена с опубликованного сайта и из черновиков'
+    ARCHIVEDPAGESHORT: Зархивировано
+    BUTTONARCHIVEDESC: 'Отменить публикацию и отправить в архив'
     BUTTONCANCELDRAFT: 'Отменить изменения черновика'
     BUTTONCANCELDRAFTDESC: 'Удалить черновик и вернуться к уже опубликованной странице'
     BUTTONPUBLISHED: Опубликовано
@@ -310,11 +380,9 @@ ru:
     BUTTONUNPUBLISHDESC: 'Удалить эту страницу с опубликованного сайта'
     Comments: Комментарии
     Content: Наполнение сайта
-    DEFAULTABOUTCONTENT: '<p>Вы можете добавить на эту страницу собственные материалы или удалить ее и создать новые страницы.<br /></p>'
     DEFAULTABOUTTITLE: 'О нас'
-    DEFAULTCONTACTCONTENT: '<p>Вы можете заполнить эту страницу собственным содержимым или удалить ее и создать новые страницы.<br /></p>'
     DEFAULTCONTACTTITLE: 'Контакты'
-    DEFAULTHOMECONTENT: '<p>Добро пожаловать в SilverStripe! Это главная страница по умолчанию. Вы можете редактировать ее в <a href="admin/">Системе Управления Содержимым</a>. Вы также можете обратиться к <a href="http://doc.silverstripe.com">документации для разработчиков</a> или начать с <a href="http://doc.silverstripe.com/doku.php?id=tutorials">учебных материалов.</a></p>'
+    DEFAULTHOMECONTENT: '<p>Добро пожаловать в SilverStripe! Это стандартная домашняя страница. Вы можете изменить её перейдя по ссылке в <a href="admin/">the CMS</a>.</p><p>Документация для разработчиков доступна <a href="http://docs.silverstripe.org">здесь</a>, видео-уроки по SilverStripe находятся <a href="http://www.silverstripe.org/learn/lessons">здесь</a>.</p>'
     DEFAULTHOMETITLE: Главная
     DELETEDPAGEHELP: 'Страница больше не является опубликованной'
     DELETEDPAGESHORT: Удалено
@@ -337,6 +405,8 @@ ru:
     LASTSAVED: 'Дата сохранения'
     LASTUPDATED: 'Последнее обновление'
     LINKCHANGENOTE: 'Изменение ссылки на эту страницу повлияет и на ссылки всех дочерних страниц.'
+    LINKSALREADYUNIQUE: '{url} уже уникален'
+    LINKSCHANGEDTO: 'изменен {url1} -> {url2}'
     MENUTITLE: 'Метка в навигации'
     METADESC: 'Описание'
     METADESCHELP: 'Поисковые системы используют этот контент для отображения результатов поиска (однако на рейтинг страницы он не влияет).'
@@ -368,7 +438,7 @@ ru:
     SHOWINMENUS: 'Показывать в меню?'
     SHOWINSEARCH: 'Показывать в поиске?'
     SINGULARNAME: Страница
-    TABBEHAVIOUR: Поведение
+    TABBEHAVIOUR: Настройки
     TABCONTENT: 'Содержимое'
     TABDEPENDENT: 'Зависимые страницы'
     TOPLEVEL: 'Содержимое сайта (верхний уровень)'
@@ -385,6 +455,12 @@ ru:
     many_many_BackLinkTracking: 'Отслеживание обратных ссылок'
     many_many_ImageTracking: 'Отслеживание изображений'
     many_many_LinkTracking: 'Отслеживание ссылок'
+  SiteTreeFileExtension:
+    BACKLINK_LIST_DESCRIPTION: 'В этом списке находятся все страницы где есть файл добавленный с помощью визуального редактора.'
+    EDIT: Изменить
+    TITLE_INDEX: '№'
+    TITLE_TYPE: Тип
+    TITLE_USED_ON: 'Используется на'
   SiteTreeURLSegmentField:
     EMPTY: 'Задайте адрес страницы или нажмите "Отмена"'
     HelpChars: 'Спецсимволы автоматически конвертируются или удаляются.'
@@ -401,20 +477,6 @@ ru:
     EditLink: редактировать
     HEADER: 'Это виртуальная страница'
     HEADERWITHLINK: 'Это виртуальная страница, копирующая содержимое из "{title}" ({link})'
-    PLURALNAME: 'Виртуальная страница'
+    PLURALNAME: 'Виртуальные страницы'
     PageTypNotAllowedOnRoot: 'Страницы типа "{type}" недопустимы в качестве корневых для этой виртуальной страницы'
     SINGULARNAME: 'Виртуальная страница'
-  CMSFileAddController:
-    MENUTITLE: Файлы
-  CMSPageEditController:
-    MENUTITLE: 'Редактировать страницу'
-  CMSPageSettingsController:
-    MENUTITLE: 'Править страницу'
-  CMSSettingsController:
-    MENUTITLE: Настройки
-  CMSSiteTreeFilter_StatusDeletedPages:
-    Title: 'Удаленные страницы'
-  CMSSiteTreeFilter_StatusDraftPages:
-    Title: 'Неопубликованные черновые страницы'
-  CMSSiteTreeFilter_StatusRemovedFromDraftPages:
-    Title: 'Опубликовано, но удалено из черновика'

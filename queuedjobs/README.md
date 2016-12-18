@@ -1,7 +1,8 @@
 # SilverStripe Queued Jobs Module
 
 
-[![Build Status](https://secure.travis-ci.org/silverstripe-australia/silverstripe-queuedjobs.png)](http://travis-ci.org/silverstripe-australia/silverstripe-queuedjobs)
+[![Build Status](https://travis-ci.org/silverstripe-australia/silverstripe-queuedjobs.svg?branch=master)](https://travis-ci.org/silverstripe-australia/silverstripe-queuedjobs)
+[![Scrutinizer](https://scrutinizer-ci.com/g/silverstripe-australia/silverstripe-queuedjobs/badges/quality-score.png)](https://scrutinizer-ci.com/g/silverstripe-australia/silverstripe-queuedjobs/)
 
 
 ## Maintainer Contact
@@ -37,8 +38,9 @@ developers set these processes to be executed in the future.
 The module comes with
 
 * A section in the CMS for viewing a list of currently running jobs or scheduled jobs.
-* An abstract skeleton class for defining your own jobs
+* An abstract skeleton class for defining your own jobs.
 * A task that is executed as a cronjob for collecting and executing jobs.
+* A pre-configured job to cleanup the QueuedJobDescriptor database table.
 
 ## Quick Usage Overview
 
@@ -50,7 +52,7 @@ same user as your webserver - this prevents any problems with file permissions.
 * If your code is to make use of the 'long' jobs, ie that could take days to process, also install another task
 that processes this queue. Its time of execution can be left a little longer.
 
-> */15 * * * * php /path/to/silverstripe/framework/cli-script.php dev/tasks/ProcessJobQueueTask queue=2
+> */15 * * * * php /path/to/silverstripe/framework/cli-script.php dev/tasks/ProcessJobQueueTask queue=large
 
 * From your code, add a new job for execution.
 
@@ -63,11 +65,35 @@ The following will run the publish job in 1 day's time from now.
 	$publish = new PublishItemsJob(21);
 	singleton('QueuedJobService')->queueJob($publish, date('Y-m-d H:i:s', time() + 86400));
 
+## Using Doorman for running jobs
+
+Doorman is included by default, and allows for asynchronous task processing.
+
+This requires that you are running an a *nix based system, or within some kind of environment
+emulator such as cygwin.
+
+In order to enable this, configure the ProcessJobQueueTask to use this backend.
+
+In your YML set the below:
+
+
+```yaml
+---
+Name: localproject
+After: '#queuedjobsettings'
+---
+Injector:
+  QueuedJobService:
+    properties: 
+      queueRunner: %$DoormanRunner
+```
+
+
 ## Using Gearman for running jobs
 
 * Make sure gearmand is installed
 * Get the gearman module from https://github.com/nyeholt/silverstripe-gearman
-* Create a _config/queuedjobs.yml file in your project with the following declaration
+* Create a \_config/queuedjobs.yml file in your project with the following declaration
 
 ```
 ---
@@ -96,6 +122,36 @@ Note - if you do NOT have this running, make sure to set `QueuedJobService::$use
 so that immediate mode jobs don't stall. By setting this to true, immediate jobs will be executed after
 the request finishes as the php script ends. 
 
+## Configuring the CleanupJob
+
+By default the CleanupJob is disabled. To enable it, set the following in your YML:
+
+```yaml
+CleanupJob:
+  is_enabled: true
+```
+This will ensure that the CleanupJob is run once a day.
+
+You can configure this job to clean up based on the number of jobs, or the age of the jobs. This is
+configured with the `cleanup_method` setting - current valid values are "age" (default)  and "number".
+Each of these methods will have a value associated with it - this is an integer, set with `cleanup_value`.
+For "age", this will be converted into days; for "number", it is the minimum number of records to keep, sorted by LastEdited.
+The default value is 30, as we are expecting days.
+
+You can also determine which JobStatuses are allowed to be cleaned up. The default setting is to clean up "Broken" and "Complete" jobs. All other statuses can be configured with `cleanup_statuses`.
+
+The default configuration looks like this:
+
+```yaml
+CleanupJob:
+  is_enabled: false
+  cleanup_method: "age"
+  cleanup_value: 30
+  cleanup_statuses:
+    - Broken
+	- Complete
+``` 
+
 
 ## Troubleshooting
 
@@ -104,6 +160,50 @@ queues - this can be done by manually calling the *setup()* and *process()* meth
 under these circumstances, try having *getJobType()* return *QueuedJob::IMMEDIATE* to have execution
 work immediately, without being persisted or executed via cron. If this works, next make sure your
 cronjob is configured and executing correctly. 
+
+If defining your own job classes, be aware that when the job is started on the queue, the job class
+is constructed _without_ parameters being passed; this means if you accept constructor args, you
+_must_ detect whether they're present or not before using them. See [this issue](https://github.com/silverstripe-australia/silverstripe-queuedjobs/issues/35) 
+and [this wiki page](https://github.com/silverstripe-australia/silverstripe-queuedjobs/wiki/Defining-queued-jobs) for 
+more information
+
+Ensure that notifications are configured so that you can get updates or stalled or broken jobs. You can 
+set the notification email address in your config as below:
+
+
+	:::yaml
+	Email:
+	  queued_job_admin_email: support@mycompany.com
+
+**Long running jobs are running multiple times!**
+
+A long running job _may_ fool the system into thinking it has gone away (ie the job health check fails because 
+`currentStep` hasn't been incremented). To avoid this scenario, you can set `$this->currentStep = -1` in your job's
+constructor, to prevent any health checks detecting the job. 
+
+## Performance configuration
+
+By default this task will run until either 128mb or the limit specified by php\_ini('memory\_limit') is reached.
+
+You can adjust this with the below config change
+
+
+	:::yaml
+	# Force memory limit to 256 megabytes
+	QueuedJobsService:
+	  # Accepts b, k, m, or b suffixes
+	  memory_limit: 256m
+
+
+You can also enforce a time limit for each queue, after which the task will attempt a restart to release all
+resources. By default this is disabled, so you must specify this in your project as below:
+
+
+	:::yaml
+	# Force limit to 10 minutes
+	QueuedJobsService:
+	  time_limit: 600
+
 
 ## Indexes
 

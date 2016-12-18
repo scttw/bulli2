@@ -1,77 +1,71 @@
 it:
-  ArchiveWidget:
-    DispBY: "Visualizzato da"
-    MONTH: "mese"
-    PLURALNAME: "Widget Archiviazione"
-    SINGULARNAME: "Widget Archiviazione"
-    YEAR: "anno"
-  BlogEntry:
-    AU: "Autore"
-    BBH: "Aiuto BBCode"
-    CN: "Contenuto"
-    DT: "Data"
-    PLURALNAME: "Registrazioni blog"
-    SINGULARNAME: "Registrazione blog"
-    TS: "Etichette (separate da virgola)"
-  BlogEntry_ss:
-    COMMENTS: "Commenti"
-    EDITTHIS: "Modifica questo post"
-    POSTEDBY: "Inserito da"
-    POSTEDON: "su"
-    TAGS: "Etichette:"
-    UNPUBLISHTHIS: "Non pubblicare questo post"
-    VIEWALLPOSTTAGGED: "Visualizza tutti i post con etichetta"
-  BlogHolder:
-    PLURALNAME: "Proprietari blog"
-    POST: "Salva il post nel blog"
-    RSSFEED: "RSS feed di questo blog"
-    SINGULARNAME: "Proprietario blog"
-    SJ: "Soggetto"
-    SPUC: "Per favore separa le etichette usando virgole."
-    SUCCONTENT: "Congratulazioni, il blog SilverStripe è stato installato correttamente. Questo messaggio del blog può essere eliminato. Puoi configurare l'aspetto del tuo blog (come la visualizzazione dei widgets nella sidebar) in [url=admin] del CMS[/url]"
-    SUCTAGS: "silverstripe, blog"
-    SUCTITLE: "Modulo blog SilverStripe installato correttamente"
-    TE: "Ad esempio: sport, personale, fantascienza"
-  BlogHolder_ss:
-    NOENTRIES: "Non ci sono voci nel blog"
-    VIEWINGTAGGED: "Visualizza voci con etichetta"
-  BlogManagementWidget:
-    COMADM: "Amministrazione commenti"
-    PLURALNAME: "Widget di amministrazione blog"
-    SINGULARNAME: "Widget di amministrazione blog"
-    UNM1: "Hai 1 commento da moderare"
-    UNMM: "Hai %i commenti non approvati"
-  BlogManagementWidget_ss:
-    LOGOUT: "Esci"
-    POSTNEW: "Inserisci un nuovo post"
-  BlogSummary_ss:
-    COMMENTS: "Commenti"
-    POSTEDBY: "Inserito da"
-    POSTEDON: "su"
-    VIEWFULL: "Visualizza post intitolato - "
-  BlogTree:
-    PLURALNAME: "Alberi dei blog"
-    SINGULARNAME: "Albero del blog"
-  RSSWidget:
-    CT: "Titolo del feed"
-    NTS: "Numero di argomenti da visualizzare"
-    PLURALNAME: "Widget RSS"
-    SINGULARNAME: "Widget RSS"
-    URL: "URL per il Feed RSS"
-  SubscribeRSSWidget:
-    PLURALNAME: "Sottoscrivi Widget RSS"
-    SINGULARNAME: "Sottoscrivi Widget RSS"
-  SubscribeRSSWidget_ss:
-    SUBSCRIBETEXT: "Sottoscrivi"
-    SUBSCRIBETITLE: "Sottoscrivi questo blog via RSS"
-  TagCloudWidget:
-    LIMIT: "Limitare il numero dei tag a"
-    PLURALNAME: "Widget Nuvola di Tag"
-    SBAL: "alfabeto"
-    SBFREQ: "frequenza"
-    SINGULARNAME: "Widget Nuvola di Tag"
-    SORTBY: "Ordina per"
-    TILE: "Titolo"
-  TrackBackPing:
-    PLURALNAME: "Rileva Ping"
-    SINGULARNAME: "Rileva Ping"
+  Blog:
+    Archive: Archivia
+    By: di
+    CONTRIBUTOR: Collaboratore
+    Categories: Categorie
+    Category: Categoria
+    Comments: Commenti
+    DESCRIPTION: 'Aggiungi un blog al tuo sito.'
+    EDITOR: Editore
+    FILTERDESCRIPTION_AUTHOR: 'Di {author}'
+    FILTERDESCRIPTION_CATEGORY: 'Nella categoria {category}'
+    FILTERDESCRIPTION_DATE: 'Il {date}'
+    FILTERDESCRIPTION_PAGE: 'Pagina {page}'
+    FILTERDESCRIPTION_TAG: 'Etichettato con {tag}'
+    LumberjackTitle: 'Articoli del Blog'
+    NoPosts: 'Non ci sono articoli'
+    PERMISSIONS_CATEGORY: 'Permessi del blog'
+    PERMISSION_MANAGE_USERS_DESCRIPTION: 'Gestire utenti per i singoli blog'
+    PERMISSION_MANAGE_USERS_HELP: 'Consenti l''assegnazione di Editori, Scrittori o Collaboratori ai blog'
+    Posted: Inserito
+    PostedIn: 'Inserito il'
+    PostsPerPage: 'Articoli Per Pagina'
+    ReadMoreAbout: 'Leggi di più su ''{title}''...'
+    SINGULARNAME: Blog
+    Tag: Etichetta
+    Tagged: Etichettato
+    Tags: Etichette
+    WRITER: Scrittore
+  BlogArchiveWidget:
+    Blog: Blog
+    NumberToDisplay: 'N. da Visualizzare'
+    PLURALNAME: 'Widget Archiviazione Blog'
+    SINGULARNAME: 'Widget Archiviazione Blog'
+  BlogCategoriesWidget:
+    Blog: Blog
+    PLURALNAME: 'Widget Categorie Blog'
+    SINGULARNAME: 'Widget Categorie Blog'
+  BlogCategory:
+    Title: Titolo
+  BlogPost:
+    AUTHOR: Autore
+    AdditionalCredits: 'Riconoscimenti Aggiuntivi'
+    Authors: Autori
+    CUSTOMSUMMARY: 'Aggiungi una Sintesi Personalizzata'
+    Categories: Categorie
+    DESCRIPTION: 'Pagina di contenuto generico'
+    PageTitleLabel: 'Titolo Articolo'
+    PublishDate: 'Data Pubblicazione'
+    SINGULARNAME: 'Articolo del Blog'
+    SUMMARY_DESCRIPTION: 'Se non è specificata una sintesi saranno usate le prime 30 parole.'
+    Tags: Etichette
+  BlogRecentPostsWidget:
+    Blog: Blog
+    NumberOfPosts: 'Numero di Articoli'
+    PLURALNAME: 'Widget Articoli Blog Recenti'
+    SINGULARNAME: 'Widget Articoli Blog Recenti'
+  BlogTag:
+    Title: Titolo
+  BlogTagsWidget:
+    Blog: Blog
+    PLURALNAME: 'Widget Etichette Blog'
+    SINGULARNAME: 'Widget Etichette Blog'
+  GridFieldAddByDBField:
+    Add: 'Aggiungi {name}'
+    AddFail: 'Impossibile salvare {class} nel database.'
+    PermissionFail: 'Non hai i permessi per creare un {class}.'
+  GridFieldBlogPostState:
+    Draft: '<i class="btn-icon gridfield-icon btn-icon-pencil"></i> Salvato come bozza il {date}'
+    Published: '<i class="btn-icon gridfield-icon btn-icon-accept"></i> Pubblicato il {date}'
+    Timer: '<i class="gridfield-icon blog-icon-timer"></i> Pubblicare al {date}'

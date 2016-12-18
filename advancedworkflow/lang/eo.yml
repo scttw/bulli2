@@ -7,10 +7,12 @@ eo:
     CREATE_WORKFLOW_HELP: 'Uzantoj povas krei laborfluajn difinojn'
     DELETE_WORKFLOW: 'Forigi laborfluon'
     DELETE_WORKFLOW_HELP: 'Uzantoj povas forigi laborfluajn difinojn kaj aktivajn laborfluojn'
+    JOB_REMINDER_COMMENT: '%s: Sendis memorigan retpoŝton\n\n'
     REASSIGNACTIVE: 'Reagordi aktivajn laborfluojn'
     REASSIGNACTIVEHELP: 'Uzantoj povas reatribui aktivajn laborfluojn al diversaj uzantoj kaj grupoj'
     VIEWACTIVE: 'Vidigi aktivajn laborfluoj'
     VIEWACTIVEHELP: 'Uzantoj povas vidigi aktivajn laborfluojn per la laborflua administra panelo'
+    WORKFLOW_REMINDER_JOB: 'Tasko pri laborflua memorigo'
   AdvancedWorkflowActionController:
     ACTION_ERROR: 'Necesas ke vi ensalutu'
   AdvancedWorkflowAdmin:
@@ -23,11 +25,11 @@ eo:
     INVALIDIDLIST: 'Provizis nevalidan liston de ID-oj'
     INVALIDPARENTID: 'Agordis nevalidan praan ID'
     LastEdited: Ŝanĝita
+    MENUTITLE: Laborfluoj
     SORTORDERSAVED: 'Konservis la ordigan ordon'
     Title: Titolo
     WorkflowStatus: 'Aktuala ago'
     WorkflowTitle: 'Aktuala laborfluo'
-    MENUTITLE: Laborfluoj
   AdvancedWorkflowFrontendForm:
     ACTIONCONTROLLERCHECK: 'Ago "%s" ne estas permesita ĉe regilo (Klaso: %s)'
     ACTIONFORMCHECK: 'Ago "%s" ne estas permesita en formularo (Nomo: "%s")'
@@ -37,6 +39,7 @@ eo:
   AllowEditing:
     ByAssignees: 'De asignitoj'
     ContentSettings: 'Enhavaj agordoj'
+    NoString: 'Ne'
   AssignUsersToWorkflowAction:
     ASSIGNUSERS: 'Asigni uzantojn'
     GROUPS: Grupoj
@@ -68,7 +71,7 @@ eo:
     FORMATTINGHELP: 'Formatada helpo'
     FORMATTINGNOTE: "Sciigaj retpoŝtoj povas enhavi HTML-formatojn. La jenajn specialajn variablojn anstataŭas iliaj respektivaj valoroj en la retpoŝtaj temo, sendinto kaj ŝablono/korpo."
     INITIATORNOTE: "Ĉi tiuj kampoj pleniĝos el la membro kiu initiatis la laborfluan peton."
-    LISTING_TEMPLATE: "Listaj ŝablonoj - Elementoj estos ĉiuj agoj en la laborfluo (sinonimo al Agoj). \n\t\t\t\t\tAnkaŭ disponeblaj estos ĉiuj atributoj de la aktuala laborflua ekzemplo"
+    LISTING_TEMPLATE: 'Lista ŝablono - elementoj estos la listo de ĉiuj agoj en la laborfluo (sinonimo al agoj). Ankaŭ disponeblos ĉiuj atributoj de la aktuala laborflua elemento.'
     MEMBERNOTE: "Ĉi tiuj kampoj pleniĝos de la membro kiu iniciatos la sciigan agon. Ekzemple,\n\t\t\t{$Member.FirstName}."
     NOTIFICATIONEMAIL: 'Sciiga retpoŝto'
     NOTIFICATIONNOTE: 'Retpoŝto sendiĝos al ĉiuj uzuloj ligitaj al la laborfluo, kiam la ago ruliĝos.'
@@ -80,9 +83,22 @@ eo:
     PLURALNAME: 'Publikigi elementajn laborfluajn agojn'
     PUBLICATIONDELAY: 'Publikiga prokrasto'
     SINGULARNAME: 'Publikigi elementan laborfluan agon'
+  SetPropertyWorkflowAction:
+    PLURALNAME: 'Agordi laborfluajn agojn'
+    PROPERTY: Atributo
+    PROPERTYTITLE: 'Agordota atributo; se ĝi ekzistas kiel agordmetodo, ĝi vokiĝos kun la valoron'
+    SINGULARNAME: 'Agordi laborfluan agon'
   SimpleApprovalWorkflowAction:
     PLURALNAME: 'Simple aprobi laborfluajn agojn'
     SINGULARNAME: 'Simple aprobi laborfluan agon'
+  SiteTree:
+    WorkflowOptions: 'Laborfluaj agordoj'
+  UnpublishItemWorkflowAction:
+    DELAYUNPUBDAYSAFTER: 'tagoj'
+    DELAYUNPUBDAYSBEFORE: 'Prokrasti malpublikigon je'
+    PLURALNAME: 'Malpublikigi elementajn laborfluajn agojn'
+    SINGULARNAME: 'Malpublikigi elementan laborfluan agon'
+    UNPUBLICATIONDELAY: 'Prokrasti malpublikigon'
   Workflow:
     WorkflowActionsTabTitle: 'Laborfluaj agoj'
   WorkflowAction:
@@ -102,15 +118,14 @@ eo:
     Transitions: Transiroj
     TypeLabel: Tipo
   WorkflowActionInstance:
-    PLURALNAME: 'Ekzemploj de laborfluaj agoj'
+    PLURALNAME: 'Ekzemploj de laborfluaj agoj '
     SINGULARNAME: 'Ekzemplo de laborflua ago'
     Title: Titolo
   WorkflowApplicable:
+    ADDITIONAL_WORKFLOW_DEFINITIONS: 'Kromaj laborfluoj'
     DEFINITION: 'Aplikis laborfluon'
     EFFECTIVE_WORKFLOW: 'Efika laborfluo'
     INHERIT: 'Heredi de patro'
-    NONE: (neniu)
-    UPDATE_WORKFLOW: 'Ĝisdatigi laborfluon'
     WORKFLOWLOG: 'Laborflua protokolo'
   WorkflowDefinition:
     ADDAFTERSAVING: 'Vi povos enmeti laborfluajn paŝojn post vi konservis la unuan fojon.'
@@ -118,6 +133,7 @@ eo:
     CHOOSE_TEMPLATE_RIGHT: 'Se agordita, ĉi tiu laborflua difino aŭtomate aktualiĝos se la ŝablono ŝanĝiĝos.'
     DESCRIPTION: Priskribo
     GROUPS: 'Limigi al grupoj'
+    INITIAL_ACTION_BUTTON_TEXT: 'Teksto de komencaga butono'
     LATEST_VERSION: 'Lasta versio estas %s'
     PLURALNAME: 'Laborfluaj difinoj'
     REMINDEREMAIL: 'Memoriga retpoŝto'
@@ -157,7 +173,6 @@ eo:
   WorkflowInstance:
     ActionLogTitle: Protokolo
     EXECUTE_EXCEPTION: 'Provis startigi nevalidan laborfluan ekzemplon #%s!'
-    NEXT_ACTION: 'Sekva ago'
     PLURALNAME: 'Laborfluaj ekzemploj'
     REASSIGN_HEADER: 'Reagordi laborfluon'
     SINGULARNAME: 'Laborflua ekzemplo'

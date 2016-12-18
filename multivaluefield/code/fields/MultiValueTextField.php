@@ -7,6 +7,10 @@
  */
 class MultiValueTextField extends FormField {
 
+	const KEY_SEP = '__';
+
+	protected $tag = 'input';
+
 	public function Field($properties = array()) {
 		Requirements::javascript(THIRDPARTY_DIR . '/jquery/jquery.js');
 		Requirements::javascript('multivaluefield/javascript/multivaluefield.js');
@@ -28,13 +32,13 @@ class MultiValueTextField extends FormField {
 		$fieldAttr = $attributes;
 		if ($this->value) {
 			foreach ($this->value as $i => $v) {
-				$fieldAttr['id'] = $this->id().':'.$i;
+				$fieldAttr['id'] = $this->id().MultiValueTextField::KEY_SEP.$i;
 				$fieldAttr['value'] = $v;
 				if ($this->readonly) {
 					unset($fieldAttr['value']);
 					$fields[] = $this->createReadonlyInput($fieldAttr, $v);
 				} else {
-					$fields[] = $this->createInput($fieldAttr);
+					$fields[] = $this->createInput($fieldAttr, $v);
 				}
 			}
 		}
@@ -54,11 +58,11 @@ class MultiValueTextField extends FormField {
 		return self::create_tag('span', $attributes, Convert::raw2xml($value));
 	}
 
-	public function createInput($attributes) {
-		return self::create_tag('input', $attributes);
+	public function createInput($attributes, $value = null) {
+		return self::create_tag($this->tag, $attributes, $value);
 	}
 
-	public function  performReadonlyTransformation() {
+	public function performReadonlyTransformation() {
 		$new = clone $this;
 		$new->setReadonly(true);
 		return $new;
@@ -80,7 +84,13 @@ class MultiValueTextField extends FormField {
 		if (!is_array($v)) {
 			$v = array();
 		}
-		
+
 		parent::setValue($v);
 	}
+
+	public function setTag($tag) {
+		$this->tag = $tag;
+		return $this;
+	}
+
 }

@@ -32,17 +32,17 @@ class MultiValueDropdownField extends MultiValueTextField {
 		Requirements::javascript(THIRDPARTY_DIR . '/jquery/jquery.js');
 		Requirements::javascript('multivaluefield/javascript/multivaluefield.js');
 		Requirements::css('multivaluefield/css/multivaluefield.css');
-		
+
 		$name = $this->name . '[]';
 		$fields = array();
 
-		
+
 		if ($this->value) {
 			foreach ($this->value as $i => $v) {
 				if ($this->readonly) {
 					$fieldAttr = array(
 						'class' => 'mventryfield  mvdropdownReadonly ' . ($this->extraClass() ? $this->extraClass() : ''),
-						'id' => $this->id().':'.$i,
+						'id' => $this->id().MultiValueTextField::KEY_SEP.$i,
 						'name' => $name,
 						'tabindex' => $this->getAttribute('tabindex')
 					);
@@ -86,7 +86,7 @@ class MultiValueDropdownField extends MultiValueTextField {
 
 		$attrs = array(
 			'class' => 'mventryfield mvdropdown ' . ($this->extraClass() ? $this->extraClass() : ''),
-			'id' => $this->id().':'.$number,
+			'id' => $this->id().MultiValueTextField::KEY_SEP.$number,
 			'name' => $name,
 			'tabindex' => $this->getAttribute('tabindex')
 		);

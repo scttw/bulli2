@@ -1,15 +1,43 @@
 bs:
   AssetAdmin:
+    ADDFILES: 'Dodaj datoteke'
+    ActionAdd: 'Kreiraj direktorij'
+    AppCategoryArchive: Arhiva
+    AppCategoryAudio: Audio
+    AppCategoryDocument: Dokument
+    BackToFolder: 'Nazad na direktorij'
+    CREATED: Datum
+    CurrentFolderOnly: 'Limitiraj na trenutni direktorij?'
+    DetailsView: Detalji
+    FILES: Datoteke
+    FILESYSTEMSYNC: 'Sinhroniziraj datoteke'
+    FROMTHEINTERNET: 'Sa interneta'
+    FROMYOURCOMPUTER: 'Sa Vašeg kompijutera'
+    Filetype: 'Tip datoteke'
+    MENUTITLE: Datoteke
     NEWFOLDER: NoviDirektorij
+    SIZE: Veličina
+    THUMBSDELETED: '{count} nekorištenih je obrisano'
+    Upload: Upload
+  AssetAdmin_DeleteBatchAction:
+    TITLE: 'Izbriši direktorije'
+  AssetAdmin_Tools:
+    FILTER: Filter
   AssetAdmin_left_ss:
     GO: Idi
+  AssetTableField:
+    BACKLINKCOUNT: 'Korišteno ovdje:'
+    PAGES: strana(ice)
+  BackLink_Button_ss:
+    Back: Nazad
+  BrokenLinksReport:
+    Any: Bilo koji
   CMSMain:
+    Create: Kreiraj
     DELETE: 'Izbriši sa privremenog nacrta stranice'
-    EMAIL: E-mail
     PAGENOTEXISTS: 'Ova stranica ne postoji'
     PUBALLCONFIRM: 'Molimo, objavite svaku stavku na ovoj stranici, kopiranjem sadržaja na aktivnu stranicu'
     PUBALLFUN: 'Funkcija "Objavi sve"'
-    PUBALLFUN2: "Pritiskom na ovu tipku ostvarit ćete isti rezultat kao i odlaskom na svaku stranicu i pritiskom na tipku \"Objavi\". Namjenjena je za korištenje nakon velikih izmjena sadržaja (npr, prilikom početka izrade web stranice)."
     REMOVEDPAGEFROMDRAFT: 'Uklonjeno ''%s'' sa privremenog nacrta stranice'
     ROLLBACK: 'Vrati na ovo izdanje'
     SAVE: Snimi
@@ -68,11 +96,8 @@ bs:
     BUTTONCANCELDRAFTDESC: 'Izbrišite Vaš privremeni nacrt stranice i vratite se na trenutno objavljenu stranicu'
     BUTTONUNPUBLISH: Opozovi objavljivanje
     BUTTONUNPUBLISHDESC: 'Ukloni ovu stavku sa objavljene stranice'
-    DEFAULTABOUTCONTENT: '<p>Ovu stranicu možete popuniti sa vlastitim sadržajem, ili je izbrisati i kreirati svoje vlastite stranice.<br /></p>'
     DEFAULTABOUTTITLE: 'O nama'
-    DEFAULTCONTACTCONTENT: '<p>Ovu stranicu možete popuniti sa vlastitim sadržajem, ili je izbrisati i kreirati svoje vlastite stranice.<br /></p>'
     DEFAULTCONTACTTITLE: 'Kontaktirajte nas'
-    DEFAULTHOMECONTENT: '<p>Dobrodošli u SilverStripe! Ovo je standardna početna stranica. Možete je izmijeniti otvaranjem <a href="admin/">administracijskog odjela CMS-a</a>. Sada možete pristupiti <a href="http://doc.silverstripe.com">razvojnoj dokumentaciji</a> ili <a href="http://doc.silverstripe.com/doku.php?id=tutorials">vodičima</a>.</p>'
     DEFAULTHOMETITLE: Početna
     EDITANYONE: 'Svi korisnici koji se mogu prijaviti u CMS'
     EDITHEADER: 'Ko može izmijeniti ovu stavku unutar CMS-a?'

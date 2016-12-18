@@ -18,11 +18,11 @@ ar:
     INVALIDIDLIST: 'تم إضافة قائمة من التعريفات غير صالحة.'
     INVALIDPARENTID: 'تم تحديد هوية رئيسية غير صالحة.'
     LastEdited: تم تغييره
+    MENUTITLE: سير العمل
     SORTORDERSAVED: 'قد تم حفظ ترتيب الفرز.'
     Title: عنوان
     WorkflowStatus: 'النشاط الحالي'
     WorkflowTitle: 'العمل الفعال'
-    MENUTITLE: سير العمل
   AdvancedWorkflowFrontendForm:
     ACTIONCONTROLLERCHECK: 'التصرف "s%" غير مسموح به على وحدة التحكم (التصنيف: s%)'
     ACTIONFORMCHECK: 'التصرف "s%" غير مسموح به على النموذج (الاسم: s%)'
@@ -53,7 +53,6 @@ ar:
     FORMATTINGHELP: 'تنسيق المساعدة'
     FORMATTINGNOTE: "رسائل البريد الالكترونى بالإشعارات يمكن أن تحتوى على تنسيق إتش تى إم إل. المتغيرات الخاصة القادمة سيتم استبدالها بقيمها المعنية فى عناوين رسائل البريد الالكترونى, شكل الرسالة و النموذج/ الجسم."
     INITIATORNOTE: "هذه المجالات سوف يتم ملأها من العضو الذى سيقوم بمبادرة طلبات مهام سير العمل. على سبيل المثال, {$Initiator.Email}."
-    LISTING_TEMPLATE: "نموذج القوائم - العناصر سوف تكون القوائم لكل إجراءات سير العمل (المرادفة للإجراءات). أيضا ستكون جميع الخصائص متاحة للحالة الحالية لسير العمل"
     MEMBERNOTE: "هذه المجالات سوف يتم ملأها من العضو الذى سيقوم بمبادرة إجراءات الإشعار. على سبيل المثال, {$Member.FirstName}."
     NOTIFICATIONEMAIL: 'بريد الكترونى بالإشعارات'
     NOTIFICATIONNOTE: 'جميع المستخدمين المرتبطين بمهام سير العمل سوف يتم إرسال بريد الكترونى لهم عند بدء الإجراء.'
@@ -87,15 +86,12 @@ ar:
     Transitions: التنقلات
     TypeLabel: نوع
   WorkflowActionInstance:
-    PLURALNAME: 'أمثلة لفعاليات سير العمل'
     SINGULARNAME: 'مثال لفعاليات سير العمل'
     Title: عنوان
   WorkflowApplicable:
     DEFINITION: 'سير العمل المقدم'
     EFFECTIVE_WORKFLOW: 'سير العمل الفعال'
     INHERIT: 'تم وراثته من الوالد'
-    NONE: (لا شئ)
-    UPDATE_WORKFLOW: 'قم بتحديث مهام سير العمل'
     WORKFLOWLOG: 'سجل مهام سير العمل'
   WorkflowDefinition:
     ADDAFTERSAVING: 'يمكنك إضافة خطوات سير العمل بعد أن تحفظها أول مرة.'
@@ -139,8 +135,6 @@ ar:
   WorkflowInstance:
     ActionLogTitle: سجل
     EXECUTE_EXCEPTION: 'محاولة بدء مثال غير صالح لسير العمل #s%!'
-    NEXT_ACTION: 'الإجراء التالى'
-    PLURALNAME: 'أمثلة مهام سير العمل'
     REASSIGN_HEADER: 'قم بإعادة تعيين مهام سير العمل'
     SINGULARNAME: 'مثال لسير العمل'
     TITLE_FOR_DO: 's - %s%'

@@ -1,74 +1,124 @@
 nl:
   ArchiveWidget:
-    DispBY: "Tonen door"
-    MONTH: "maand"
-    PLURALNAME: "Archief-widgets"
-    SINGULARNAME: "Archief-widget"
-    YEAR: "jaar"
+    PLURALNAME: 'Archief-widgets'
+    SINGULARNAME: 'Archief-widget'
+  Blog:
+    Archive: Archief
+    By: door
+    CONTRIBUTOR: Co-auteur
+    Categories: Categorieën
+    Category: Categorie
+    Comments: Reacties
+    DESCRIPTION: 'Voegt een blog toe aan je site.'
+    EDITOR: Redacteur
+    FILTERDESCRIPTION_AUTHOR: 'Door {author}'
+    FILTERDESCRIPTION_CATEGORY: 'In categorie {category}'
+    FILTERDESCRIPTION_DATE: 'In {date}'
+    FILTERDESCRIPTION_PAGE: 'Pagina {page}'
+    FILTERDESCRIPTION_TAG: 'Getagd met {tag}'
+    LumberjackTitle: 'Blog Artikelen'
+    NoPosts: 'Er zijn geen blog artikelen'
+    NoUnfeaturedPosts: 'Er zijn geen niet aanbevolen artikelen'
+    PERMISSIONS_CATEGORY: 'Blog rechten'
+    PERMISSION_MANAGE_USERS_DESCRIPTION: 'Beheer gebruikers voor individuele blogs'
+    PERMISSION_MANAGE_USERS_HELP: 'Laat toewijzing van Redacteurs, Auteurs en Co-auteurs toe.'
+    PLURALNAME: 'Blogs'
+    Posted: Geplaatst
+    PostedIn: 'Geplaatst in'
+    PostsPerPage: 'Artikelen per pagina'
+    ReadMoreAbout: 'Lees meer over ''{title}''...'
+    SINGULARNAME: Blog
+    Tag: Tag
+    Tagged: Getagd
+    Tags: Tags
+    WRITER: Auteur
+  BlogArchiveWidget:
+    ArchiveType: ArchiveType
+    Blog: Blog
+    NumberToDisplay: 'Aantal te tonen'
+    PLURALNAME: 'Blog Archief-widgets'
+    SINGULARNAME: 'Blog Archief-widget'
+  BlogCategoriesWidget:
+    Blog: Blog
+    Direction:
+      Description: 'Verander de sorteerrichting van categoriën getoond door deze widget.'
+      Label: Sorteerrichting
+    Limit:
+      Description: 'Limiteer het aantal categorieën getoond door deze widget (Stel in op 0 om alle categorieën te tonen).'
+      Label: Limiet
+    PLURALNAME: 'Blog Categorie-widgets'
+    SINGULARNAME: 'Blog Categorie-widget'
+    Sort:
+      Description: 'Verander de volgorde van categorieën getoond door deze widget.'
+      Label: Volgorde
+  BlogCategory:
+    Duplicate: 'Een blog categorie met dezelfde naam bestaat al'
+    PLURALNAME: 'Blog Categorieën'
+    SINGULARNAME: 'Blog Categorie'
+    Title: Titel
   BlogEntry:
-    AU: "Auteur"
-    BBH: "BBCode hulp"
-    CN: "Inhoud"
-    DT: "Datum"
-    PLURALNAME: "Blog Artikelen"
-    SINGULARNAME: "Blog Artikel"
-    TS: "Tags (Komma gescheiden)"
-  BlogEntry_ss:
-    COMMENTS: "Reacties"
-    EDITTHIS: "Bewerk deze post"
-    POSTEDBY: "Auteur"
-    POSTEDON: "Aan"
-    TAGS: "Tags:"
-    UNPUBLISHTHIS: "onpubliceer deze post"
-    VIEWALLPOSTTAGGED: "Bekijk alle posten getiteld"
+    DESCRIPTION: 'Blog Artikel'
+    PLURALNAME: 'Blog Artikelen'
+    SINGULARNAME: 'Blog Artikel'
   BlogHolder:
-    PLURALNAME: "Blog Houders"
-    POST: "Blogartikel plaatsen"
-    RSSFEED: "RSS-feed van deze blog"
-    SINGULARNAME: "Blog Houder"
-    SJ: "Onderwerp"
-    SPUC: "Scheid de tags met behulp van komma's."
-    SUCCONTENT: "Gefeliciteerd, de SilverStripe blog module is met succes geïnstalleerd. Dit blogartikel kan veilig worden verwijderd. U kunt aspecten van uw blog (zoals de widgets weergegeven in de zijbalk) in [url=admin]het CMS[/url] veranderen."
-    SUCTAGS: "silverstripe, blog"
-    SUCTITLE: "SilverStripe blog module met succes geïnstalleerd"
-    TE: "Bijvoorbeeld: sport, persoonlijke, science fiction"
-  BlogHolder_ss:
-    NOENTRIES: "Er zijn geen blog artikelen"
-    VIEWINGTAGGED: "U bekijkt artikelen getagged met"
-  BlogManagementWidget:
-    COMADM: "Opmerking administratie"
-    PLURALNAME: "Blog Management Widgets"
-    SINGULARNAME: "Blog Management Widgets"
-    UNM1: "U heeft 1 niet gecontroleerde opmerking"
-    UNMM: "U heeft %i niet gecontroleerde opmerkingen"
-  BlogManagementWidget_ss:
-    LOGOUT: "Afmelden"
-    POSTNEW: "Publiceer een nieuw blog entree"
-  BlogSummary_ss:
-    COMMENTS: "Reacties"
-    POSTEDBY: "Geplaatst door"
-    POSTEDON: "Aan"
-    VIEWFULL: "Bekijk het gehele post getitled"
-  RSSWidget:
-    CT: "Aangepaste titel voor de RSS-feed"
-    NTS: "Aantal objecten tonen"
-    PLURALNAME: "RSS-widget"
-    SINGULARNAME: "R S S Widget"
-    URL: "URL van de RSS-feed"
-  SubscribeRSSWidget:
-    PLURALNAME: "Abonneer R S S Widgets"
-    SINGULARNAME: "Abonneer R S S Widget"
-  SubscribeRSSWidget_ss:
-    SUBSCRIBETEXT: "Inschrijven"
-    SUBSCRIBETITLE: "Inschrijven om dit weblog via RSS te volgen"
+    DESCRIPTION: 'Blog Houder'
+    PLURALNAME: 'Blog Houders'
+    SINGULARNAME: 'Blog Houder'
+  BlogPost:
+    AUTHOR: Auteur
+    AdditionalCredits: 'Dankbetuigingen'
+    AdditionalCredits_Description: 'Indien (enkele) auteurs geen toegang hebben tot dit CMS, kunnen ze hier toegevoegd worden. Scheid namen door middel van komma''s'
+    Authors: Auterus
+    CUSTOMSUMMARY: 'Voeg een eigen samenvatting toe'
+    Categories: Categorieën
+    DESCRIPTION: 'Blog Artikel'
+    FeaturedImage: 'Prominente Afbeelding'
+    PLURALNAME: 'Blog Artikelen'
+    PageTitleLabel: 'Artikel Titel'
+    PublishDate: 'Publicatiedatum'
+    PublishDate_Description: 'Wordt op "nu" gezet indien gepubliceerd zonder waarde.'
+    SINGULARNAME: 'Blog Artikel'
+    SUMMARY_DESCRIPTION: 'Als geen samenvatting ingevoerd wordt, worden de eerste 30 worden gebruikt.'
+    Tags: Tags
+  BlogRecentPostsWidget:
+    Blog: Blog
+    NumberOfPosts: 'Aantal Artikelen'
+    PLURALNAME: 'Blog Recente Artikelen-widgets'
+    SINGULARNAME: 'Blog Recente Artikelen-widget'
+  BlogTag:
+    Duplicate: 'Een blog tag met dezelfde naam bestaat al'
+    PLURALNAME: 'Blog Tags'
+    SINGULARNAME: 'Blog Tag'
+    Title: Titel
+  BlogTagsCloudWidget:
+    Blog: Blog
+    PLURALNAME: 'Blog Tags Cloud-widgets'
+    SINGULARNAME: 'Blog Tags Cloud-widget'
+  BlogTagsWidget:
+    Blog: Blog
+    Direction:
+      Description: 'Verander de volgorde van tags getoond door deze widget.'
+      Label: Volgorde
+    Limit:
+      Description: 'Limiteer het aantal tags getoond door deze widget (Stel in op 0 om alle tags te tonen).'
+      Label: Limiet
+    PLURALNAME: 'Blog Tags-widgets'
+    SINGULARNAME: 'Blog Tags-widget'
+    Sort:
+      Description: 'Verander de volgorde van tags getoond door deze widget.'
+      Label: Volgorde
+  BlogTree:
+    DESCRIPTION: 'Blog Boomstructuur'
+    PLURALNAME: 'Blog Boomstructuren'
+    SINGULARNAME: 'Blog Boomstructuur'
+  GridFieldAddByDBField:
+    Add: 'Voeg {name} toe'
+    AddFail: 'Kon geen {class} opslaan in de database.'
+    PermissionFail: 'Je hebt geen permissie om een {class} aan te maken.'
+  GridFieldBlogPostState:
+    Draft: '<i class="btn-icon gridfield-icon btn-icon-pencil"></i> Opgeslagen als concept op {date}'
+    Published: '<i class="btn-icon gridfield-icon btn-icon-accept"></i> Gepubliceerd op {date}'
+    Timer: '<i class="gridfield-icon blog-icon-timer"></i> Publiceer op {date}'
   TagCloudWidget:
-    LIMIT: "Beperk aantal tags"
-    PLURALNAME: "Tag Cloud Widgets"
-    SBAL: "alfabet"
-    SBFREQ: "frequentie"
-    SINGULARNAME: "Tag Cloud Widget"
-    SORTBY: "Sorteer bij"
-    TILE: "Titel"
-  TrackBackPing:
-    PLURALNAME: "Track Back Pings"
-    SINGULARNAME: "Track Back Ping"
+    PLURALNAME: 'Tag Cloud-widgets'
+    SINGULARNAME: 'Tag Cloud-widget'

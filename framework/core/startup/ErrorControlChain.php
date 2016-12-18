@@ -13,13 +13,32 @@
  *
  * WARNING: This class is experimental and designed specifically for use pre-startup in main.php
  * It will likely be heavily refactored before the release of 3.2
+ *
+ * @package framework
+ * @subpackage misc
  */
 class ErrorControlChain {
 	public static $fatal_errors = null; // Initialised after class definition
 
+	/**
+	 * Is there an error?
+	 *
+	 * @var bool
+	 */
 	protected $error = false;
+
+	/**
+	 * List of steps
+	 *
+	 * @var array
+	 */
 	protected $steps = array();
 
+	/**
+	 * True if errors should be hidden
+	 *
+	 * @var bool
+	 */
 	protected $suppression = true;
 
 	/** We can't unregister_shutdown_function, so this acts as a flag to enable handling */
@@ -28,6 +47,18 @@ class ErrorControlChain {
 	/** We overload display_errors to hide errors during execution, so we need to remember the original to restore to */
 	protected $originalDisplayErrors = null;
 
+	/**
+	 * Any exceptions passed through the chain
+	 *
+	 * @var Exception
+	 */
+	protected $lastException = null;
+
+	/**
+	 * Determine if an error has been found
+	 *
+	 * @return bool
+	 */
 	public function hasErrored() {
 		return $this->error;
 	}
@@ -36,9 +67,43 @@ class ErrorControlChain {
 		$this->error = (bool)$error;
 	}
 
+	/**
+	 * Sets whether errors are suppressed or not
+	 * Notes:
+	 * - Errors cannot be suppressed if not handling errors.
+	 * - Errors cannot be un-suppressed if original mode dis-allowed visible errors
+	 *
+	 * @param bool $suppression
+	 */
 	public function setSuppression($suppression) {
 		$this->suppression = (bool)$suppression;
-		if ($this->handleFatalErrors) ini_set('display_errors', !$suppression);
+		// If handling fatal errors, conditionally disable, or restore error display
+		// Note: original value of display_errors could also evaluate to "off"
+		if ($this->handleFatalErrors) {
+			if($suppression) {
+				$this->setDisplayErrors(0);
+			} else {
+				$this->setDisplayErrors($this->originalDisplayErrors);
+			}
+		}
+	}
+
+	/**
+	 * Set display_errors
+	 *
+	 * @param mixed $errors
+	 */
+	protected function setDisplayErrors($errors) {
+		ini_set('display_errors', $errors);
+	}
+
+	/**
+	 * Get value of display_errors ini value
+	 *
+	 * @return mixed
+	 */
+	protected function getDisplayErrors() {
+		return ini_get('display_errors');
 	}
 
 	/**
@@ -57,19 +122,43 @@ class ErrorControlChain {
 		return $this;
 	}
 
+	/**
+	 * Request that the callback is invoked if not errored
+	 *
+	 * @param callable $callback
+	 * @return $this
+	 */
 	public function thenWhileGood($callback) {
 		return $this->then($callback, false);
 	}
 
+	/**
+	 * Request that the callback is invoked on error
+	 *
+	 * @param callable $callback
+	 * @return $this
+	 */
 	public function thenIfErrored($callback) {
 		return $this->then($callback, true);
 	}
 
+	/**
+	 * Request that the callback is invoked always
+	 *
+	 * @param callable $callback
+	 * @return $this
+	 */
 	public function thenAlways($callback) {
 		return $this->then($callback, null);
 	}
 
+	/**
+	 * Return true if the last error was fatal
+	 *
+	 * @return boolean
+	 */
 	protected function lastErrorWasFatal() {
+		if($this->lastException) return true;
 		$error = error_get_last();
 		return $error && ($error['type'] & self::$fatal_errors) != 0;
 	}
@@ -111,8 +200,8 @@ class ErrorControlChain {
 		register_shutdown_function(array($this, 'handleFatalError'));
 		$this->handleFatalErrors = true;
 
-		$this->originalDisplayErrors = ini_get('display_errors');
-		ini_set('display_errors', !$this->suppression);
+		$this->originalDisplayErrors = $this->getDisplayErrors();
+		$this->setSuppression($this->suppression);
 
 		$this->step();
 	}
@@ -122,7 +211,12 @@ class ErrorControlChain {
 			$step = array_shift($this->steps);
 
 			if ($step['onErrorState'] === null || $step['onErrorState'] === $this->error) {
-				call_user_func($step['callback'], $this);
+				try {
+					call_user_func($step['callback'], $this);
+				} catch (Exception $ex) {
+					$this->lastException = $ex;
+					throw $ex;
+				}
 			}
 
 			$this->step();
@@ -130,7 +224,7 @@ class ErrorControlChain {
 		else {
 			// Now clean up
 			$this->handleFatalErrors = false;
-			ini_set('display_errors', $this->originalDisplayErrors);
+			$this->setDisplayErrors($this->originalDisplayErrors);
 		}
 	}
 }

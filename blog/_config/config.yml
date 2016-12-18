@@ -1,3 +1,6 @@
-LeftAndMain:
+---
+Name: blogconfig
+---
+Member:
   extensions:
-    - BlogLeftMainExtension
+    - BlogMemberExtension

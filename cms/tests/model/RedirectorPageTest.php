@@ -3,6 +3,7 @@
 class RedirectorPageTest extends FunctionalTest {
 	protected static $fixture_file = 'RedirectorPageTest.yml';
 	protected static $use_draft_site = true;
+	protected $autoFollowRedirection = false;
 	
 	public function testGoodRedirectors() {
 		/* For good redirectors, the final destination URL will be returned */
@@ -50,4 +51,41 @@ class RedirectorPageTest extends FunctionalTest {
 		$page->write();
 		$this->assertEquals($page->ExternalURL, 'http://google.com', 'onBeforeWrite will not double prefix if written again!');
 	}
+
+	public function testAllowsProtocolRelative() {
+		$noProtocol = new RedirectorPage(array('ExternalURL' => 'mydomain.com'));
+		$noProtocol->write();
+		$this->assertEquals('http://mydomain.com', $noProtocol->ExternalURL);
+
+		$protocolAbsolute = new RedirectorPage(array('ExternalURL' => 'http://mydomain.com'));
+		$protocolAbsolute->write();
+		$this->assertEquals('http://mydomain.com', $protocolAbsolute->ExternalURL);
+
+		$protocolRelative = new RedirectorPage(array('ExternalURL' => '//mydomain.com'));
+		$protocolRelative->write();
+		$this->assertEquals('//mydomain.com', $protocolRelative->ExternalURL);
+	}
+
+	/**
+	 * Test that we can trigger a redirection before RedirectorPage_Controller::init() is called
+	 */
+	public function testRedirectRespectsFinishedResponse() {
+		$page = $this->objFromFixture('RedirectorPage', 'goodinternal');
+		RedirectorPage_Controller::add_extension('RedirectorPageTest_RedirectExtension');
+
+		$response = $this->get($page->regularLink());
+		$this->assertEquals(302, $response->getStatusCode());
+		$this->assertEquals('/foo', $response->getHeader('Location'));
+
+		RedirectorPage_Controller::remove_extension('RedirectorPageTest_RedirectExtension');
+	}
+
+}
+
+class RedirectorPageTest_RedirectExtension extends Extension implements TestOnly {
+
+	public function onBeforeInit() {
+		$this->owner->redirect('/foo');
+	}
+
 }

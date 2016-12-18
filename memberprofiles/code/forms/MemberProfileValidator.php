@@ -19,7 +19,11 @@ class MemberProfileValidator extends RequiredFields {
 		$this->member = $member;
 
 		foreach($this->fields as $field) {
-			if($field->Required) $this->addRequiredField($field->MemberField);
+			if($field->Required) {
+				if($field->ProfileVisibility !== 'Readonly') {
+					$this->addRequiredField($field->MemberField);
+				}
+			}
 			if($field->Unique)   $this->unique[] = $field->MemberField;
 		}
 
@@ -59,6 +63,22 @@ class MemberProfileValidator extends RequiredFields {
 
 				$valid = false;
 				$this->validationError($field, $message, 'required');
+			}
+		}
+		
+		// Create a dummy member as this is required for custom password validators
+		if(isset($data['Password']) && $data['Password'] !== "") {
+			if(is_null($member)) $member = Member::create();
+
+			if($validator = $member::password_validator()) {
+				$results = $validator->validate($data['Password'], $member);
+
+				if(!$results->valid()) {
+					$valid = false;
+					foreach($results->messageList() as $key => $value) {
+						$this->validationError('Password', $value, 'required');
+					}
+				}
 			}
 		}
 

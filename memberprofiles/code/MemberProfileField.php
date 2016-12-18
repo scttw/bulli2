@@ -58,6 +58,7 @@ class MemberProfileField extends DataObject {
 
 		$fields->removeByName('MemberField');
 		$fields->removeByName('ProfilePageID');
+		$fields->removeByName('Sort');
 
 		$fields->fieldByName('Root.Main')->getChildren()->changeFieldOrder(array(
 			'CustomTitle',
@@ -93,7 +94,7 @@ class MemberProfileField extends DataObject {
 				_t('MemberProfiles.DEFAULTVALUE', 'Default Value'),
 				$memberField->getSource()
 			));
-			$default->setHasEmptyDefault(true);
+			$default->setEmptyString(' ');
 		} elseif($memberField instanceof TextField) {
 			$fields->replaceField('DefaultValue', new TextField(
 				'DefaultValue', _t('MemberProfiles.DEFAULTVALUE', 'Default Value')
@@ -158,7 +159,7 @@ class MemberProfileField extends DataObject {
 	/**
 	 * Get the default title for this field from the form field.
 	 *
-	 * @param  bool $force Force a non-empty title to be returned.
+	 * @param bool $force Force a non-empty title to be returned.
 	 * @return string
 	 */
 	public function getDefaultTitle($force = true) {

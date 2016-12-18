@@ -4,7 +4,7 @@
  * @subpackage tests
  */
 class MemberAuthenticatorTest extends SapphireTest {
-	
+
 	protected $usesDatabase = true;
 
 	protected $defaultUsername = null;
@@ -23,61 +23,61 @@ class MemberAuthenticatorTest extends SapphireTest {
 		Security::setDefaultAdmin($this->defaultUsername, $this->defaultPassword);
 		parent::tearDown();
 	}
-	
+
 	public function testLegacyPasswordHashMigrationUponLogin() {
 		$member = new Member();
-		
+
 		$field=Member::config()->unique_identifier_field;
-		
+
 		$member->$field = 'test1@test.com';
 		$member->PasswordEncryption = "sha1";
 		$member->Password = "mypassword";
 		$member->write();
-		
+
 		$data = array(
 			'Email' => $member->$field,
 			'Password' => 'mypassword'
 		);
 		MemberAuthenticator::authenticate($data);
-		
+
 		$member = DataObject::get_by_id('Member', $member->ID);
 		$this->assertEquals($member->PasswordEncryption, "sha1_v2.4");
 		$result = $member->checkPassword('mypassword');
 		$this->assertTrue($result->valid());
 	}
-	
+
 	public function testNoLegacyPasswordHashMigrationOnIncompatibleAlgorithm() {
 		Config::inst()->update('PasswordEncryptor', 'encryptors',
 			array('crc32'=>array('PasswordEncryptor_PHPHash'=>'crc32')));
 		$field=Member::config()->unique_identifier_field;
-		
+
 		$member = new Member();
 		$member->$field = 'test2@test.com';
 		$member->PasswordEncryption = "crc32";
 		$member->Password = "mypassword";
 		$member->write();
-		
+
 		$data = array(
 			'Email' => $member->$field,
 			'Password' => 'mypassword'
 		);
 		MemberAuthenticator::authenticate($data);
-		
+
 		$member = DataObject::get_by_id('Member', $member->ID);
 		$this->assertEquals($member->PasswordEncryption, "crc32");
 		$result = $member->checkPassword('mypassword');
 		$this->assertTrue($result->valid());
 	}
-	
+
 	public function testCustomIdentifierField(){
-		
+
 		$origField = Member::config()->unique_identifier_field;
 		Member::config()->unique_identifier_field = 'Username';
 
 		$label=singleton('Member')->fieldLabel(Member::config()->unique_identifier_field);
-		
+
 		$this->assertEquals($label, 'Username');
-		
+
 		Member::config()->unique_identifier_field = $origField;
 	}
 
@@ -163,5 +163,23 @@ class MemberAuthenticatorTest extends SapphireTest {
 		$this->assertEmpty($result);
 		$this->assertEquals('The provided details don&#039;t seem to be correct. Please try again.', $form->Message());
 		$this->assertEquals('bad', $form->MessageType());
+	}
+
+	public function testDefaultAdminLockOut()
+	{
+		Config::inst()->update('Member', 'lock_out_after_incorrect_logins', 1);
+		Config::inst()->update('Member', 'lock_out_delay_mins', 10);
+		SS_Datetime::set_mock_now('2016-04-18 00:00:00');
+		$controller = new Security();
+		$form = new Form($controller, 'Form', new FieldList(), new FieldList());
+
+		// Test correct login
+		MemberAuthenticator::authenticate(array(
+			'Email' => 'admin',
+			'Password' => 'wrongpassword'
+		), $form);
+
+		$this->assertTrue(Member::default_admin()->isLockedOut());
+		$this->assertEquals(Member::default_admin()->LockedOutUntil, '2016-04-18 00:10:00');
 	}
 }

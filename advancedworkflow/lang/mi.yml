@@ -17,8 +17,8 @@ mi:
     INVALIDCLASSTOORDER: 'I tāurua he tauaha muhu ki te raupapa.'
     INVALIDIDLIST: 'I tāurua he rārangi muhu o ngā TT.'
     INVALIDPARENTID: 'I tāurua he TT matua muhu.'
-    SORTORDERSAVED: 'Kua tiakina te raupapa kōmaka.'
     MENUTITLE: Ngā reremahi
+    SORTORDERSAVED: 'Kua tiakina te raupapa kōmaka.'
   AdvancedWorkflowFrontendForm:
     ACTIONCONTROLLERCHECK: 'Kāore e whakaaetia te hohenga "%s" i te pūmana (Tauaha: %s)'
     ACTIONFORMCHECK: 'Kāore e whakaaetia te hohenga "%s" i te puka (Ingoa: %s)'
@@ -49,7 +49,6 @@ mi:
     FORMATTINGHELP: 'Āwhina Whakahōputu'
     FORMATTINGNOTE: "Ka whai hōputu HTML pea ngā īmēra whakamōhio. Ka whakakapia ēnei taurangi motuhake ki ngā\n\t\t\tuara hāngai i roto i te kaupapa īmerā, i te īmērā mai, me te tātauira/tinana."
     INITIATORNOTE: "Ka whakakīa ēnei āpure i te mema ka tīmata i te tono reremahi. Hei tauira,\n\t\t\t{$Initiator.Email}."
-    LISTING_TEMPLATE: "Tātauira Whakarārangi- Ko ngā tuemi te rārangi o ngā hohenga katoa i te reremahi (kupu haurite ki ngā Hohenga). \n\t\t\t\t\tKa wātea hoki ngā āhuatanga katoa o te Tauira Reremahi o nāianei"
     MEMBERNOTE: "Ka whakakīa ēnei āpure i te mema ka tīmata i te hohenga whakamōhio. Hei tauira,\n\t\t\t{$Member.FirstName}."
     NOTIFICATIONEMAIL: 'Īmēra Whakamōhio'
     NOTIFICATIONNOTE: 'Ka tukuna he īmēra ki ngā kaiwhakamahi katoa e tāpiritia ana ki te reremahi ina whakahaeretia tēnei hohenga.'
@@ -83,14 +82,11 @@ mi:
     Transitions: Ngā Whakawhiti
     TypeLabel: Momo
   WorkflowActionInstance:
-    PLURALNAME: 'Ngā Tauira Hohenga Reremahi'
     SINGULARNAME: 'Tauira Hohenga Reremahi'
   WorkflowApplicable:
     DEFINITION: 'Reremahi Kua Hoatu'
     EFFECTIVE_WORKFLOW: 'Reremahi Tōtika'
     INHERIT: 'Tukuna iho i te matua'
-    NONE: (kore)
-    UPDATE_WORKFLOW: 'Whakahou Reremahi'
     WORKFLOWLOG: 'Rangitaki Reremahi'
   WorkflowDefinition:
     ADDAFTERSAVING: 'Ka taea  te tāpiri hipanga reremahi i muri i te tiakinga tuatahitanga.'
@@ -134,8 +130,6 @@ mi:
   WorkflowInstance:
     ActionLogTitle: Rangitaki
     EXECUTE_EXCEPTION: 'I whakamātauria te tīmatanga o tētahi tauira reremahi muhu #%s!'
-    NEXT_ACTION: 'Hohenga Panuku'
-    PLURALNAME: 'Ngā Tauira Reremahi'
     REASSIGN_HEADER: 'Tautapatia anō te reremahi'
     SINGULARNAME: 'Tauira Reremahi'
     TITLE_FOR_DO: '%s - %s'

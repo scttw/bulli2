@@ -17,12 +17,12 @@ Feature: Insert an image into a page
     Then I should see "Choose files to upload..."
 
     When I press the "From the web" button
-    And I fill in "RemoteURL" with "http://www.silverstripe.com/themes/sscom/images/silverstripe_logo_web.png"
+    And I fill in "RemoteURL" with "http://www.silverstripe.org/themes/ssv3/img/ss_logo.png"
     And I press the "Add url" button
-    Then I should see "silverstripe_logo_web.png (www.silverstripe.com)" in the ".ss-assetuploadfield span.name" element
+    Then I should see "ss_logo.png (www.silverstripe.org)" in the ".ss-assetuploadfield span.name" element
 
     When I press the "Insert" button  
-    Then the "Content" HTML field should contain "silverstripe_logo_web.png"
+    Then the "Content" HTML field should contain "ss_logo.png"
     # Required to avoid "unsaved changed" browser dialog
     Then I press the "Save draft" button
 
@@ -40,18 +40,18 @@ Feature: Insert an image into a page
     Then I press the "Save draft" button
 
   @assets
-  Scenario: I can overwrite an existing image with one uploaded from my own computer
+  Scenario: I can upload an image from my own computer that matches the name of an existing file
     Given a "image" "assets/Uploads/file1.jpg"
     When I press the "Insert Media" button
     And I press the "From your computer" button
     And I attach the file "file1.jpg" to "AssetUploadField" with HTML5
     # TODO Delay previous step until upload succeeded
     And I wait for 2 seconds
-    Then I should see "Overwrite"
-    When I press the "Overwrite" button
+    # Note change in default behaviour from 3.1, respect default Upload.replaceFile=false
     Then there should be a file "assets/Uploads/file1.jpg"
+    And there should be a file "assets/Uploads/file2.jpg"
     When I press the "Insert" button
-    Then the "Content" HTML field should contain "file1.jpg"
+    Then the "Content" HTML field should contain "file2.jpg"
     # Required to avoid "unsaved changed" browser dialog
     Then I press the "Save draft" button
 
@@ -59,7 +59,7 @@ Feature: Insert an image into a page
     Given I press the "Insert Media" button
     And I press the "From the CMS" button
     And I fill in the "ParentID" dropdown with "folder1"
-    And I click on "file1.jpg" in the "Files" table
+    And I click on "file1" in the "Files" table
     When I press the "Insert" button
     Then the "Content" HTML field should contain "file1.jpg"
     # Required to avoid "unsaved changed" browser dialog
@@ -69,7 +69,7 @@ Feature: Insert an image into a page
     Given I press the "Insert Media" button
     And I press the "From the CMS" button
     And I fill in the "ParentID" dropdown with "folder1"
-    And I click on "file1.jpg" in the "Files" table
+    And I click on "file1" in the "Files" table
     And I press the "Edit" button
     When I fill in "Alternative text (alt)" with "My alt"
     And I press the "Insert" button

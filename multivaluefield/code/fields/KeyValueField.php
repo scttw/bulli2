@@ -23,19 +23,19 @@ class KeyValueField extends MultiValueTextField {
 		$nameKey = $this->name . '[key][]';
 		$nameVal = $this->name . '[val][]';
 		$fields = array();
-		
+
 		if ($this->value) {
 			foreach ($this->value as $i => $v) {
 				if ($this->readonly) {
 					$fieldAttr = array(
 						'class' => 'mventryfield  mvkeyvalReadonly ' . ($this->extraClass() ? $this->extraClass() : ''),
-						'id' => $this->id().':'.$i,
+						'id' => $this->id().MultiValueTextField::KEY_SEP.$i,
 						'name' => $nameKey,
 						'tabindex' => $this->getAttribute('tabindex')
 					);
 
 					$keyField = self::create_tag('span', $fieldAttr, Convert::raw2xml($i));
-					$fieldAttr['id'] = $this->id().':'.$v;
+					$fieldAttr['id'] = $this->id().MultiValueTextField::KEY_SEP.$v;
 					$valField = self::create_tag('span', $fieldAttr, Convert::raw2xml($v));
 					$fields[] = $keyField . $valField;
 				} else {
@@ -79,7 +79,7 @@ class KeyValueField extends MultiValueTextField {
 		if (count($values)) {
 			$attrs = array(
 				'class' => 'text mventryfield mvdropdown ' . ($this->extraClass() ? $this->extraClass() : ''),
-				'id' => $this->id().':'.$number,
+				'id' => $this->id().MultiValueTextField::KEY_SEP.$number,
 				'name' => $name,
 				'tabindex' => $this->getAttribute('tabindex')
 			);
@@ -90,7 +90,7 @@ class KeyValueField extends MultiValueTextField {
 		} else {
 			$attrs = array(
 				'class' => 'text mventryfield mvtextfield ' . ($this->extraClass() ? $this->extraClass() : ''),
-				'id' => $this->id().':'.$number,
+				'id' => $this->id().MultiValueTextField::KEY_SEP.$number,
 				'value' => $selected,
 				'name' => $name,
 				'tabindex' => $this->getAttribute('tabindex'),
@@ -102,20 +102,20 @@ class KeyValueField extends MultiValueTextField {
 			return self::create_tag('input', $attrs);
 		}
 	}
-	
+
 	public function setValue($v) {
 		if (is_array($v)) {
 			// we've been set directly via the post - lets convert things to an appropriate key -> value
 			// structure
 			if (isset($v['key'])) {
 				$newVal = array();
-				
+
 				for ($i = 0, $c = count($v['key']); $i < $c; $i++) {
 					if (strlen($v['key'][$i]) && strlen($v['val'][$i])) {
 						$newVal[$v['key'][$i]] = $v['val'][$i];
 					}
 				}
-				
+
 				$v = $newVal;
 			}
 		}
@@ -127,7 +127,7 @@ class KeyValueField extends MultiValueTextField {
 		if (!is_array($v)) {
 			$v = array();
 		}
-		
+
 		parent::setValue($v);
 	}
 }

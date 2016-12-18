@@ -1,46 +1,72 @@
 hr:
   ArchiveWidget:
-    MONTH: "mjesec"
-    YEAR: "godina"
+    PLURALNAME: 'Arhivirani widgeti'
+    SINGULARNAME: 'Arhiviran widget'
+  Blog:
+    Archive: Arhiva
+    By: od
+    CONTRIBUTOR: Suradnik
+    Categories: Kategorije
+    Category: Kategorija
+    Comments: Komentari
+    DESCRIPTION: 'Dodaje blog na Vašu web stranicu.'
+    EDITOR: Urednik
+    FILTERDESCRIPTION_AUTHOR: 'od {author}'
+    FILTERDESCRIPTION_CATEGORY: 'U kategoriji {category}'
+    FILTERDESCRIPTION_DATE: 'od {date}'
+    FILTERDESCRIPTION_PAGE: 'Stranica {page} '
+    FILTERDESCRIPTION_TAG: 'Tagiran s {tag}'
+    LumberjackTitle: 'Blog zapisi'
+    NoPosts: 'Nema zapisa'
+    NoUnfeaturedPosts: 'Nema izdvojenih zapisa'
+    PERMISSIONS_CATEGORY: 'Blog dozvole'
+    PERMISSION_MANAGE_USERS_DESCRIPTION: 'Upravljaj korisnike za pojedinačne blogove'
+    PLURALNAME: 'Bazne stranice'
+    Posted: Objavljeno
+    PostedIn: 'Objavljeno u'
+    PostsPerPage: 'Postova po stranici'
+    ReadMoreAbout: 'Pročitaj više o ''{title}''...'
+    SINGULARNAME: Blog
+    Tag: Tag
+    Tagged: Tagirano
+    Tags: Tagovi
+    WRITER: Pisac
+  BlogArchiveWidget:
+    ArchiveType: Tip arhive
+    Blog: Blog
+    NumberToDisplay: 'Broj za prikaz'
+  BlogCategoriesWidget:
+    Blog: Blog
+    Limit:
+      Label: Limit
+  BlogCategory:
+    Title: Naslov
   BlogEntry:
-    AU: "Autor"
-    BBH: "Pomoć za BBCode"
-    CN: "Sadržaj"
-    DT: "Datum"
-    TS: "Tagovi (odvojeni zarezom)"
-  BlogEntry_ss:
-    COMMENTS: "Komentari"
-    POSTEDBY: "Objavio"
-    POSTEDON: "Objavljeno"
-    TAGS: "Tagovi:"
-    VIEWALLPOSTTAGGED: "Pogledaj sve blog zapise tagirane sa"
+    DESCRIPTION: 'Obična sadržajna stranica'
+    PLURALNAME: 'Bazne stranice'
+    SINGULARNAME: 'Blog zapis'
   BlogHolder:
-    POST: "Objavi blog zapis"
-    RSSFEED: "RSS feed ovog bloga"
-    SJ: "Tema"
-    SPUC: "Molimo vas razdovojite tagove zarezima."
-    SUCCONTENT: "Čestitamo, SilverStripe blog modul je uspješno instaliran. Ovaj blog zapis se slobodno može obrisati. Postavke bloga je moguće konfigurirati (kao što su widgeti prikazani sa strane) u [url=admin]CMSu[/url]."
-    SUCTAGS: "silverstripe, blog"
-    SUCTITLE: "SilverStripe blog modul uspješno je instaliran"
-    TE: "Na primjer: sport, osobno, znanstvena fantastika"
-  BlogHolder_ss:
-    NOENTRIES: "Nema blog zapisa"
-    VIEWINGTAGGED: "Pogledaj zapise tagirane sa"
-  BlogManagementWidget:
-    COMADM: "Administriranje komentara"
-  BlogManagementWidget_ss:
-    LOGOUT: "Odlogiraj se"
-    POSTNEW: "Objavi novi blog zapis"
-  BlogSummary_ss:
-    COMMENTS: "Komentari"
-    POSTEDON: "Objavljeno"
-    VIEWFULL: "Pogledaj potpuni blog zapis pod nazivom - "
-  RSSWidget:
-    NTS: "Broj orikazanih zapisa"
-    URL: "URL RSS feeda"
-  TagCloudWidget:
-    LIMIT: "Ograniči broj tagova"
-    SBAL: "abecedi"
-    SBFREQ: "učestalosti (frekvenciji)"
-    SORTBY: "Sortiraj prema"
-    TILE: "Naslov"
+    DESCRIPTION: 'Obična sadržajna stranica'
+    PLURALNAME: 'Bazne stranice'
+  BlogPost:
+    AUTHOR: Autor
+    Authors: Autori
+    Categories: Kategorije
+    DESCRIPTION: 'Obična sadržajna stranica'
+    FeaturedImage: 'Izdvojena slika'
+    PLURALNAME: 'Bazna stranica'
+    PageTitleLabel: 'Naslov posta'
+    PublishDate: 'Datum objave'
+    SINGULARNAME: 'Blog zapis'
+    Tags: Tagovi
+  BlogRecentPostsWidget:
+    Blog: Blog
+    NumberOfPosts: 'Broj zapisa'
+  BlogTag:
+    Title: Naslov
+  BlogTagsCloudWidget:
+    Blog: Blog
+  BlogTagsWidget:
+    Blog: Blog
+    Limit:
+      Label: Limit

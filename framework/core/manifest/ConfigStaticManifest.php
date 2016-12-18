@@ -79,7 +79,7 @@ class SS_ConfigStaticManifest {
 			$static = $this->statics[$class][$name];
 
 			if ($static['access'] != T_PRIVATE) {
-				Deprecation::notice('3.2.0', "Config static $class::\$$name must be marked as private",
+				Deprecation::notice('4.0', "Config static $class::\$$name must be marked as private",
 					Deprecation::SCOPE_GLOBAL);
 				// Don't warn more than once per static
 				$this->statics[$class][$name]['access'] = T_PRIVATE;
@@ -199,6 +199,25 @@ class SS_ConfigStaticManifest_Parser {
 	}
 
 	/**
+	 * Get the previous token processed. Does *not* decrement the pointer
+	 *
+	 * @param bool $ignoreWhitespace - if true will skip any whitespace tokens & only return non-whitespace ones
+	 * @return null | mixed - Either the previous token or null if there isn't one
+	 */
+	protected function lastToken($ignoreWhitespace = true) {
+		// Subtract 1 as the pointer is always 1 place ahead of the current token
+		$pos = $this->pos - 1;
+		do {
+			if($pos <= 0) return null;
+			$pos--;
+			$prev = $this->tokens[$pos];
+		}
+		while($ignoreWhitespace && is_array($prev) && $prev[0] == T_WHITESPACE);
+
+		return $prev;
+	}
+
+	/**
 	 * Get the next set of tokens that form a string to process,
 	 * incrementing the pointer
 	 *
@@ -239,9 +258,17 @@ class SS_ConfigStaticManifest_Parser {
 		$depth = 0; $namespace = null; $class = null; $clsdepth = null; $access = 0;
 
 		while($token = $this->next()) {
-			$type = is_array($token) ? $token[0] : $token;
+			$type = ($token === (array)$token) ? $token[0] : $token;
 
 			if($type == T_CLASS) {
+				$lastToken = $this->lastToken();
+				$lastType = ($lastToken === (array)$lastToken) ? $lastToken[0] : $lastToken;
+
+				// Ignore class keyword if it's being used for class name resolution: ClassName::class
+				if ($lastType === T_PAAMAYIM_NEKUDOTAYIM) {
+					continue;
+				}
+
 				$next = $this->nextString();
 				if($next === null) {
 					user_error("Couldn\'t parse {$this->path} when building config static manifest", E_USER_ERROR);
@@ -302,7 +329,7 @@ class SS_ConfigStaticManifest_Parser {
 		$value = '';
 
 		while($token = $this->next()) {
-			$type = is_array($token) ? $token[0] : $token;
+			$type = ($token === (array)$token) ? $token[0] : $token;
 
 			if($type == T_PUBLIC || $type == T_PRIVATE || $type == T_PROTECTED) {
 				$access = $type;
@@ -320,15 +347,16 @@ class SS_ConfigStaticManifest_Parser {
 				// NOP
 			}
 			else {
-				user_error('Unexpected token when building static manifest: '.print_r($token, true), E_USER_ERROR);
+				user_error('Unexpected token ("' . token_name($type) . '") when building static manifest in class "'
+					. $class . '": '.print_r($token, true), E_USER_ERROR);
 			}
 		}
 
 		if($token == '=') {
 			$depth = 0;
 
-			while($token = $this->next(false)){
-				$type = is_array($token) ? $token[0] : $token;
+			while($token = ($this->pos >= $this->length) ? null : $this->tokens[$this->pos++]) {
+				$type = ($token === (array)$token) ? $token[0] : $token;
 
 				// Track array nesting depth
 				if($type == T_ARRAY || $type == '[') {
@@ -350,7 +378,7 @@ class SS_ConfigStaticManifest_Parser {
 					$value .= $class;
 				}
 				else {
-					$value .= is_array($token) ? $token[1] : $token;
+					$value .= ($token === (array)$token) ? $token[1] : $token;
 				}
 			}
 		}

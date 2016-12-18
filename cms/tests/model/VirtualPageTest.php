@@ -1,12 +1,15 @@
 <?php
 
-class VirtualPageTest extends SapphireTest {
+class VirtualPageTest extends FunctionalTest {
 	protected static $fixture_file = 'VirtualPageTest.yml';
+	protected static $use_draft_site = false;
+	protected $autoFollowRedirection = false;
 	
 	protected $extraDataObjects = array(
 		'VirtualPageTest_ClassA',
 		'VirtualPageTest_ClassB',
 		'VirtualPageTest_VirtualPageSub',
+		'VirtualPageTest_PageWithAllowedChildren'
 	);
 
 	protected $illegalExtensions = array(
@@ -19,6 +22,9 @@ class VirtualPageTest extends SapphireTest {
 
 	public function setUp() {
 		parent::setUp();
+
+		// Ensure we always have permission to save/publish
+		$this->logInWithPermission("ADMIN");
 
 		$this->origInitiallyCopiedFields = VirtualPage::config()->initially_copied_fields;
 		Config::inst()->remove('VirtualPage', 'initially_copied_fields');
@@ -209,46 +215,46 @@ class VirtualPageTest extends SapphireTest {
 		$vp->write();
 
 		// VP is oragne
-		$this->assertTrue($vp->IsAddedToStage);
+		$this->assertTrue($vp->getIsAddedToStage());
 
 		// VP is still orange after we publish
 		$p->doPublish();
 		$this->fixVersionNumberCache($vp);
-		$this->assertTrue($vp->IsAddedToStage);
+		$this->assertTrue($vp->getIsAddedToStage());
 		
 		// A new VP created after P's initial construction
 		$vp2 = new VirtualPage();
 		$vp2->CopyContentFromID = $p->ID;
 		$vp2->write();
-		$this->assertTrue($vp2->IsAddedToStage);
+		$this->assertTrue($vp2->getIsAddedToStage());
 		
 		// Also remains orange after a republish
 		$p->Content = "new content";
 		$p->write();
 		$p->doPublish();
 		$this->fixVersionNumberCache($vp2);
-		$this->assertTrue($vp2->IsAddedToStage);
+		$this->assertTrue($vp2->getIsAddedToStage());
 		
 		// VP is now published
 		$vp->doPublish();
 
 		$this->fixVersionNumberCache($vp);
-		$this->assertTrue($vp->ExistsOnLive);
-		$this->assertFalse($vp->IsModifiedOnStage);
+		$this->assertTrue($vp->getExistsOnLive());
+		$this->assertFalse($vp->getIsModifiedOnStage());
 		
 		// P edited, VP and P both go green
 		$p->Content = "third content";
 		$p->write();
 
 		$this->fixVersionNumberCache($vp, $p);
-		$this->assertTrue($p->IsModifiedOnStage);
-		$this->assertTrue($vp->IsModifiedOnStage);
+		$this->assertTrue($p->getIsModifiedOnStage());
+		$this->assertTrue($vp->getIsModifiedOnStage());
 
 		// Publish, VP goes black
 		$p->doPublish();
 		$this->fixVersionNumberCache($vp);
-		$this->assertTrue($vp->ExistsOnLive);
-		$this->assertFalse($vp->IsModifiedOnStage);
+		$this->assertTrue($vp->getExistsOnLive());
+		$this->assertFalse($vp->getIsModifiedOnStage());
 	}
 	
 	public function testVirtualPagesCreateVersionRecords() {
@@ -269,7 +275,7 @@ class VirtualPageTest extends SapphireTest {
 		
 		$this->assertEquals($vp->ID, DB::query("SELECT \"RecordID\" FROM \"SiteTree_versions\"
 			WHERE \"RecordID\" = $vp->ID AND \"Title\" = 'T1'")->value());
-		$this->assertEquals($vp->ID, DB::query("SELECT \"RecordID\" FROM \"SiteTree_versions\" 
+		$this->assertEquals($vp->ID, DB::query("SELECT \"RecordID\" FROM \"SiteTree_versions\"
 			WHERE \"RecordID\" = $vp->ID AND \"Title\" = 'T2'")->value());
 		$this->assertEquals($vp->ID, DB::query("SELECT \"RecordID\" FROM \"SiteTree_versions\"
 			WHERE \"RecordID\" = $vp->ID AND \"Version\" = $vp->Version")->value());
@@ -280,12 +286,12 @@ class VirtualPageTest extends SapphireTest {
 		// version
 		$liveVersion = DB::query("SELECT \"Version\" FROM \"SiteTree_Live\" WHERE \"ID\" = $vp->ID")->value();
 
-		$this->assertEquals("T0", DB::query("SELECT \"Title\" FROM \"SiteTree_Live\" 
+		$this->assertEquals("T0", DB::query("SELECT \"Title\" FROM \"SiteTree_Live\"
 				WHERE \"ID\" = $vp->ID")->value());
 
 		// SiteTree_Live.Version should reference a legal entry in SiteTree_versions for the
 		// virtual page
-		$this->assertEquals("T0", DB::query("SELECT \"Title\" FROM \"SiteTree_versions\" 
+		$this->assertEquals("T0", DB::query("SELECT \"Title\" FROM \"SiteTree_versions\"
 				WHERE \"RecordID\" = $vp->ID AND \"Version\" = $liveVersion")->value());
 	}
 	
@@ -314,7 +320,7 @@ class VirtualPageTest extends SapphireTest {
 		// Unpublish the source page, confirm that the virtual page has also been unpublished
 		$p->doUnpublish();
 
-        // The draft VP still has the CopyContentFromID link
+		// The draft VP still has the CopyContentFromID link
 		$vp->flushCache();
 		$vp = DataObject::get_by_id('SiteTree', $vp->ID);
 		$this->assertEquals($p->ID, $vp->CopyContentFromID);
@@ -381,11 +387,11 @@ class VirtualPageTest extends SapphireTest {
 		$classCVirtual->write();
 		
 		$classBVirtual->ParentID = $classA->ID;
-		$valid = $classBVirtual->validate();
+		$valid = $classBVirtual->doValidate();
 		$this->assertTrue($valid->valid(), "Does allow child linked to virtual page type allowed by parent");
 		
 		$classCVirtual->ParentID = $classA->ID;
-		$valid = $classCVirtual->validate();
+		$valid = $classCVirtual->doValidate();
 		$this->assertFalse($valid->valid(), "Doesn't allow child linked to virtual page type disallowed by parent");
 	}
 	
@@ -416,12 +422,12 @@ class VirtualPageTest extends SapphireTest {
 		$virtual->copyFrom($original);
 		// Using getField() to avoid side effects from an overloaded __get()
 		$this->assertEquals(
-			'original', 
+			'original',
 			$virtual->getField('MyInitiallyCopiedField'),
 			'Fields listed in $initially_copied_fields are copied on first copyFrom() invocation'
 		);
 		$this->assertEquals(
-			'original', 
+			'original',
 			$virtual->getField('MyVirtualField'),
 			'Fields not listed in $initially_copied_fields are copied in copyFrom()'
 		);
@@ -434,7 +440,7 @@ class VirtualPageTest extends SapphireTest {
 		$original->write();
 		$virtual->copyFrom($original);
 		$this->assertEquals(
-			'original', 
+			'original',
 			$virtual->MyInitiallyCopiedField,
 			'Fields listed in $initially_copied_fields are not copied on subsequent copyFrom() invocations'
 		);
@@ -460,8 +466,8 @@ class VirtualPageTest extends SapphireTest {
 		$virtual->Title = 'changed 1';
 		$virtual->writeWithoutVersion();
 		$this->assertEquals(
-			$virtual->Version, 
-			$virtualVersion, 
+			$virtual->Version,
+			$virtualVersion,
 			'writeWithoutVersion() on VirtualPage doesnt increment version'
 		);
 
@@ -471,8 +477,8 @@ class VirtualPageTest extends SapphireTest {
 		DataObject::flush_and_destroy_cache();
 		$virtual = DataObject::get_by_id('VirtualPage', $virtual->ID, false);
 		$this->assertEquals(
-			$virtual->Version, 
-			$virtualVersion, 
+			$virtual->Version,
+			$virtualVersion,
 			'writeWithoutVersion() on original page doesnt increment version on related VirtualPage'
 		);
 		
@@ -481,8 +487,8 @@ class VirtualPageTest extends SapphireTest {
 		DataObject::flush_and_destroy_cache();
 		$virtual = DataObject::get_by_id('VirtualPage', $virtual->ID, false);
 		$this->assertGreaterThan(
-			$virtualVersion, 
-			$virtual->Version, 
+			$virtualVersion,
+			$virtual->Version,
 			'write() on original page does increment version on related VirtualPage'
 		);
 	}
@@ -494,7 +500,7 @@ class VirtualPageTest extends SapphireTest {
 
 		$notRootPage = new VirtualPageTest_NotRoot();
 		// we don't want the original on root, but rather the VirtualPage pointing to it
-		$notRootPage->ParentID = $page->ID; 
+		$notRootPage->ParentID = $page->ID;
 		$notRootPage->write();
 
 		$virtual = new VirtualPage();
@@ -511,7 +517,7 @@ class VirtualPageTest extends SapphireTest {
 		} catch(ValidationException $e) {
 			$this->assertContains('is not allowed on the root level', $e->getMessage());
 			$isDetected = true;
-		} 
+		}
 
 		if(!$isDetected) $this->fail('Fails validation with $can_be_root=false');
 	}
@@ -591,6 +597,76 @@ class VirtualPageTest extends SapphireTest {
 			'No field copying from previous original after page type changed'
 		);
 	}
+
+	public function testVirtualPageFindsCorrectCasting() {
+		$page = new VirtualPageTest_ClassA();
+		$page->CastingTest = "Some content";
+		$page->write();
+		$virtual = new VirtualPage();
+		$virtual->CopyContentFromID = $page->ID;
+		$virtual->write();
+
+		$this->assertEquals('VirtualPageTest_TestDBField', $virtual->castingHelper('CastingTest'));
+		$this->assertEquals('SOME CONTENT', $virtual->obj('CastingTest')->forTemplate());
+	}
+
+	public function testVirtualPageAsAnAllowedChild() {
+		$parentPage = new VirtualPageTest_PageWithAllowedChildren();
+		$parentPage->write();
+
+		$childPage = new VirtualPageTest_ClassA();
+		$childPage->ParentID = $parentPage->ID;
+		$childPage->write();
+
+		// Check we're allowed to create a VirtualPage without linking it to a page yet
+		$childVirtualPage = new VirtualPage();
+		$childVirtualPage->ParentID = $parentPage->ID;
+		try {
+			$childVirtualPage->write();
+		} catch(ValidationException $e) {
+			$this->fail('Failed to write VirtualPage when it is an allowed child');
+		}
+
+		// Check that we can link a VirtualPage to a page type that's an allowed child
+		$childVirtualPage->CopyContentFromID = $childPage->ID;
+		try {
+			$childVirtualPage->write();
+		} catch(ValidationException $e) {
+			$this->fail('Failed to write VirtualPage when it is linked to an allowed child');
+		}
+
+		// Check that we CAN'T link a VirtualPage to a page that is NOT an allowed child
+		$disallowedChild = new VirtualPageTest_ClassB();
+		$disallowedChild->write();
+		$childVirtualPage->CopyContentFromID = $disallowedChild->ID;
+		$isDetected = false;
+		try {
+			$childVirtualPage->write();
+		} catch(ValidationException $e) {
+			$this->assertContains('not allowed as child of this parent page', $e->getMessage());
+			$isDetected = true;
+		}
+
+		if(!$isDetected) $this->fail("Shouldn't be allowed to write a VirtualPage that links to a disallowed child");
+	}
+
+	public function testVirtualPagePointingToRedirectorPage() {
+		if (!class_exists('RedirectorPage')) {
+			$this->markTestSkipped('RedirectorPage required');
+		}
+
+		$rp = new RedirectorPage(array('ExternalURL' => 'http://google.com', 'RedirectionType' => 'External'));
+		$rp->write();
+		$rp->doPublish();
+		
+		$vp = new VirtualPage(array('URLSegment' => 'vptest', 'CopyContentFromID' => $rp->ID));
+		$vp->write();
+		$vp->doPublish();
+
+		$response = $this->get($vp->Link());
+		$this->assertEquals(301, $response->getStatusCode());
+		$this->assertEquals('http://google.com', $response->getHeader('Location'));
+	}
 }
 
 class VirtualPageTest_ClassA extends Page implements TestOnly {
@@ -599,13 +675,14 @@ class VirtualPageTest_ClassA extends Page implements TestOnly {
 		'MyInitiallyCopiedField' => 'Text',
 		'MyVirtualField' => 'Text',
 		'MyNonVirtualField' => 'Text',
+		'CastingTest' => 'VirtualPageTest_TestDBField'
 	);
 	
 	private static $allowed_children = array('VirtualPageTest_ClassB');
 }
 
 class VirtualPageTest_ClassB extends Page implements TestOnly {
-	private static $allowed_children = array('VirtualPageTest_ClassC'); 
+	private static $allowed_children = array('VirtualPageTest_ClassC');
 }
 
 class VirtualPageTest_ClassC extends Page implements TestOnly {
@@ -614,6 +691,12 @@ class VirtualPageTest_ClassC extends Page implements TestOnly {
 
 class VirtualPageTest_NotRoot extends Page implements TestOnly {
 	private static $can_be_root = false;
+}
+
+class VirtualPageTest_TestDBField extends Varchar implements TestOnly {
+	public function forTemplate() {
+		return strtoupper($this->XML());
+	}
 }
 
 class VirtualPageTest_VirtualPageSub extends VirtualPage implements TestOnly {
@@ -631,4 +714,11 @@ class VirtualPageTest_PageExtension extends DataExtension implements TestOnly {
 		'MySharedNonVirtualField' => 'Text',
 	);
 
+}
+
+class VirtualPageTest_PageWithAllowedChildren extends Page implements TestOnly {
+	private static $allowed_children = array(
+		'VirtualPageTest_ClassA',
+		'VirtualPage'
+	);
 }

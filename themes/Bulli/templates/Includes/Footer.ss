@@ -1,15 +1,12 @@
             <footer class="footer row">
                 <div class="col-md-4 col-xs-12">
-                <h3>Bulli Anglican</h3>
-                <p>66 Park Rd, Bulli NSW 2516</p>
+                    $FooterContentOne
                 </div>
                 <div class="col-md-4 col-xs-12">
-                <p>Ph: (02) 4284 3021</p>
-                <p>Fx: (02) 4285 0282</p>
+                  $FooterContentTwo
                 </div>
                 <div class="col-md-4 col-xs-12">
-                <p><a href="mailto:bullianglican@bigpond.com">bullianglican@bigpond.com</a></p>
-                <p>Church Office hours: 9:30am – 2:00pm Mon – Fri during school terms</p>
+                  $FooterContentThree
                 </div>
                 <%-- <div class="col-md-3 col-xs-12">
                 <h3>Church members:</h3>

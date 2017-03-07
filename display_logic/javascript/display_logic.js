@@ -2,7 +2,7 @@
 	$('div.display-logic, div.display-logic-master').entwine({
 
 		escapeSelector: function(selector) {
-			return selector.replace(/(\[)/g, '_').replace(/(\])/g, '')
+			return selector.replace(/(\[)/g, '_').replace(/(\])/g, '');
 		},
 
 		findHolder: function(name) {
@@ -37,13 +37,15 @@
 		nameToHolder: function (name) {
 			name = this.escapeSelector(name);
 
+			// SS 3.2+, Convert::raw2htmlid() logic
+			name = name.replace(/[^a-zA-Z0-9\-_:.]+/g, '_').replace(/_+/g, '_');
+
 			// Hack!
 			// Remove this when OptionsetField_holder.ss uses $HolderID
 			// as its div ID instead of $ID
 			if(this.closest('form').find('ul.optionset li input[name='+name+']:first').length) {
 				return name;
 			}
-
 			return this.getFormID()+'_'+name+'_Holder';
 		},
 
@@ -125,12 +127,13 @@
 
 			if(field.data('display-logic-eval') && field.data('display-logic-masters')) {
 				this.data('display-logic-eval', field.data('display-logic-eval'))
-					.data('display-logic-masters', field.data('display-logic-masters'));
+					.data('display-logic-masters', field.data('display-logic-masters'))
+					.data('display-logic-animation', field.data('display-logic-animation'));
 			}
 
 			masters = this.getMasters();
 
-			for(m in masters) {
+			for(var m in masters) {
 				var holderName = this.nameToHolder(this.escapeSelector(masters[m]));
 				var master = this.closest('form').find(this.escapeSelector('#'+holderName));
 
@@ -188,7 +191,7 @@
 			var found = false;
 			this.find(':checkbox').filter(':checked').each(function() {
 				found = (found || ($(this).val() === val || $(this).getLabel().text() === val));
-			})
+			});
 
 			return found;
 		},
@@ -208,20 +211,68 @@
 		getLabel: function() {
 			return this.closest('form').find('label[for='+this.getHolder().escapeSelector(this.attr('id'))+']');
 		}
-	})
+	});
 
+	var animation = {
+		
+		toggle: {
+			
+			show: function(el) {
+				el.show();
+			},
+			
+			hide: function(el) {
+				el.hide();
+			}
+			
+		},
+		
+		slide: {
+			
+			show: function(el) {
+				el.slideDown();
+			},
+			
+			hide: function(el) {
+				el.slideUp();
+			}
+			
+		},
+		
+		fade: {
+			
+			show: function(el) {
+				el.fadeIn();
+			},
+			
+			hide: function(el) {
+				el.fadeOut();
+			}
+			
+		},
+		
+		perform: function(el, result, method) {
+			if(typeof method == 'undefined') method = 'toggle';
+			if(result) {
+				this[method].show(el);
+			} else {
+				this[method].hide(el);
+			}
+		}
+		
+	};
 
 
 	$('div.display-logic.display-logic-display').entwine({
 		testLogic: function() {
-			this.toggle(this.parseLogic());
+			animation.perform(this, this.parseLogic(), this.data('display-logic-animation'));
 		}
 	});
 
 
 	$('div.display-logic.display-logic-hide').entwine({
 		testLogic: function() {
-			this.toggle(!this.parseLogic());
+			animation.perform(this, !this.parseLogic(), this.data('display-logic-animation'));
 		}
 	});
 
@@ -263,14 +314,15 @@
 		},
 
 		getListeners: function() {
-			if(l = this._super()) {
+			l = this._super();
+			if(l) {
 				return l;
 			}
 			var self = this;
 			var listeners = [];
 			this.closest("form").find('.display-logic').each(function() {
 				masters = $(this).getMasters();
-				for(m in  masters) {
+				for(var m in masters) {
 					if(self.nameToHolder(masters[m]) == self.attr('id')) {
 						listeners.push($(this)[0]);
 						break;
@@ -288,7 +340,7 @@
 		},
 
 		getFieldName: function () {
-			return ''
+			return '';
 		}
 	});
 

@@ -1,0 +1,6 @@
+CMSHook:
+  extensions:
+    - CMSMainHookExtension
+SiteConfig:
+  extensions:
+    - SiteConfigExtension

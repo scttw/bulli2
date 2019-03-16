@@ -246,11 +246,21 @@ a:focus { color: #08c; }
 
 .navbar .active a:active { color: #fff; }
 
+.list-group-item.active a { color: #fff; }
+
+.list-group-item.active a:hover { background: transparent; }
+
+@media (max-width: 1199.98px) { .navbar-collapse { margin-right: -16px; margin-left: -16px; z-index: 1000; } }
+
 #SearchForm_SearchForm_Search { width: 120px; }
 
 ul.nav { background: #fff; }
 
 .strap { height: 250px; padding: 15px; background-repeat: no-repeat; background-position: top right; overflow: hidden; }
+
+.strap .strapfiller { height: 100%; }
+
+.bg-image { width: 100%; height: 100%; margin: 0; padding: 0; background-repeat: no-repeat; background-position: 50% 50%; background-size: cover; }
 
 footer div { padding: 5px; color: #888; text-align: center; }
 
@@ -277,8 +287,6 @@ footer div { padding: 5px; color: #888; text-align: center; }
 footer.footer { clear: both; border-top: 1px solid #333; background: #000; }
 
 .breaker { clear: both; }
-
-#subNav li { background: #eee; }
 
 img.left { margin-right: 20px; float: left; }
 
@@ -316,9 +324,7 @@ form label.required { padding-left: 16px; background: transparent url("../imgs/e
 
 .weeks { padding-top: 130px; padding-right: 10%; padding-left: 5%; border-radius: 15px; background: url("../imgs/77-Days-of-Prayer.jpg") top left no-repeat; background-size: 100% auto; color: #333; font-size: 220%; }
 
-@media (min-width: 768px) and (max-width: 979px) { .fauxbody { max-width: 724px; }
-  .strap img { width: auto; max-width: 10000px; }
-  .navbar-default .navbar-nav > li > a { font-size: 0.9em; }
+@media (min-width: 768px) and (max-width: 979px) { .navbar-default .navbar-nav > li > a { font-size: 0.9em; }
   .weeks { font-size: 150%; } }
 
 @media (max-width: 480px) { .fauxbody { margin: 0; padding: 0; -webkit-box-shadow: none; box-shadow: none; overflow: hidden; }
@@ -335,8 +341,6 @@ form label.required { padding-left: 16px; background: transparent url("../imgs/e
   .strapfiller p { margin: 0; padding: 0; }
   .strapfiller img { margin: 0; padding: 0; }
   .strap { margin: 0; padding: 0; }
-  .strap img { display: block; width: 200%; max-width: 200%; height: auto; margin: 0; }
-  .strap img.left { display: block; width: 200%; max-width: 200%; height: auto; margin: 0; }
   footer { margin: 0; padding: 0; }
   header.banner { margin: 0; padding: 0; }
   input.span2.search-query { width: 80px; }

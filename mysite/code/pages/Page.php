@@ -37,7 +37,7 @@ class Page extends SiteTree {
 
 		$fields->addFieldToTab('Root.Banner', new CheckboxField('HasBanner'));
 		$fields->addFieldToTab("Root.Banner", UploadField::create('BannerImage', 'Banner Image'));
-//		$fields->addFieldToTab('Root.Banner', new HTMLEditorField('BannerContent'));
+		$fields->addFieldToTab('Root.Banner', new HTMLEditorField('BannerContent'));
 
 		$fields->addFieldToTab('Root.Gallery', new CheckboxField('HasGallery'));
 		$fields->addFieldToTab('Root.Gallery', new CheckboxField('Carousel', 'Carousel style image rotator'));

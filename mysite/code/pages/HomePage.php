@@ -2,15 +2,22 @@
 class HomePage extends Page {
 
 	private static $db = array(
-	);	
+	    'PodcastFeature' => 'Varchar'
+	);
 	private static $has_many = array(
 		'HomepageFeatures' => 'HomepageFeature'
 	);
 	//static $icon = "framework/docs/en/tutorials/_images/treeicons/home-file.gif";
-	
+
 	function getCMSFields() {
 		$fields = parent::getCMSFields();
 
+		$fields->addFieldToTab('Root.Features', DropdownField::create('PodcastFeature', 'Show podcast feature panel', array(
+            'full' => 'Full width',
+            'centered' => 'Full width, centered',
+            'half' => 'Half width',
+            'none' => 'Do not show'
+        )));
 		$fields->addFieldToTab('Root.Features', new GridField('HomepageFeatures', 'Homepage Feature', $this->HomepageFeatures(), GridFieldConfig_RecordEditor::create()));
 		//$fields->addFieldToTab('Root.Images', new GridField('CarouselImages', 'Carousel Images', $this->CarouselImages(), GridFieldConfig_RecordEditor::create()));
 

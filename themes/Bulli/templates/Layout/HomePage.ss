@@ -4,7 +4,7 @@
         <% loop HomepageFeatures %>
             <% if Online %>
                 <% if Enabled  %>
-                    <div class="<% if $FullWidth %>col-md-12<% else %>col-md-6<% end_if %> masonry-block">
+                    <div class="col-12 <% if $FullWidth %><% else %>col-xl-6<% end_if %> masonry-block">
                         <div class="feature p-3">
                             <% if $HasTitle %><h3>$Title</h3><% end_if %>
                             <div class="content">
@@ -16,12 +16,13 @@
             <% end_if %>
         <% end_loop %>
 
-        <div class="col-md-6 masonry-block">
+        <% if $PodcastFeature != 'none' %>
+        <div class="col-12 <% if $PodcastFeature == 'half' %>col-xl-6<% end_if %> <% if $PodcastFeature == 'centered' %>text-center<% end_if %> masonry-block">
             <div class="feature p-3">
                 <% include TopPodcast %>
             </div>
         </div>
-
+        <% end_if %>
 
         <div class="breaker"></div>
     </div>

@@ -1,12 +1,12 @@
             <footer class="footer container">
                 <div class="row">
-                    <div class="col-md-4 col-xs-12">
+                    <div class="col-12 col-md-4">
                         $SiteConfig.FooterContentOne
                     </div>
-                    <div class="col-md-4 col-xs-12">
+                    <div class="col-12 col-md-4">
                         $SiteConfig.FooterContentTwo
                     </div>
-                    <div class="col-md-4 col-xs-12">
+                    <div class="col-12 col-md-4">
                         $SiteConfig.FooterContentThree
                     </div>
                     <%-- <div class="col-md-3 col-xs-12">

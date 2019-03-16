@@ -1,11 +1,11 @@
 			<header class="banner align-items-center" role="banner">
-				<nav id="mainnav" class="mainnav navbar navbar-expand-lg mt-0 pt-4 navbar-light justify-content-between">
-                    <a href="$BaseLink" class="navbar-brand mr-auto"><img src="{$ThemeDir}/imgs/logo.png" width="150"></a>
+				<nav id="mainnav" class="mainnav navbar navbar-expand-lg mt-0 pt-2 navbar-light justify-content-between">
+                    <a href="$BaseLink" class="navbar-brand mr-auto"><img src="{$ThemeDir}/imgs/logo.png" width="200" height="101"></a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
 
-                    <div id="navbar-collapse" class="collapse navbar-collapse background-white">
+                    <div id="navbar-collapse" class="collapse navbar-collapse background-white pt-lg-4">
                         <ul class="navbar-nav ml-auto">
                             <% loop Menu(1) %>
                             <li class="nav-item <% if $Children %> dropdown<% end_if %> ">

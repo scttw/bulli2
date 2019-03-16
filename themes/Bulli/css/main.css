@@ -234,6 +234,20 @@ a:hover { color: #08c; }
 
 a:focus { color: #08c; }
 
+.navbar .active a { color: #fff; }
+
+.navbar .active a:link { color: #fff; }
+
+.navbar .active a:visited { color: #fff; }
+
+.navbar .active a:focus { color: #fff; }
+
+.navbar .active a:hover { color: #fff; }
+
+.navbar .active a:active { color: #fff; }
+
+#SearchForm_SearchForm_Search { width: 120px; }
+
 ul.nav { background: #fff; }
 
 .strap { height: 250px; padding: 15px; background-repeat: no-repeat; background-position: top right; overflow: hidden; }
@@ -255,8 +269,6 @@ footer div { padding: 5px; color: #888; text-align: center; }
 .logo h1 { margin: 0; }
 
 .logo h1 a { display: block; width: 176px; height: 88px; background: #fff url("../imgs/logo.png"); background-size: 176px 88px; text-indent: -900000em; overflow: hidden; }
-
-#SearchForm_SearchForm_Search { width: 120px; }
 
 .security { position: absolute; top: 15px; right: 20px; }
 

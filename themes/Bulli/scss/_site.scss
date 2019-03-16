@@ -138,6 +138,24 @@ a {
     }
 }
 
+.navbar {
+    .active {
+        a {
+            @include link-colour-fixed($color-white);
+        }
+    }
+}
+
+#SearchForm_SearchForm_Search { // scss-lint:disable-line no-ids
+    width: 120px;
+}
+//.mainnav {
+//    position: absolute;
+//    top: 77px;
+//    right: 0;
+//    z-index: 100;
+//}
+
 ul.nav {
     background: $color-white;
 }
@@ -216,16 +234,6 @@ header.banner {
         }
     }
 }
-
-#SearchForm_SearchForm_Search { // scss-lint:disable-line no-ids
-    width: 120px;
-}
-//.mainnav {
-//    position: absolute;
-//    top: 77px;
-//    right: 0;
-//    z-index: 100;
-//}
 
 .security {
     position: absolute;

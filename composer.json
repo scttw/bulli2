@@ -25,7 +25,8 @@
         "scttw/silverstripe-simple-podcast": "dev-master",
         "studiobonito/silverstripe-google-analytics": "^2.0",
         "silverstripe/widgets": "^1.2.3",
-        "colymba/gridfield-bulk-editing-tools": "^2.1"
+        "colymba/gridfield-bulk-editing-tools": "^2.1",
+        "jonom/focuspoint": "^2.1.1"
     },
 
     "authors": [

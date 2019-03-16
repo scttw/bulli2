@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6557431b85024045ada4366463030c8e",
+    "content-hash": "fdab6d4d21db02c48b74ed15e2cf8db9",
     "packages": [
         {
             "name": "colymba/gridfield-bulk-editing-tools",
@@ -207,6 +207,45 @@
                 "ics"
             ],
             "time": "2016-03-16T13:31:55+00:00"
+        },
+        {
+            "name": "jonom/focuspoint",
+            "version": "2.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jonom/silverstripe-focuspoint.git",
+                "reference": "a2a2ce5ebc65381c839c48222b76a4f70b63b53b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jonom/silverstripe-focuspoint/zipball/a2a2ce5ebc65381c839c48222b76a4f70b63b53b",
+                "reference": "a2a2ce5ebc65381c839c48222b76a4f70b63b53b",
+                "shasum": ""
+            },
+            "require": {
+                "silverstripe/framework": "^3.6"
+            },
+            "type": "silverstripe-module",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jonathon Menz",
+                    "homepage": "http://jonathonmenz.com"
+                }
+            ],
+            "description": "Smarter automatic image cropping for SilverStripe",
+            "keywords": [
+                "crop",
+                "cropping",
+                "focus",
+                "focuspoint",
+                "image",
+                "silverstripe"
+            ],
+            "time": "2017-07-26T20:28:53+00:00"
         },
         {
             "name": "micschk/silverstripe-excludechildren",

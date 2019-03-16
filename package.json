@@ -1,0 +1,49 @@
+{
+  "name": "solutions-outsourced-dev-tools",
+  "version": "1.0.0",
+  "author": "Steve Dixon",
+  "description": "Development tools for Solutions Outsourced SilverStripe projects",
+  "license": "UNLICENSED",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git@laserbeak.solweb.com.au:vagrant/vagrant-trusty64.git"
+  },
+  "scripts": {
+    "build:sass": "for f in `find themes/* -maxdepth 1 -wholename '*/scss' -type d`; do fp=${f%/*}; node-sass $f/ -o $fp/css/ --output-style compact --source-map true; done || true",
+    "build:autoprefixer": "postcss themes/*/css/*.css -r --use autoprefixer -m inline=false || true",
+    "build:babel": "for f in `find themes/**/javascript/*.js ! -name '*\\.min\\.js'`; do fp=${f%/*};ff=${f##*/};fn=${ff%%.*}; echo \"Processing $f...\"; babel $fp/$ff -o $fp/$fn.min.js -s; done",
+    "build:css": "npm run build:sass && npm run build:autoprefixer --silent",
+    "build:js": "npm run build:babel --silent",
+    "build": "npm run build:css && npm run build:js --silent",
+    "postbuild:css": "npm run lint:sass --silent",
+    "postbuild:babel": "npm run lint:js --silent",
+    "lint:js": "echo Linting JS... && eslint \"themes/*/javascript/*.js\" --ignore-pattern '*.min.js' --fix || true",
+    "lint:sass": "echo Linting SASS... && sass-lint \"themes/*/scss/*.scss\" -v -q || true",
+    "lint": "npm run lint:sass && npm run lint:js --silent",
+    "test": "npm run lint --silent",
+    "watch:css": "onchange 'themes/*/scss/*.scss' -p -w -- npm run build:css --silent",
+    "watch:js": "npm run watch:jsbabel --silent",
+    "watch:jslint": "onchange 'themes/*/javascript/*.js' -e '**/*.min.js' -p -w -- npm run lint:js --silent",
+    "watch:jsbabel": "onchange 'themes/*/javascript/*.js' -e '**/*.min.js' -p -w -- npm run build:babel --silent",
+    "watch": "parallelshell \"npm run watch:css\" \"npm run watch:js\"",
+    "build:sort": "postcss themes/*/scss/*.scss --replace"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "autoprefixer": "^7.1.4",
+    "babel-cli": "^6.24.0",
+    "babel-preset-env": "^1.3.2",
+    "babel-preset-minify": "^0.2.0",
+    "bower": "^1.8.0",
+    "eslint": "^4.7.1",
+    "node-sass": "^4.5.2",
+    "onchange": "^3.2.1",
+    "parallelshell": "^3.0.1",
+    "postcss-cli": "^4.1.1",
+    "postcss-reporter": "^5.0.0",
+    "postcss-scss": "^1.0.2",
+    "postcss-sorting": "*",
+    "sass-lint": "^1.10.2"
+  }
+}

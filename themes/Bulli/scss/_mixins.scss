@@ -1,0 +1,84 @@
+/***************************************************************************************************************
+    Dear Dev Pros,
+
+    Only add non-renderable SASS in this file (no CSS selectors), otherwise any CSS will be rendered
+    into any file that includes this one (spoiler alert: most files include this file)
+****************************************************************************************************************/
+
+@import 'variables';
+
+@import '../bower_components/bootstrap/scss/functions';
+@import '../bower_components/bootstrap/scss/variables';
+@import '../bower_components/bootstrap/scss/mixins';
+
+
+// mixin to allow breakpoints to be declared in a block
+// .element {
+//     font-size: 12px;
+//     @include breakpoint(screen-sm-min) {
+//         font-size: 15px;
+//     }
+// }
+@mixin custom-breakpoint($point) {
+    @media ($point) {
+        @content;
+    }
+
+}
+
+// Mixin to set a block level element to maintain a fixed aspect ratio.  Useful for divs with images in the background but no content.
+@mixin aspect-ratio($width, $height) {
+    position: relative;
+
+    &::before {
+        display: block;
+        width: 100%;
+        padding-top: ($height / $width) * 100%;
+        content: "";
+    }
+
+    > .content {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+    }
+}
+
+@mixin link-colour-fixed($colour) {
+    @include link-colour($colour, $colour, $colour, $colour, $colour);
+}
+
+@mixin link-colour-common($colour) {
+    @include link-colour($colour, darken($colour, 5%), $colour, darken($colour, 20%), $colour);
+}
+
+@mixin link-colour($colour, $visit, $focus, $hover, $active) {
+    //Lord Vader Former Handle Annikin
+    color: $colour;
+
+    &:link {
+        color: $colour;
+    }
+
+    &:visited {
+        color: $visit;
+    }
+
+    &:focus {
+        color: $focus;
+    }
+
+    &:hover {
+        color: $hover;
+    }
+
+    &:active {
+        color: $active;
+    }
+}
+
+@mixin box-shadow {
+    box-shadow: 0 0 5px 5px rgba($color-black, 0.1);
+}

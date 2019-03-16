@@ -1,0 +1,528 @@
+@import 'variables';
+@import 'mixins';
+@import 'fonts';
+@import '../bower_components/bootstrap/scss/functions';
+@import '../bower_components/bootstrap/scss/variables';
+@import '../bower_components/bootstrap/scss/mixins';
+
+// sass-lint:disable force-element-nesting, no-qualifying-elements, class-name-format, nesting-depth
+
+
+/* bootstrap reset */
+/* local customisations */
+/* home page */
+/* calendar widget */
+/* user forms */
+/* 77 days of prayer */
+@media (max-width: 767px) {
+    .navbar-collapse {
+        min-width: 230px;
+        max-height: none;
+    }
+
+    .strap {
+        height: auto;
+    }
+
+    .weeks {
+        padding-top: 80px;
+        font-size: 140%;
+    }
+}
+
+html {
+    background: $color-deep-grey;
+    color: $color-light-grey;
+    font-size: 16px;
+}
+
+body {
+    background: $color-deep-grey;
+    color: $color-light-grey;
+    font-size: 16px;
+}
+
+.fauxbody {
+    @include make-container();
+    @include make-container-max-widths();
+
+    position: relative;
+    padding: 0;
+    box-shadow: 20px 0 20px -20px rgba(0, 0, 0, 0.7), -20px 0 20px -20px rgba(0, 0, 0, 0.7);
+    z-index: 100;
+
+
+}
+
+.bgStretcher {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 378px;
+    background: #ff8000 url('../imgs/headerbg.gif') top left repeat-x;
+    z-index: 0;
+}
+
+
+
+.orange {
+    .bgStretcher {
+        background-color: $color-orange;
+    }
+
+    .strap {
+        background: $color-orange;
+    }
+}
+
+.green {
+    .bgStretcher {
+        background-color: $color-yellow;
+    }
+
+    .strap {
+        background: $color-yellow;
+    }
+}
+
+.blue {
+    .bgStretcher {
+        background-color: $color-navy;
+    }
+
+    .strap {
+        background: $color-navy;
+    }
+}
+
+.lightblue {
+    .bgStretcher {
+        background-color: $color-cyan;
+    }
+
+    .strap {
+        background: $color-cyan;
+    }
+}
+
+.red {
+    .bgStretcher {
+        background-color: $color-maroon;
+    }
+
+    .strap {
+        background: $color-maroon;
+    }
+}
+
+.search {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+
+    label {
+        display: none;
+    }
+}
+
+a {
+    color: $color-light-blue;
+
+    &:hover {
+        color: $color-deep-blue;
+    }
+
+    &:focus {
+        color: $color-deep-blue;
+    }
+}
+
+ul.nav {
+    background: $color-white;
+}
+
+.strap {
+    height: 250px;
+    padding: 15px;
+    background-repeat: no-repeat;
+    background-position: top right;
+    overflow: hidden;
+}
+
+footer {
+    div {
+        padding: 5px;
+        color: $color-grey;
+        text-align: center;
+    }
+}
+
+header.banner {
+
+}
+
+.strapfiller {
+
+    max-width: 100%;
+    overflow: hidden;
+
+    .content-banner {
+        p {
+            margin: 0 0 10px;
+            border: 1px solid $color-transparent;
+        }
+    }
+}
+
+.no-banner {
+    .bgStretcher {
+        height: 168px;
+    }
+
+    .strap {
+        height: 40px;
+        background-image: none;
+
+        * {
+            display: none;
+        }
+    }
+}
+
+.banner {
+    position: relative;
+    height: 128px;
+    margin: 0;
+    background: $color-white;
+}
+
+.logo {
+    //position: absolute;
+    //top: 20px;
+    //left: 20px;
+
+    h1 {
+        margin: 0;
+
+        a {
+            display: block;
+            width: 176px;
+            height: 88px;
+            background: $color-white url('../imgs/logo.png');
+            background-size: 176px 88px;
+            text-indent: -900000em;
+            overflow: hidden;
+        }
+    }
+}
+
+#SearchForm_SearchForm_Search { // scss-lint:disable-line no-ids
+    width: 120px;
+}
+//.mainnav {
+//    position: absolute;
+//    top: 77px;
+//    right: 0;
+//    z-index: 100;
+//}
+
+.security {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+}
+
+.rightnav {
+    margin-right: 20px;
+}
+
+footer.footer {
+    clear: both;
+    border-top: 1px solid $color-deep-grey;
+    background: $color-black;
+}
+
+.breaker {
+    clear: both;
+}
+
+#subNav { // sass-lint:disable-line no-ids
+    li {
+        background: $color-light-grey;
+    }
+}
+
+img.left {
+    margin-right: 20px;
+    float: left;
+}
+
+img.right {
+    margin-left: 20px;
+    float: right;
+}
+
+.masonry-block {
+    margin-bottom: 20px;
+}
+
+.feature {
+    @include box-shadow;
+    padding: 1%;
+    border: $color-grey;
+    background: lighten($color-deep-grey, 5%);
+
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    &.wide {
+        width: auto;
+        margin-right: 0;
+        float: left;
+    }
+}
+
+
+.spacer {
+    height: 20px;
+}
+
+.dropdown-backdrop {
+    position: static;
+}
+
+#container { //sass-lint:disable-line no-ids
+    .calendar-widget-table {
+        tbody {
+            td {
+                width: 13%;
+                min-width: 24px;
+                color: $color-grey;
+                font-size: 0.9em;
+
+                &:last-child {
+                    width: 9%;
+                    min-width: 5px;
+                }
+            }
+
+            .hasEvent {
+                background-position: 5px center;
+            }
+        }
+    }
+}
+
+form {
+    fieldset {
+        div.field {
+            margin: 0 0 1em;
+        }
+    }
+
+    label.required {
+        padding-left: 16px;
+        background: transparent url('../imgs/error_up.png') 0 50% no-repeat;
+        background-size: 12px 6px;
+        color: $color-red;
+        font-weight: normal;
+    }
+}
+
+.ss-uploadfield-item-info {
+    label {
+        color: $color-black;
+        font-weight: normal;
+    }
+}
+
+.ss-uploadfield-item {
+    color: $color-black;
+    font-weight: normal;
+}
+
+.ss-uploadfield {
+    .ss-uploadfield-item {
+        .ss-uploadfield-item-preview {
+            color: $color-black;
+            font-weight: normal;
+        }
+    }
+}
+
+.ss-uploadfield-item-name {
+    small {
+        display: none;
+    }
+}
+
+.weeks {
+    padding-top: 130px;
+    padding-right: 10%;
+    padding-left: 5%;
+    border-radius: 15px;
+    background: url('../imgs/77-Days-of-Prayer.jpg') top left no-repeat;
+    background-size: 100% auto;
+    color: $color-deep-grey;
+    font-size: 220%;
+}
+
+@media (min-width: 768px) and (max-width: 979px) {
+    .fauxbody {
+        max-width: 724px;
+    }
+
+    .strap {
+        img {
+            width: auto;
+            max-width: 10000px;
+        }
+    }
+
+    .navbar-default {
+        .navbar-nav {
+            > li {
+                > a {
+                    font-size: 0.9em;
+                }
+            }
+        }
+    }
+
+    .weeks {
+        font-size: 150%;
+    }
+}
+
+@media (max-width: 480px) {
+    .fauxbody {
+        margin: 0;
+        padding: 0;
+        box-shadow: none;
+        overflow: hidden;
+    }
+
+    .banner {
+        div.bgStretcher {
+            height: 10px;
+            background-color: $color-transparent;
+        }
+    }
+
+    .logo {
+        margin-top: 10px;
+    }
+
+    .search {
+        right: 5px;
+    }
+
+    .feature {
+        width: auto;
+        margin: 5px;
+        float: none;
+        box-sizing: content-box;
+    }
+
+    .rightnav {
+        margin-right: 0;
+    }
+
+    .container {
+        > div {
+            padding: 5px;
+        }
+    }
+
+    .strap.row-fluid {
+        height: auto;
+        margin: 0;
+        padding: 0;
+        background: none;
+    }
+
+    .row-fluid {
+        box-sizing: border-box;
+    }
+
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .strapfiller {
+        margin: 0;
+        padding: 0;
+
+        p {
+            margin: 0;
+            padding: 0;
+        }
+
+        img {
+            margin: 0;
+            padding: 0;
+        }
+    }
+
+    .strap {
+        img {
+            display: block;
+            width: 200%;
+            max-width: 200%;
+            height: auto;
+            margin: 0;
+        }
+
+        img.left {
+            display: block;
+            width: 200%;
+            max-width: 200%;
+            height: auto;
+            margin: 0;
+        }
+
+        margin: 0;
+        padding: 0;
+    }
+
+    footer {
+        margin: 0;
+        padding: 0;
+    }
+
+    header.banner {
+        margin: 0;
+        padding: 0;
+    }
+
+    input.span2.search-query {
+        width: 80px;
+    }
+
+    .row {
+        margin-right: 0;
+        margin-left: 0;
+    }
+
+    .weeks {
+        padding: 0.2em;
+        background: $color-transparent;
+        color: $color-off-white;
+        font-size: 100%;
+
+        &::before {
+            content: "77 Days of Prayer: ";
+        }
+    }
+}
+
+@media (max-width: 600px) {
+    .weeks {
+        padding-top: 80px;
+        font-size: 110%;
+    }
+}

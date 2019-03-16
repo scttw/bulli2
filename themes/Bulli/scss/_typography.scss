@@ -1,0 +1,70 @@
+//* shared typography and style */
+@import 'variables';
+@import 'fonts';
+@import 'utilities';
+@import '../bower_components/bootstrap/scss/functions';
+@import '../bower_components/bootstrap/scss/variables';
+@import '../bower_components/bootstrap/scss/mixins';
+
+body {
+    @include roboto;
+}
+
+p {
+}
+
+blockquote {
+    border-left-color: $color-accent-blue;
+}
+
+h1 {
+    @include oxygen;
+    color: $color-light;
+    font-size: 61px;
+    line-height: 1.28;
+}
+
+h2 {
+    @include oxygen;
+    color: $color-light;
+    font-size: 49px;
+    line-height: 1.06;
+}
+
+h3 {
+    @include oxygen;
+    color: $color-light;
+    font-size: 39px;
+    line-height: 1.33;
+}
+
+h4 {
+    @include oxygen;
+    color: $color-light;
+    font-size: 31px;
+    line-height: 1.16;
+}
+
+h5 {
+    @include oxygen;
+    color: $color-light;
+    font-size: 25px;
+    line-height: 1.04;
+}
+
+h6 {
+    @include oxygen;
+    color: $color-light;
+    font-size: 20px;
+    line-height: 1.3;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:not(.btn) {
+    @include link-colour-fixed($color-light-blue);
+}
+
+

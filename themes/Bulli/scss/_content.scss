@@ -1,0 +1,47 @@
+@import 'variables';
+@import 'mixins';
+@import 'fonts';
+
+@import '../bower_components/bootstrap/scss/functions';
+@import '../bower_components/bootstrap/scss/variables';
+@import '../bower_components/bootstrap/scss/mixins';
+
+// This is a placeholder primarily so that editor.scss can use it
+%content {
+    // content images
+    img {
+        max-width: 100%;
+        height: auto;
+
+        &.leftAlone { // sass-lint:disable-line class-name-format
+            display: block;
+            margin-right: $base-margin;
+            float: none;
+            clear: both;
+        }
+
+        &.center {
+            display: block;
+            margin-right: auto;
+            margin-left: auto;
+        }
+
+        &.left {
+            display: block;
+            margin-top: 0;
+            margin-right: $base-margin;
+            float: left;
+        }
+
+        &.right {
+            display: block;
+            margin-top: 0;
+            margin-left: $base-margin;
+            float: right;
+        }
+    }
+}
+
+.content {
+    @extend %content;
+}

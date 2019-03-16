@@ -1,0 +1,22 @@
+//* style for the CMS content editor */
+@import 'typography';
+@import 'content';
+
+$color-warning: #f00;
+$color-warning-bg: #ff7b71;
+
+// add style to the TinyMCE editor
+.mceContentBody { // sass-lint:disable-line class-name-format
+    @extend %content;
+
+    font-size: 75%;
+
+    a {
+        .ss-broken {
+            border: 1px solid $color-warning;
+            background-color: $color-warning-bg;
+            color: $color-light;
+            text-decoration: underline;
+        }
+    }
+}

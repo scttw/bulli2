@@ -1,0 +1,149 @@
+@import 'variables';
+@import 'mixins';
+@import 'fonts';
+@import '../bower_components/bootstrap/scss/functions';
+@import '../bower_components/bootstrap/scss/variables';
+@import '../bower_components/bootstrap/scss/mixins';
+
+// sass-lint:disable force-element-nesting, class-name-format, no-qualifying-elements, no-ids, force-attribute-nesting, no-color-literals
+//
+//$error-text: #f00;
+//
+//.alert.bad {
+//    border-color: $error-text;
+//    background-color: rgba($error-text, 0.2);
+//}
+//
+//
+//input,
+//textarea,
+//select {
+//
+//    &.md-form-control {
+//        display: block;
+//        width: 100%;
+//        height: $input-height;
+//        padding: $input-padding-y $input-padding-x;
+//        border: $input-border-width solid $input-border-color;
+//        background-clip: padding-box;
+//        background-color: $input-bg;
+//        color: $input-color;
+//        font-size: $font-size-base;
+//        line-height: $input-line-height;
+//
+//        &.optionset {
+//            height: auto;
+//        }
+//
+//    }
+//}
+//
+//
+//textarea.md-form-control {
+//    height: auto;
+//
+//}
+//
+//
+//.CompositeField {
+//    & > label {
+//        display: block;
+//
+//    }
+//}
+//
+//canvas {
+//    background: $color-light;
+//}
+//
+//.fieldgroup-field {
+//    margin-top: $base-margin;
+//    clear: both;
+//
+//    .AlternativeFormField {
+//        .fieldgroupField {
+//            float: none;
+//        }
+//
+//        .AlternativeFormFieldSelectedValue {
+//            margin-right: 0;
+//        }
+//
+//        select {
+//            width: 100%;
+//        }
+//
+//        input.text {
+//            width: 100%;
+//            margin-left: 0;
+//        }
+//    }
+//
+//
+//}
+//
+//
+//input.signature {
+//    display: none;
+//
+//    & + canvas {
+//        display: block;
+//        border: 1px solid #b3b3b3;
+//        background: #fff;
+//        vertical-align: bottom;
+//
+//        & + button {
+//            margin-bottom: 1px;
+//            margin-left: 4px;
+//        }
+//    }
+//}
+//
+//
+//
+//form {
+//    ul {
+//        margin: 0 0 15px;
+//        padding: 0;
+//        list-style-type: none;
+//    }
+//
+//    li {
+//        position: initial;
+//
+//        &::before {
+//            display: none;
+//        }
+//    }
+//
+//    label {
+//        font-weight: normal;
+//    }
+//
+//    #Remember {
+//        input.checkbox {
+//            min-height: 27px;
+//            margin-left: -20px;
+//        }
+//    }
+//}
+//
+//form:not(.SubscribeForm) div.checkbox input.checkbox {
+//    margin-left: 0;
+//}
+//
+//
+//// particulars for function forms
+//
+//.steps-input-form {
+//    .steps {
+//        display: none;
+//    }
+//
+//    .left {
+//        @include roboto-bold;
+//        color: $color-light-blue;
+//        font-size: 25px;
+//    }
+//
+//}

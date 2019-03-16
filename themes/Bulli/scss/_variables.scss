@@ -1,0 +1,93 @@
+$base-font: 16px;
+$base-margin: $base-font;
+
+// colours
+$color-accent-blue: #039fe2;
+$color-light: #fff;
+$color-dark: #191919;
+$color-text-dark-grey: #6d6e71;
+
+$color-lightblue: #f2fafd;
+
+$color-page: $color-light;
+$color-link: $color-accent-blue;
+$color-link-hover: $color-link;
+
+$color-light-grey: #eee;
+$color-light-blue: #00bdf2;
+$color-deep-blue: #08c;
+$color-grey: #888;
+$color-red: #f00;
+$color-black: #000;
+$color-deep-grey: #333;
+$color-off-white: #efefef;
+$color-orange: #ff8000;
+$color-yellow: #bfd62f;
+$color-navy: #000765;
+$color-cyan: #00bdf2;
+$color-maroon: #7b0707;
+$color-transparent: transparent;
+$color-grey-40: #444;
+
+$font_family_1: 'Oxygen', sans-serif;
+
+$color-white: #fff;
+
+$color-overlay-cover: rgba($color-deep-grey, 0.6);
+
+// tints
+
+$color-utilities: (
+    'black': $color-dark,
+    'dark': $color-dark,
+    'dark-grey': $color-deep-grey,
+    'light': $color-light,
+    'lightblue': $color-lightblue,
+    'white': $color-white,
+);
+
+
+// Bootstrap customisations / Override any default Bootstrap variables here
+
+$primary: $color-light-blue;
+$secondary: $color-deep-blue;
+//$success:       $green !default;
+//$info:          $cyan !default;
+//$warning:       $yellow !default;
+//$danger:        $red !default;
+//$light:         $gray-100 !default;
+//$dark:          $gray-800 !default;
+
+
+$border-radius: 2px;
+$card-cap-bg: $color-light;
+
+$border-color: rgba($color-deep-blue, 0.05);
+
+$card-border-color: $color-light-grey;
+$card-spacer-y: 1.5rem !default;
+$card-spacer-x: 2rem !default;
+
+$navbar-light-color: $color-dark;
+$navbar-light-hover-color: $color-dark;
+$navbar-light-active-color: $color-dark;
+$navbar-light-disabled-color: $color-dark;
+
+$input-btn-padding-y: 0.25rem;
+$input-btn-padding-x: 0.75rem;
+
+$input-height: 50px;
+$input-border-color: $color-light-grey;
+$input-border-width: 2px;
+
+$input-btn-focus-color: rgba($color-light-blue, 0.25);
+$input-btn-border-width: 2px;
+
+$btn-border-width: $input-btn-border-width;
+$btn-padding-x: 1.5rem;
+$btn-font-weight: bold;
+$btn-border-radius: 4px;
+$btn-border-radius-lg: 4px;
+$btn-border-radius-sm: 5px;
+
+

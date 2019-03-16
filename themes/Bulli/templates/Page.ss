@@ -23,11 +23,9 @@
         <![endif]-->
     <div class="bgStretcher">
         <div class="fauxbody" >
-            <div class="container container-fluid" id="container">
             <% include Header %>
                 $Layout
             <% include Footer %>
-            </div><!-- container -->
         </div><!-- fauxbody -->
     </div><!-- bgStretcher -->
 </body>

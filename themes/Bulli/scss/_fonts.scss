@@ -1,0 +1,25 @@
+// font mixins
+
+@mixin oxygen {
+    font-family: 'Oxygen', Arial, sans-serif;
+    font-weight: 300;
+}
+
+@mixin oxygen-bold {
+    @include oxygen;
+    font-weight: 400;
+}
+
+//@mixin oxygen-extrabold {
+//    @include oxygen;
+//    font-weight: 800;
+//}
+
+@mixin roboto {
+    font-family: 'Roboto', 'Source Sans Pro', Arial, sans-serif;
+}
+
+@mixin roboto-bold {
+    @include roboto;
+    font-weight: 700;
+}

@@ -1,19 +1,21 @@
-            <div class="row">
-                <div class="col-md-8 lefstedge">
-					<article>
-						<h1>$Title</h1>
-						<div class="content">
-							$Content
-							$Googlemaps
-						</div>
-						<% include Gallery %>
-					</article>
-						$Form
-						$PageComments
+<div class="container">
+    <div class="row pb-4">
+        <div class="col-12 col-md-8 col-lg-9">
+            <article>
+                <h1>$Title</h1>
+                <div class="content">
+                    $Content
+                    $Googlemaps
                 </div>
-                <div class="col-md-3 col-xs-12 pull-right rightnav">
-                	<% include SideBar %>
-                </div>
-                <div class="breaker"></div>
-            </div>
+                <% include Gallery %>
+            </article>
+            $Form
+            $PageComments
+        </div>
+        <div class="col-12 col-md-4 col-lg-3 ">
+            <% include SideBar %>
+        </div>
+        <div class="breaker"></div>
+    </div>
 
+</div>

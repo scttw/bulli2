@@ -7,9 +7,15 @@ class Page extends SiteTree {
 		'HasGallery' => 'Boolean',
 		'Carousel' => 'Boolean'
 	);
+
+	private static $has_one = array(
+	    'BannerImage' => 'Image'
+    );
+
 	private static $has_many = array(
 		'GalleryImages' => 'GalleryImage'
 	);
+
 	private static $defaults = array(
 		'PageStyle' => 'green',
 		'HasBanner' => 0,
@@ -28,8 +34,10 @@ class Page extends SiteTree {
 		$options = singleton('Page')->dbObject('PageStyle')->enumValues();
 		$fields->addFieldToTab("Root.Main", new DropdownField("PageStyle", "Page colour scheme", $options), 'Content');
 
+
 		$fields->addFieldToTab('Root.Banner', new CheckboxField('HasBanner'));
-		$fields->addFieldToTab('Root.Banner', new HTMLEditorField('BannerContent'));
+		$fields->addFieldToTab("Root.Banner", UploadField::create('BannerImage', 'Banner Image'));
+//		$fields->addFieldToTab('Root.Banner', new HTMLEditorField('BannerContent'));
 
 		$fields->addFieldToTab('Root.Gallery', new CheckboxField('HasGallery'));
 		$fields->addFieldToTab('Root.Gallery', new CheckboxField('Carousel', 'Carousel style image rotator'));
@@ -110,30 +118,27 @@ class Page_Controller extends ContentController {
 
 	public function init() {
 		parent::init();
-		Requirements::themedCSS('reset');
-		Requirements::themedCSS('layout');
-		Requirements::themedCSS('typography');
-		Requirements::themedCSS('form');
+        $themeFolder = $this->ThemeDir();
 
-		Requirements::css('themes/Bulli/css/normalize.css');
-		Requirements::css('themes/Bulli/css/bootstrap.css');
-		Requirements::css('//fonts.googleapis.com/css?family=Oxygen:300');
-		Requirements::css('themes/Bulli/css/main.css');
-		Requirements::css('themes/Bulli/css/site.css');
-		Requirements::javascript('//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js');
-        Requirements::javascript('themes/Bulli/javascript/plugins.js');
-        Requirements::javascript('themes/Bulli/javascript/bootstrap.js');
-        Requirements::javascript('themes/Bulli/javascript/site.js');
-        Requirements::javascript('themes/Bulli/javascript/main.js');
+		Requirements::css($themeFolder . '/css/bootstrap.css');
+		Requirements::css('//fonts.googleapis.com/css?family=Oxygen:300,400|Roboto:400,700');
+		Requirements::css($themeFolder . '/css/main.css');
+
+		//		Requirements::css($themeFolder . '/css/site.css');
+        Requirements::javascript($themeFolder . '/bower_components/jquery/jquery.min.js');
+        Requirements::javascript($themeFolder . '/bower_components/bootstrap/dist/js/bootstrap.bundle.js');
+        Requirements::javascript($themeFolder . '/javascript/plugins.js');
+        Requirements::javascript($themeFolder . '/javascript/site.js');
+        Requirements::javascript($themeFolder . '/javascript/main.js');
 		Requirements::block(FRAMEWORK_DIR .'/thirdparty/jquery/jquery.js');
         if ( $this->HasGallery  ) {
 	        if ( $this->Carousel ) {
-				Requirements::javascript('themes/Bulli/javascript/3rdparty/jquery.flexslider.js');
-				Requirements::css('themes/Bulli/javascript/3rdparty/flexslider.css');
-		        Requirements::javascript('themes/Bulli/javascript/carousel.js');
+				Requirements::javascript($themeFolder . '/javascript/3rdparty/jquery.flexslider.js');
+				Requirements::css($themeFolder . '/javascript/3rdparty/flexslider.css');
+		        Requirements::javascript($themeFolder . '/javascript/carousel.js');
 	        } else {
-				Requirements::css('themes/Bulli/css/gallery.css');
-		        Requirements::javascript('themes/Bulli/javascript/gallery.js');
+				Requirements::css($themeFolder . '/css/gallery.css');
+		        Requirements::javascript($themeFolder . '/javascript/gallery.js');
 		        Requirements::javascript('//cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/3.0.4/jquery.imagesloaded.min.js');
 		        Requirements::javascript('//cdnjs.cloudflare.com/ajax/libs/fluidbox/1.2.5/jquery.fluidbox.min.js');
 				Requirements::css('//cdnjs.cloudflare.com/ajax/libs/fluidbox/1.2.5/jquery.fluidbox.css');

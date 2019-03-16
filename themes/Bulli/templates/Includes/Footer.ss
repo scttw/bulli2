@@ -1,12 +1,12 @@
             <footer class="footer row">
                 <div class="col-md-4 col-xs-12">
-                    $FooterContentOne
+                    $SiteConfig.FooterContentOne
                 </div>
                 <div class="col-md-4 col-xs-12">
-                  $FooterContentTwo
+                  $SiteConfig.FooterContentTwo
                 </div>
                 <div class="col-md-4 col-xs-12">
-                  $FooterContentThree
+                  $SiteConfig.FooterContentThree
                 </div>
                 <%-- <div class="col-md-3 col-xs-12">
                 <h3>Church members:</h3>
@@ -21,14 +21,4 @@
                 <div class="breaker"></div>
 
             </footer>
-            <script>
-              (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-              })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-              ga('create', 'UA-28953557-1', 'bullianglican.org.au');
-              ga('require', 'displayfeatures');
-              ga('send', 'pageview');
-
-            </script>
+            $GoogleAnalytics

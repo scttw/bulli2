@@ -1,8 +1,0 @@
----
-Name: contentcontrollerurlhandler
----
-ContentController:
-  extensions:
-    - WidgetContentControllerExtension
-  url_handlers:
-    'widget/$ID!': 'handleWidget'

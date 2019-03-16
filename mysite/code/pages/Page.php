@@ -95,18 +95,6 @@ class Page_Controller extends ContentController {
 		return $children;
 	}
 
- //  	public static function TopPodcastShortcodeHandler($arguments, $content = null, $parser = null) {
- //      $current = Controller::curr();
- //      return $current->TopPodcast();
- //      //return "Ahoy";
- //   	}
-
-	// public function onBeforeInit() {
- //
-	// static function PodcastShortCodeHandler(){
-	//    $current = Controller::curr();
-	//    return $current->renderWith('Podcast');
- //   }
    function SearchForm() {
       $searchText = isset($_REQUEST['Search']) ? $_REQUEST['Search'] : 'Search Huh?';
       $fields = new FieldList(

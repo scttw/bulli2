@@ -4,6 +4,8 @@ class Page extends SiteTree {
 		'PageStyle' => "Enum('orange, blue, lightblue, green, red')",
 		'HasBanner' => 'boolean',
 		'BannerContent' => 'HTMLText',
+        'BannerImageOverlay' => 'Varchar(50)',
+        'BannerImageOverlayExtra' => 'Varchar(150)',
 		'HasGallery' => 'Boolean',
 		'Carousel' => 'Boolean'
 	);
@@ -36,7 +38,9 @@ class Page extends SiteTree {
 
 
 		$fields->addFieldToTab('Root.Banner', new CheckboxField('HasBanner'));
-		$fields->addFieldToTab("Root.Banner", UploadField::create('BannerImage', 'Banner Image'));
+        $fields->addFieldToTab("Root.Banner", UploadField::create('BannerImage', 'Banner Image'));
+        $fields->addFieldToTab("Root.Banner", TextField::create('BannerImageOverlay', 'Banner Image Overlay Text'));
+        $fields->addFieldToTab("Root.Banner", TextField::create('BannerImageOverlayExtra', 'Banner Image Overlay Text Line 2'));
 		$fields->addFieldToTab('Root.Banner', new HTMLEditorField('BannerContent'));
 
 		$fields->addFieldToTab('Root.Gallery', new CheckboxField('HasGallery'));

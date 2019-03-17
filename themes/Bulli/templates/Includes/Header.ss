@@ -35,7 +35,7 @@
 				<% if $HasBanner %>
 				<div class="strapfiller">
                     <% if $BannerImage %>
-                        <div class="bg-image">
+                        <div class="bg-image position-relative">
                             <style>
                                 .bg-image {
                                     background-image: url('{$BannerImage.CroppedFocusedImage(480,220).URL}');
@@ -60,17 +60,12 @@
                                 }
 
                             </style>
-                            <%--<picture>--%>
-                                <%--<!--[if IE 9]><video style="display: none;"><![endif]-->--%>
-                                <%--<% with $BannerImage.CroppedFocusedImage(1100,220) %><source srcset="$URL" media="(min-width: 1200px)" alt="$Up.Title" width="$width" height="$height" class="img-responsive center-block" ><% end_with %>--%>
-                                <%--<% with $BannerImage.CroppedFocusedImage(1100,220) %><source srcset="$URL" media="(min-width: 992px)" alt="$Up.Title" width="$width" height="$height" class="img-responsive center-block" ><% end_with %>--%>
-                                <%--<% with $BannerImage.CroppedFocusedImage(992,220) %><source srcset="$URL" media="(min-width: 768px)" alt="$Up.Title" width="$width" height="$height" class="img-responsive center-block" ><% end_with %>--%>
-                                <%--<% with $BannerImage.CroppedFocusedImage(768,220) %><source srcset="$URL" media="(min-width: 480px)" alt="$Up.Title" width="$width" height="$height" class="img-responsive center-block" ><% end_with %>--%>
-                                <%--<% with $BannerImage.CroppedFocusedImage(480,250) %><source srcset="$URL" media="(min-width: 320px)" alt="$Up.Title" width="$width" height="$height" class="img-responsive center-block" ><% end_with %>--%>
-                                <%--<% with $BannerImage.CroppedFocusedImage(320,250) %><source srcset="$URL" media="(min-width: 100px)" alt="$Up.Title" width="$width" height="$height" class="img-responsive center-block" ><% end_with %>--%>
-                                <%--<!--[if IE 9]></video><![endif]-->--%>
-                                <%--<img src="<% with $BannerImage.CroppedFocusedImage(1200,220) %>$URL<% end_with %>" class="img-responsive center-block" alt="$Title">--%>
-                            <%--</picture>--%>
+                            <% if $BannerImageOverlay %>
+                            <div class="text-overlay w-100 h-100 d-flex flex-column align-items-center text-center justify-content-center align-content-center position-absolute">
+                                <% if $BannerImageOverlay %><h3>$BannerImageOverlay</h3><% end_if %>
+                                <% if $BannerImageOverlayExtra %><p>$BannerImageOverlayExtra</p><% end_if %>
+                            </div>
+                            <% end_if %>
                         </div>
 
                     <% else %>

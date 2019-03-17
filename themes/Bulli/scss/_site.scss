@@ -183,6 +183,10 @@ ul.nav {
 }
 
 .strap {
+
+    @include media-breakpoint-down(md) {
+
+    }
     height: 250px;
     padding: 15px;
     background-repeat: no-repeat;
@@ -191,10 +195,6 @@ ul.nav {
 
     .strapfiller {
         height: 100%;
-    }
-
-    @include media-breakpoint-down(md) {
-
     }
 }
 
@@ -206,6 +206,15 @@ ul.nav {
     background-repeat: no-repeat;
     background-position: 50% 50%;
     background-size: cover;
+    text-shadow: 2px 2px 4px $color-black;  // sass-lint:disable-line no-color-literals
+
+    h3,
+    p {
+        max-width: 90%;
+        @include media-breakpoint-up(md) {
+            max-width: 75%;
+        }
+    }
 }
 
 footer {
@@ -529,8 +538,8 @@ form {
     }
 
     .row {
-        margin-right: 0;
-        margin-left: 0;
+        //margin-right: 0;
+        //margin-left: 0;
     }
 
     .weeks {
